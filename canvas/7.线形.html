@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <canvas id="c4"></canvas>
+    <canvas id="c5"></canvas>
+    <script>
+        //lineWidth设置线宽
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d')
+        for (var i = 0; i < 10; i++){
+            ctx1.lineWidth = 1+i;//设置不同的线宽
+            ctx1.beginPath();
+            ctx1.moveTo(5+i*14,5);
+            ctx1.lineTo(5+i*14,140);
+            ctx1.stroke();
+        }
+
+        //lineCap线段端点显示的样子
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+        //butt 标准的端点 round 多出半径为线宽一半的半圆  square 多出高度为线宽一半的长方形
+        var lineCap = ['butt','round','square'];
+        ctx2.strokeStyle = 'black';
+        for (var i=0;i<lineCap.length;i++){
+            ctx2.lineWidth = 15;
+            ctx2.lineCap = lineCap[i];
+            ctx2.beginPath();
+            ctx2.moveTo(25+i*50,10);
+            ctx2.lineTo(25+i*50,140);
+            ctx2.stroke();
+        }
+
+        //lineJoin 两线段连接处所显示的样子
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d');
+        //round 边角磨圆,圆半径等于线宽 miter 线段会在连接处外侧延伸直至交于一点 bevel(设定外延交点与连接点的最大距离，如果交点距离大于此值，连接效果会变成了 bevel) 
+        var lineJoin = ['round','bevel','miter'];
+        ctx3.lineWidth = 10;
+        for (var i=0;i<lineJoin.length;i++){
+            ctx3.lineJoin = lineJoin[i];
+            ctx3.beginPath();
+            ctx3.moveTo(-5,5+i*40);
+            ctx3.lineTo(35,45+i*40);
+            ctx3.lineTo(75,5+i*40);
+            ctx3.lineTo(115,45+i*40);
+            ctx3.lineTo(155,5+i*40);
+            ctx3.stroke();
+        }
+
+        //使用虚线
+        var canvas = document.getElementById('c4');
+        var ctx4 = canvas.getContext('2d');
+        var offset = 0;
+        setTimeout(function draw(){
+            offset = offset%16;
+            //清空画布 不然所有的strokeRect 重叠在一起
+            ctx4.clearRect(0,0,150,150);
+            //设置stroke为虚线
+            ctx4.setLineDash([4,2]);
+            //正值 逆时针 负值 顺时针
+            ctx4.lineDashOffset = -offset;
+            ctx4.strokeRect(10,10, 100, 100);
+            offset =  offset + 1;
+
+            setTimeout(draw,20);
+        },20)
+
+
+        
+    </script>
+</body>
+</html>

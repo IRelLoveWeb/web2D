@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条纹背景</title>
+    <style>
+        div{
+            width:8rem;
+            height:4rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 4rem;
+            font-size:2rem;
+        }
+
+        /* 
+            线形渐变 to top 是0deg，角度顺时针变化
+         */
+
+        .demo1{
+            /*渐变表示的是两个不同色值之间的过渡,从一只色值过渡到另一种色值
+              渐变来说就是以整个元素的范围进行填充*/
+            background: linear-gradient(to bottom,#fb3,#58a)
+        }
+
+        .demo2{
+            /*渐变是一种由代码生成的图像，我们能像对待其他任何背景图像那样对待*/
+             background-image: linear-gradient(to bottom,#fb3 50%,#58a 50%);
+             /*控制渐变色的大小*/
+             background-size: 100% 2.3rem;
+             /*background-repeat: no-repeat;*/
+        }
+
+        .demo3{
+            /*色值之后的数值表示的是 两个色彩之间的渐变的开始和结束位置
+              此处的渐变表示从 0-30% 实色 30%-30% 渐变色 30%-100%实色*/
+            background: linear-gradient(#fb3 30%, #58a 30%);
+            background-size: 100% 30px;
+        }
+
+        .demo4{
+            /*如果某个色标的位置值比整个列表中在它之前的色标的位置值都要
+              小，则该色标的位置值会被设置为它前面所有色标位置值的最大值*/
+            background: linear-gradient(#fb3 30%, #58a 0);
+            background-size: 100% 30px;
+        }
+
+        /*多色*/
+        .demo5{
+            background: linear-gradient(#fb3 33.3%,#58a 0, #58a 66.6%, yellowgreen 0);
+            /* 实色 0渐变 同色 0渐变 实色*/
+            /*background: linear-gradient(#fb3 33.3%,#58a 33.3%, #58a 66.6%, yellowgreen 66.6%);*/
+            background-size: 100% 30px;
+        }
+
+        /*斜向 角度是沿着顺时针方向旋转的*/
+        .demo6{
+            background: linear-gradient(45deg,#fb3 50%,#58a 0);
+            background-size: 1rem 1rem;
+        }
+        .demo7{
+            background: linear-gradient(45deg,#fb3 25%,#58a 0,#58a 50%,#fb3 0,#fb3 75%,#58a 0);
+            background-size: 1rem 1rem;
+        }
+
+        /*循环渐变*/
+        .demo8{
+            /*45度角 渐变宽度为30px;重复渐变过程*/
+            background: repeating-linear-gradient(45deg,#fb3,#58a 30px);
+        }
+        .demo9{
+            /*渐变必须给定开始和结束颜色 ,即使2个色彩是同一种色值*/
+            background: repeating-linear-gradient(45deg,#fb3,#fb3 15px,#58a 0,#58a 30px);
+        }
+        .demo10{
+            /*重复渐变是对背景图片整个进行平铺,如果设置了大小,就是在每个重复的图片进行平铺*/
+            background: repeating-linear-gradient(45deg,#fb3,#58a 5px);
+            background-size: 1rem 1rem;
+        }
+        .demo11{
+            /*百分比是取值于整个图形,也可以是实际的像素值*/
+            background: repeating-linear-gradient(90deg,#fb3,#58a 20%);
+        }
+
+        .demo12{
+            /*不标准角度渐变*/
+            background: repeating-linear-gradient(60deg,#fb3,#58a 20%);
+        }
+
+        /*同色系简便写法*/
+        .demo13{
+            background: #58a;
+            background-image: repeating-linear-gradient(30deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.1) 15px,
+                                transparent 0, transparent 30px);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+    <div class="demo9">9</div>
+    <div class="demo10">10</div>
+    <div class="demo11">11</div>
+    <div class="demo12">12</div>
+    <div class="demo13">13</div>
+</body>
+</html>

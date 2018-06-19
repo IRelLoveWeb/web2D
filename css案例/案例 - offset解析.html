@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础 - offset</title>
+    <style>
+        #container{
+            border:5px solid red;
+            padding:20px;
+            margin:20px;
+            position: fixed;
+        }
+
+        #test2{
+             position: relative;
+             border:1px solid black;
+             padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="test2"> 
+            <div id="test">Test div</div>
+        </div>
+    </div>
+
+    <script>
+        /*//最近包含元素没有定位,则test的offsetParent是body
+        var test = document.getElementById('test');
+        test.offsetParent.tagName  //BODY*/
+
+        //最近包含元素定位(absolute,relative,fixed)
+        var test = document.getElementById('test');
+        test.offsetParent.tagName //DIV
+    </script>
+</body>
+</html>
+
+<!--
+    1.offsetHeight,offsetWidth 的值等于 box-sizing:border-box 时的height,width;
+    2.offsetLeft,offsetTop 是该元素左顶点相对于offsetParent左顶点的水平,纵行距离(左顶点是padding的左上角)
+    3.该元素最近的已经定位的包含元素(假如父级为定位,可以继续网上找),如果所有的包含元素都没有定位,那么offsetParent就是body
+-->

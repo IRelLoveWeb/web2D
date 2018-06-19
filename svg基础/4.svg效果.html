@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        图形的填充可以使用渐变色(linearGradient,radialGradient);也可以使用一组图形模式(pattern)
+     -->
+
+    <svg width="300" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <g stroke='black'>
+            <g id='g1'>
+                <path d='M0,50 100,50 M0,100 100,100 M50,0 50,100 M100,0 100,100' id='g' />
+                <use xlink:href='#g' transform='translate(0,100)' />
+                <use xlink:href='#g' transform='translate(0,200)' />
+                <use xlink:href='#g' transform='translate(0,300)' />
+                <use xlink:href='#g' transform='translate(0,400)' />
+                <use xlink:href='#g' transform='translate(0,500)' />
+            </g>
+
+            <use xlink:href='#g1' transform='translate(100,0)' />
+            <use xlink:href='#g1' transform='translate(200,0)' />
+        </g>
+        <!-- 
+            渐变相当于本地图片,url(#id)获取
+            stop设置截止色彩
+            offset设置渐变色开始值
+            stop-color设置截止颜色
+            stop-opacity设置透明度
+         -->
+
+        <!-- 线形渐变:默认从左往右渐变(渐变占据整个图形) -->
+        <path d='M50,0 0,100 100,100z' stroke='black' stroke-width='2' fill='url(#linear)'/>
+        <linearGradient id='linear'>
+            <stop offset='0' stop-color='white'/>
+            <stop offset='1' stop-color='black'/>
+        </linearGradient>
+
+
+        <!-- 径向渐变:以路径外接矩形中心为渐变原点(此时渐变焦点和原点重合,渐变占据整个图形) -->
+        <path d='M200,0 150,100 250,100z' stroke='black' stroke-width='2' fill='url(#radial)'/>
+        <radialGradient id='radial'>
+            <stop offset='0' stop-color='white'/>
+            <stop offset='1' stop-color='black'/>
+        </radialGradient>
+
+
+        <!-- 
+            线形渐变大小与方向:
+                1. x1,y1,x2,y2控制渐变的方向和范围大小 (值1表示渐变占满图形)
+                2. 可以通过gradientTransform对渐变进行变换操作(改变渐变的方向等)
+         -->
+        <rect x='0' y='150' width='50' height='100' fill='url(#linear2)'/>
+        <linearGradient id='linear2' x1='0' y1='.2' x2='0' y2='80%' >
+            <stop offset='0' stop-color='white'/>
+            <stop offset='0.25' stop-color='black'/>
+            <stop offset='0.5' stop-color='white'/>
+            <stop offset='1' stop-color='black'/>
+        </linearGradient>
+
+        <rect x='100' y='150' width='50' height='100' fill='url(#linear3)'/>
+        <linearGradient id='linear3' gradientTransform='rotate(30,0.5,0.5)'>
+            <stop offset='0' stop-color='white'/>
+            <stop offset='0.25' stop-color='black'/>
+            <stop offset='0.5' stop-color='white'/>
+            <stop offset='1' stop-color='black'/>
+        </linearGradient>
+
+
+        <!-- 径向渐变设置图形中心大小和焦点:
+              1. cx,cy,r 设置渐变范围和位置(用百分比或小数表示,此时默认焦点和cx,cy表示的中心重合)
+              2. fx,fy 设置渐变的焦点
+        -->
+        <rect x='0' y='300' width='150' height='100' fill='url(#radial2)'/>
+        <radialGradient id='radial2' cx='.3' cy='.4' r='.5'>
+            <stop offset='0' stop-color='white' stop-opacity='0.5'/>
+            <stop offset='.2' stop-color='black' stop-opacity='1'/>
+            <stop offset='.4' stop-color='white' stop-opacity='.2'/>
+            <stop offset='.6' stop-color='black' stop-opacity='.8'/>
+            <stop offset='.8' stop-color='white' stop-opacity='0'/>
+            <stop offset='1' stop-color='black' stop-opacity='.5'/>
+        </radialGradient>
+
+        <rect x='150' y='300' width='150' height='100' fill='url(#radial3)'/>
+        <radialGradient id='radial3' cx='.3' cy='.4' r='.5' fx='.1' fy='.1'>
+            <stop offset='0' stop-color='white' stop-opacity='0.5'/>
+            <stop offset='.2' stop-color='black' stop-opacity='1'/>
+            <stop offset='.4' stop-color='white' stop-opacity='.2'/>
+            <stop offset='.6' stop-color='black' stop-opacity='.8'/>
+            <stop offset='.8' stop-color='white' stop-opacity='0'/>
+            <stop offset='1' stop-color='black' stop-opacity='.5'/>
+        </radialGradient>
+
+
+        <!-- 
+            渐变结束后控制渐变范围范围外的显示形式(spreadMethod属性，该属性控制了当渐变到达终点的行为)
+            1. pad(默认) 渐变截止的颜色填充外围空间
+            2. repeat 立即回到0%色彩渐变到100%色彩,循环(外界范围渐变就是 red -> blue ->red ->blue ...)
+            3. reflect 立即重100%色彩渐变到0%色彩,循环(外界范围渐变就是 blue ->red ->blue ->red ...)
+         -->
+         <rect x="0" y="450" width="100" height="100" fill="url(#GradientPad)" stroke='black'/>
+         <radialGradient id='GradientPad' fx='.8' fy='.8'>
+             <stop offset='0' stop-color='red'/>
+             <stop offset='1' stop-color='blue'/>
+         </radialGradient>
+
+         <rect x="100" y="450" width="100" height="100" fill="url(#GradientRepeat)" stroke='black'/>
+         <radialGradient id='GradientRepeat' fx='.8' fy='.8' spreadMethod='repeat'>
+             <stop offset='0' stop-color='red'/>
+             <stop offset='1' stop-color='blue'/>
+         </radialGradient>
+
+         <rect x="200" y="450" width="100" height="100" fill="url(#GradientReflect)" stroke='black'/>
+         <radialGradient id='GradientReflect' fx='.8' fy='.8' spreadMethod='reflect'>
+             <stop offset='0' stop-color='red'/>
+             <stop offset='1' stop-color='blue'/>
+         </radialGradient>
+
+         <!-- 渐变与图片组合裁剪图片图形  -->
+         <image xlink:href='s1.jpg' x='200' y='150' width='100' height='100' />
+         <rect x='200' y='150' width='100' height='100' fill='url(#radial5)' />
+         <radialGradient id='radial5'>
+            <stop offset='0' stop-color='white' stop-opacity='0' />
+            <stop offset='0.5' stop-color='white' stop-opacity='0' />
+            <stop offset='0.5' stop-color='white' stop-opacity='1' />
+            <stop offset='1' stop-color='white' stop-opacity='1' />
+         </radialGradient>
+    </svg>
+    <br />
+
+    <svg width="300" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <g stroke='black'>
+            <g id='g1'>
+                <path d='M0,50 100,50 M0,100 100,100 M50,0 50,100 M100,0 100,100' id='g' />
+                <use xlink:href='#g' transform='translate(0,100)' />
+                <use xlink:href='#g' transform='translate(0,200)' />
+                <use xlink:href='#g' transform='translate(0,300)' />
+                <use xlink:href='#g' transform='translate(0,400)' />
+                <use xlink:href='#g' transform='translate(0,500)' />
+            </g>
+
+            <use xlink:href='#g1' transform='translate(100,0)' />
+            <use xlink:href='#g1' transform='translate(200,0)' />
+        </g>
+
+        <!-- 
+            模式(pattern):将一组图形填充到指定的目标图形中(此时背景是透明,可以在图形相同位置放置一个指定色的相同图形)
+            不能放在def中
+         -->
+         <def>
+            <g id='ovals5' fill='#835' stroke-width='.7' stroke='#006'>
+                <ellipse cx='5' cy='5' rx='4' ry='2' />
+                <ellipse cx='20' cy='5' rx='4' ry='2' />
+                <ellipse cx='5' cy='20' rx='4' ry='2' />
+                <ellipse cx='20' cy='20' rx='4' ry='2' />
+            </g>
+         </def>
+
+         <pattern id='oval' patternUnits ='userSpaceOnUse' width='25' height='25'>
+            <use xlink:href='#ovals5' />
+         </pattern>
+         <ellipse cx='50' cy='50' rx='50' ry='25' fill='blue' />
+         <ellipse cx='50' cy='50' rx='50' ry='25' fill='url(#oval)' stroke='black'/>
+
+         <!-- 
+             1.clipPath是一组图形的容器,被其他图形使用,迫使该图形展示clipPath集合中图形范围
+             2.使用clip-path属性的图形还是图形,可以继续变换操作,当做clipPath的路径,继续使用clip-path,被g,use使用等;和其他一般图形是一样的
+          -->
+          <!-- 该处裁剪路径时文本,所以图片只展示了文本占据的内容 -->
+          <clipPath id='CP'>
+            <text x='100' y='75' font-size='60'>OK!</text>
+          </clipPath>
+          <image xlink:href='s1.jpg' x='100' y='0' width='100' height='100' clip-path='url(#CP)' />
+
+          <!-- 集合设置了clip-path,那么这个集合中图形就只展示clipPath中文本范围. -->
+          <clipPath id='CP2'>
+              <text x='200' y='50' font-size='15'>ClipPath Test!</text>
+          </clipPath>
+          <g clip-path='url(#CP2)'>
+            <rect x='200' y='0' width='50' height='100' fill='red' />
+            <rect x='250' y='0' width='50' height='100' fill='blue' />
+          </g>
+
+
+        <!-- 
+            1.mask 等于在图形上再盖一层 ,该层的 可见（黑色或不透明）部分和不可见（白色或透明）部分 导致 图形 不可见(白色或透明) 和 可见(图形该部位景色)
+         -->
+         <linearGradient id='maskGra'>
+             <stop offset='0' stop-color='black' />
+             <stop offset='1' stop-color='white' />
+         </linearGradient>
+         <mask id='mask1'>
+             <rect x='0' y='100' width='150' height='50' fill='url(#maskGra)'/>
+         </mask>
+         <text x='0' y='130' mask='url(#mask1)' font-size='20'>This is mask!</text>
+
+
+         <radialGradient id='maskGra2'>
+                <stop offset="0.0" stop-color="black"/>
+                <stop offset="0.5" stop-color="white"/>
+                <stop offset="1" stop-color="black"/>
+         </radialGradient>
+         <mask id='mask2'>
+            <ellipse cx='225' cy='150' rx='75' ry='50' fill='url(#maskGra2)'/>
+         </mask>
+         <image xlink:href='s1.jpg' x='150' y='100' width='150' height='100' mask='url(#mask2)' />
+
+         <!-- 设置透明色 -->
+         <radialGradient id='maskGra3'>
+                <stop offset="0.0" stop-color="black" />
+                <stop offset="0.5" stop-color="white" />
+                <stop offset="1" stop-color="black"/>
+         </radialGradient>
+         <mask id='mask3'>
+            <ellipse cx='75' cy='250' rx='75' ry='50' fill='url(#maskGra3)' opacity='.2'/>
+         </mask>
+         <image xlink:href='s1.jpg' x='0' y='200' width='150' height='100' mask='url(#mask3)' />
+    </svg>
+
+
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" style='display:none;'>
+        <!-- 路径有重合部分,默认是在全部路径内部 （使用于在一个图形中的重叠部分） -->
+        <path d="M 270 140 A 65 30 0 1 1 270 141 M 308
+        128 A 25 7 0 1 1 308 129" id='basepath'/>
+
+        <!-- 设置fill-rule='evenodd' 表示重碟部分是偶数次的指定为图形外部 -->
+        <use xlink:href='#basepath' transform='translate(0,100)'  fill-rule="evenodd"/>
+
+        <!-- 由于是指定切割路径,将clip-rule='evenodd'表示重叠部分(偶次)不属于该切割路径图形(图形外部,此处就是内部小圆圈为空) -->
+        <clipPath id='clippath'>
+                <use xlink:href='#basepath' transform='translate(0,300)' clip-rule='evenodd'/>
+        </clipPath>
+        <image xlink:href='s1.jpg' x='200' y='300' width='300' height='300' clip-path='url(#clippath)'/>
+    </svg>
+    <br />
+
+
+    <!-- 
+        clipPath与mask的区别
+        1.clip-path和mask都是作为图形的属性使用
+        2.都可以使用(line,path,rect,text...)作为其基本路径或组合路径
+
+        3.clip-path是对图形进行裁剪,图形只显示路径范围内的图形
+        4.mask相当于一个遮掩层(黑->白,不透明->透明 对于遮掩层是可见到不可见;但是对于图形来说就是相反的效果),必须设置fill填充样式(未设置样式表示默认黑色,图形不可见)
+     -->
+
+
+
+     <!-- 
+         //TOLearn filter
+         https://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html#clipPath
+         Filters: blurring, distortion, etc.
+      -->
+</body>
+</html>

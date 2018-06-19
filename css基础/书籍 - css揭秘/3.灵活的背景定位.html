@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>灵活的背景定位</title>
+    <style>
+        div{
+            /*width:10em;*/
+            height:10em;
+            border:1px solid black;
+            background-repeat:no-repeat;
+            /*图片大小*/
+            background-size: 3em 3em;
+        }
+
+        .img1{
+            background-image: url(./imgs/sImg/s3.jpg);
+            /*相对于左上角定位*/
+            /*background-position: 6em 6em;*/
+            /*background-position:right bottom; */
+            background-position:20% 40%; 
+        }
+        .img2{
+            background-image: url(./imgs/sImg/s3.jpg);
+            /*相对于任意边方向定位 设置距离;默认以padding盒模式的顶点为基*/
+            background-position:right 2em bottom 1em;
+            padding:10px;
+             /*设置position的相对盒模式,这里是内容区域,默认为padding模式*/
+            background-origin: content-box;
+        }
+
+        .img3{
+            background-image: url(./imgs/sImg/s3.jpg);
+            background-position:calc(100% - 20px) calc(100% - 10px);
+            padding:2em;
+            border:2em solid rgba(255,0,0,.1);
+            /*background-clip: content-box;*/
+        }
+
+        .img4{
+            padding:1em 2em;
+            background-image: url(./imgs/sImg/s3.jpg);
+
+            /*clip决定背景展示的范围*/
+            background-color:hsla(200,100%,0%,.3);
+            background-clip: content-box;
+            
+            /*origin决定图片position的相对位置*/
+            background-position: 3em 3em;
+            background-origin: padding-box;
+        }
+
+        .img5{
+            background-image: url(./imgs/sImg/s4.jpg);
+            background-repeat:repeat;
+            background-size: 3em 5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="img1"></div>
+    <div class="img2"></div>
+    <div class="img3"></div>
+    <div class="img4"></div>
+    <div class="img5"></div>
+</body>
+</html>

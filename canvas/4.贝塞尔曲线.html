@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="b1" width="300px" height="300px"></canvas>
+    <canvas id="b2"></canvas>
+
+    <script>
+        //二次贝塞尔曲线
+        var canvas = document.getElementById('b1');
+        var ctx1 = canvas.getContext('2d')
+
+        /*ctx1.beginPath()
+        ctx1.moveTo(75,25);
+        ctx1.quadraticCurveTo(25,25,25,62.5);
+        ctx1.quadraticCurveTo(25,100,50,100);
+        ctx1.quadraticCurveTo(50,120,30,125);
+        ctx1.quadraticCurveTo(60,120,65,100);
+        ctx1.quadraticCurveTo(125,100,125,62.5);
+        ctx1.quadraticCurveTo(125,25,75,25);
+        ctx1.stroke();*/
+
+        ctx1.beginPath();
+        ctx1.moveTo(150,50);
+        ctx1.lineTo(100,50);
+        ctx1.quadraticCurveTo(80,50,80,70);
+        ctx1.lineTo(80,170);
+        ctx1.quadraticCurveTo(80,190,100,190);
+        ctx1.lineTo(120,190);
+        ctx1.quadraticCurveTo(120,230,100,225);
+        ctx1.quadraticCurveTo(150,230,150,190);
+        ctx1.lineTo(200,190);
+        ctx1.quadraticCurveTo(220,190,220,170);
+        ctx1.lineTo(220,70);
+        ctx1.quadraticCurveTo(220,50,200,50);
+        ctx1.lineTo(150,50);
+        ctx1.stroke();
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选用合适的鼠标光标</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+        }
+        
+        button{
+            margin: 0 5px;
+        }
+
+        :disabled,[disabled]{
+            cursor:not-allowed;
+        }
+
+        .btn2{
+            cursor: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        <button class='btn1' disabled>提示禁用状态</button>
+        <button class='btn2'>隐藏光标</button>
+    </div>
+    
+</body>
+</html>

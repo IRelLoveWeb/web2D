@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>require-define</title>
+</head>
+<body>
+    <script>
+        const module = (function(){
+            let obj={}
+
+            function define(name,refences,callback){
+                if(Object.prototype.hasOwnProperty.call(obj,name)){
+                    console.error('该模块已经定义');
+                    return ;
+                }
+                let arr = [];
+                for(let i=0,len=refences.length;i<len;i++){
+                    if(Object.prototype.hasOwnProperty.call(obj,refences[i])) {
+                        arr.push(obj[refences[i]])
+                    }else{
+                        console.error(refences[i] + '模块未定义!');
+                        continue;
+                    }
+                }
+                obj[name] =  callback.apply(null,arr);               
+            }
+
+            function require(refences,callback){
+                let arr =[];
+
+                for(let i=0,len=refences.length;i<len;i++){
+                    if(Object.prototype.hasOwnProperty.call(obj,refences[i])) {
+                        arr.push(obj[refences[i]])
+                    }else{
+                        console.error(refences[i] + '模块未定义!');
+                        continue;
+                    }
+                }
+
+                callback.apply(null,arr);
+            }
+
+            return {define,require}
+        })()
+    </script>
+</body>
+</html>

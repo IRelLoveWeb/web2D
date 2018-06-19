@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="root"></canvas>
+    
+    <script>
+        var canvas = document.getElementById('root');
+        var ctx = canvas.getContext('2d');
+        
+
+/*      new Path2D();     // 空的Path对象
+        new Path2D(path); // 克隆Path对象
+        new Path2D(d);    // 从SVG建立Path对象
+*/
+
+
+        var rectangle = new Path2D();
+        rectangle.rect(10, 10, 50, 50);
+
+        var circle = new Path2D();
+        circle.moveTo(125, 35);
+        circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+        ctx.stroke(rectangle);
+        ctx.fill(circle);
+
+        //svg路径
+        var p = new Path2D("M10 10 h 80 v 80 h -80 Z");
+        ctx.stroke(p);
+    </script>
+</body>
+</html>

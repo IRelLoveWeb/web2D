@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shareWorker</title>
+
+</head>
+<body>
+    <input type='text' id='input1' />
+
+    <script>
+        const worker = new SharedWorker('./worker.js');
+
+        document.getElementById('input1').onblur = function(e){
+            worker.port.postMessage(e.target.value)
+        }
+
+        worker.port.onmessage = function(e){
+            var newDiv = document.createElement('div');
+            newDiv.innerHTML = e.data;
+            document.body.appendChild(newDiv);
+        }
+    </script>
+</body>
+</html>

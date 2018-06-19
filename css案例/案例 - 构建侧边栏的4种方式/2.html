@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定宽度区使用绝对定位，自适应区照例设置margin</title>
+    <style>
+        div{
+            border:1px solid red;
+        }
+        #wrap {
+           *zoom: 1; position: relative;
+        }
+        #content ,#sidebar {
+            background-color: #eee; 
+        }
+        #sidebar {
+           width: 300px; position: absolute; right: 0; top: 0;
+        }
+        #content {
+            margin-right: 310px;
+        }
+        #footer {background-color: #f00;color:#fff; margin-top: 1em}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content" style="height:340px;">自适应区，在前面</div>
+        <div id="sidebar" style="height:240px;">固定宽度区</div>
+        <div id="#footer">footer</div>
+    </div>
+</body>
+</html>

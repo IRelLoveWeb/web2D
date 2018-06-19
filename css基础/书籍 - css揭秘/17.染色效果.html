@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>染色效果</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+        
+        img{
+            width:10rem;
+            height: 6rem;
+        }
+        /* 
+            在文档流中 :before在content之前 ,:after在content之后
+         */
+        .demo1{
+            background-image: url(imgs/img0.jpg);
+            background-size: cover;
+            position: relative;
+        }
+        .demo1::before{
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: gray;
+            opacity: 0.5;
+        }
+        
+        /* 
+            滤镜
+         */
+        .demo2{
+            background-image: url(imgs/img0.jpg);
+            filter:sepia(1) saturate(4) hue-rotate(295deg);
+            transition: filter .5s;
+        }
+
+        .demo2:hover{
+            filter: none;
+        }
+
+        /* 混合模式 */
+        .demo3{
+            background: hsl(335, 100%, 50%);
+        }
+        .demo3 > img{
+            mix-blend-mode: luminosity;
+        }
+        
+
+        .demo4{
+            background-size: cover();
+            background-color: hsl(335, 100%, 50%);
+            background-image: url(imgs/img0.jpg);
+            background-blend-mode:luminosity;
+            transition: all .5s;
+        }
+        .demo4:hover{
+            background-color:transparent;
+        }
+
+
+        /* 
+            css  filer 过滤属性 【函数值一般为百分比或小数】
+                blur(px|em|rem) 高斯模糊;默认0,不接受百分比 
+                brightness(%) 亮度;100%图像不变,0%图像全黑;线性,默认1
+                contrast(%) 图像的对比度;100%图像不变,0%图像全黑;值可以大于100%,默认1
+                drop-shadow(px px px color) 设置一个阴影效果;xoffset yoffset blur color 空格分隔
+                grayscale(%) 转换为灰度图像;0%图像不变,100%完全转为灰度图像;线性,默认0
+                hue-rotate(deg) 应用色相旋转;0deg图像不变,360deg为一圈;默认0deg
+                invert(%) 反转输入图像;0%图像无变化,100%图像完全反转;线性,默认0
+                opacity(%) 透明程度;100%图像无变化,0%完全透明;线性,默认1
+                saturate(%) 图像饱和度;100%图像无变化,0%完全不饱和;线性,默认1,可以超过100%
+                sepia(%) 转换为深褐色;100%则完全是深褐色的，值为0%图像无变化;默认0
+                url() svg滤镜  filter: url(svg-url#element-id)
+                inherit  继承父属性
+
+            后代元素都会受到影响
+         */
+         .demo5{
+             overflow: hidden;
+             background-size: cover;
+             border-radius: 20px;
+             filter: drop-shadow(2px 2px 5px red) blur(1px);
+         }
+
+         /* 
+            颜色混合
+            mix-blend-mode  混合所有处于该元素位置下的所有父辈元素和自身
+            background-blend-mode 混合该元素下的所有背景图片和背景色
+          */
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3" style='z-index:5'>
+        <img src='./imgs/img0.jpg' style='z-index:1'/>
+    </div>
+    <div class="demo4">4</div>
+    <div class="demo5">
+        <img src='./imgs/img2.jpg' />
+    </div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

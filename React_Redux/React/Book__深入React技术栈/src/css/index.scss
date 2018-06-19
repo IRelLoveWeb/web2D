@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+// .partRoot{
+//     & > .sider-bar{
+//         position: fixed;
+//         left:0;
+//         width:3rem;
+//         opacity: 0.8;
+//         height: 100%;
+//         background: #bbd3e4;
+//     }
+
+//     & > [class^=part]{
+//         margin-left: 3.5rem;
+//     }
+// }
+
+
+.partOne{
+    & > div{
+        padding-left: 1rem;
+
+        a{
+            text-decoration: none;
+            color: #ff00ff;
+            margin-left: .5rem;
+        }
+
+        & > h3{
+            padding: .3rem;
+            cursor: pointer;
+        }
+
+        & > p >span {
+            padding-left: 2rem;
+            display: block;
+            white-space:nowrap;
+            padding: .3rem;
+        }
+
+        .tabs-panel{
+            display: none;
+        }
+        
+        .tabs-active{
+            display: block;
+        }
+    }
+}
+
+.partTwo{
+    &>div{
+        padding: 3px;
+        border-bottom: 1px solid black;
+        // &>h3::first-letter{
+        //     float:left;
+        //     font-size:40px;
+        //     font-weight:bold;
+        // }
+    }
+
+    @extend .partOne;
+
+    .testone span{
+        display: block;
+    }
+}

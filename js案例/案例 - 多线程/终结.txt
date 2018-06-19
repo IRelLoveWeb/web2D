@@ -1,0 +1,5 @@
+指的是页面【html,iframe等,不是js】
+
+    Dedicated Worker：专用的 worker，只能被创建它的 JS 访问，创建它的页面关闭，它的生命周期就结束了。
+    Shared Worker：共享的 worker，可以被同一域名下的 JS 访问，关联的页面都关闭时，它的生命周期就结束了
+    ServiceWorker：是事件驱动的 worker，生命周期与页面无关，关联页面未关闭时，它也可以退出，没有关联页面时，它也可以启动

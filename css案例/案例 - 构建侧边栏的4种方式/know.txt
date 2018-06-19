@@ -1,0 +1,5 @@
+1. div的宽默认占据一行所有空余长度(假设设置了margin-left等),则宽度为 父长减去marginLeft的值
+
+2. position:absolute 的元素需要设置固定长宽或其类子元素撑开(与其父元素无关)
+
+3. margin 不包含在 元素的长度 中

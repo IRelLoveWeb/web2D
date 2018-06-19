@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>边框内圆角</title>
+    <style>
+        div{
+            width:6rem;
+            height:3rem;
+            margin:2rem auto;
+        }
+
+        .demo1{
+            background-color: blue;
+            border-radius: .5rem;
+            /*outline 是矩形的,不占布局空间*/
+            outline: .7rem solid gray;
+        }
+
+        .demo2{
+            /*box-shadow是根据元素形状来展现的*/
+            box-shadow: 0 0 0 .25rem gray;
+            background-color: blue;
+            border-radius: .5rem;
+            outline: .7rem solid gray;
+            /*用outline描边,用box-shadow去除缝隙*/
+        }
+
+        /* 外圆内方 */
+        .demo3{
+            position: relative; 
+            background: blue;
+            line-height: 2rem;
+        }
+        .demo3:before{
+            content:'';
+            position: absolute;
+            display: block;
+            left:-0.7rem;right:-0.7rem;top:-0.7rem;bottom:-0.7rem;
+            background: yellow;
+            border-radius: .5rem;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1"></div>
+    <div class="demo2"></div>
+    <div class="demo3">demo3</div>
+</body>
+</html>

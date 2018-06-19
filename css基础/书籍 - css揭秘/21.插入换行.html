@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插入换行</title>
+    <style>
+       div{
+            height:10rem;
+        }
+        
+         dt,dd{
+            display: inline;
+            margin: 0;
+        }
+        
+        /* 
+            伪元素content是字符串内容
+            white-space 控制空格和换行的行为
+         */
+        .demo2 dd::after{
+            content: '\A';
+            white-space:pre;
+        }
+        
+        /* 第一个dt不换行 */
+        .demo3 dd + dt::before{
+            content: '\A';
+            white-space:pre;
+        }
+
+
+        /* 多个dd之间加逗号 */
+        .demo4 dd + dd::before{
+            content: ',';
+        }
+        .demo4 dd + dt::before{
+            content: '\A';
+            white-space:pre;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        <dl>
+            <dt>Name:</dt>
+            <dd>Lea Verou</dd>
+            <br/>
+            <dt>Email:</dt>
+            <dd>823088131@qq.com</dd>
+            <br/>
+            <dt>Location:</dt>
+            <dd>Earth</dd>
+        </dl>
+    </div>
+    <div class="demo2">
+        <dl>
+            <dt>Name:</dt>
+            <dd>Lea Verou</dd>
+            <dt>Email:</dt>
+            <dd>823088131@qq.com</dd>
+            <dt>Location:</dt>
+            <dd>Earth</dd>
+        </dl>
+    </div>
+    <div class="demo3">
+        <dl>
+            <dt>Name:</dt>
+            <dd>Lea Verou</dd>
+            <dt>Email:</dt>
+            <dd>823088131@qq.com</dd>
+            <dt>Location:</dt>
+            <dd>Earth</dd>
+        </dl>
+    </div>
+
+    <div class="demo4">
+        <dl>
+            <dt>Name:</dt>
+            <dd>Lea Verou</dd>
+            <dt>Email:</dt>
+            <dd>823088131@qq.com</dd>
+            <dd>935853954@qq.com</dd>
+            <dt>Location:</dt>
+            <dd>Earth</dd>
+        </dl>
+    </div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

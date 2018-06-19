@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 
+            --val 定义变量
+            var(--val) 读取变量
+         */
+        :root{
+            --font-size:20px;
+            --font-color:red;
+        }
+        
+        .test{
+            color:var(--font-color);
+            --space:calc(var(--font-size) * 2);
+            font-size:var(--space);
+        }
+        
+        @media screen and (max-width:1200px){
+            .test{
+                color: var(--font-color);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class='test'>
+        Hello Css!
+    </div>
+</body>
+</html>

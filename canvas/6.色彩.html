@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+
+    <script>
+    /*一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值*/
+    var canvas = document.getElementById('c1');
+    var ctx1 = canvas.getContext('2d');     
+    for(var i=0;i<6;i++){
+        for(var j=0;j<6;j++){
+            ctx1.fillStyle = "rgb("+ Math.floor(255-42.5*i) +","+ Math.floor(255-42.5*j) +",0)";
+            ctx1.fillRect(j*25,i*25,25,25);
+        }
+    }
+
+
+    /*
+        如果没有beginPath(),那么rect是moveTo 左上角,arc是lineTo 圆心;
+        且每次beginPath()其色彩值都会改变,否则无beginPath就是最后的色彩
+    */
+    var canvas = document.getElementById('c2');
+    var ctx2 = canvas.getContext('2d');
+    for (var i=0;i<6;i++){
+      for (var j=0;j<6;j++){
+        ctx2.strokeStyle = 'rgb(0,' + Math.floor(255-42.5*i) + ',' + 
+                         Math.floor(255-42.5*j) + ')';
+        ctx2.beginPath();
+        //ctx2.arc(12.5+j*25,12.5+i*25,10,0,Math.PI*2,true);
+        ctx2.rect(j*25,i*25,20,20);
+        ctx2.stroke();
+      }
+    }   
+
+    /*
+    ctx.globalAlpha = 0.2 统一设置透明度
+    rgba 设置多个透明度
+    */
+    </script>
+</body>
+</html>

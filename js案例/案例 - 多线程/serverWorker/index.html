@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>serverWorker</title>
+</head>
+<body>
+    <script>
+            if('serviceWorker' in navigator){
+                navigator.serviceWorker.register('./serverWorker.js')
+                .then(registration =>{ console.log('workerserver register ok!')})
+            }
+    </script>
+</body>
+</html>
+
+<!-- 
+    chrome://inspect/#service-workers
+    chrome://serviceworker-internals/
+ -->

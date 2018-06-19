@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="400" height="300"></canvas>
+    <label>smoothing:<input type="checkbox" id="smoothing"></label>
+    <span id="color"></span>
+    
+    <br />
+
+    <canvas id="c2"></canvas>
+    <button id="invertbtn">invertbtn</button> <button id="grayscalebtn">grayscalebtn</button>
+
+    <br />
+
+    <canvas id="c3"></canvas>
+    <script>
+        //创建一个ImageData对象
+        //var myImageData = ctx.createImageData(width, height);
+        //得到场景像素数据
+        //var myImageData = ctx.getImageData(left, top, width, height);
+        //将改变或生成的imageData数据放入画布
+        //ctx2.putImageData(imageData, 0, 0);
+
+        var canvas1 = document.getElementById('c1');
+        var ctx1 = canvas1.getContext('2d');
+
+        var canvas3 = document.getElementById('c3');
+        var ctx3 = canvas3.getContext('2d');
+
+        var img = new Image();
+        //图片同源
+        img.src = '../imgs/Capitan_Meadows,_Yosemite_National_Park.jpg';
+        img.onload = function(){
+            ctx1.drawImage(img,0,0);
+            img.style.display = 'none';
+        }
+        var color = document.getElementById('color');
+        canvas1.addEventListener('mousemove',function(e){
+            var x = event.layerX;
+            var y = event.layerY;
+            var pixel = ctx1.getImageData(x, y, 1, 1);
+            var data = pixel.data;
+            var rgba = 'rgba(' + data[0] + ',' + data[1] +
+                        ',' + data[2] + ',' + (data[3] / 255) + ')';
+            color.style.background =  rgba;
+            color.textContent = rgba;
+
+            //将canvas1中10px像素在canvas3中进行缩放
+            ctx3.drawImage(canvas1,Math.abs(x-5),Math.abs(y-5),10,10,0,0,200,200);
+        })
+
+        //反锯齿 默认启用 不同浏览器需要不同前缀
+         var smoothing = document.getElementById('smoothing');
+        smoothing.onclick =function(event){
+            var target = event.target;
+            ctx3.imageSmoothingEnabled = target.checked;
+            ctx3.mozImageSmoothingEnabled = target.checked;
+            ctx3.webkitImageSmoothingEnabled = target.checked;
+            ctx3.msImageSmoothingEnabled = target.checked;
+        }
+
+    </script>
+
+    <script>
+        var canvas2 = document.getElementById('c2');
+        var ctx2 = canvas2.getContext('2d');
+
+        var img2 = new Image()
+        img2.src="../imgs/s10.jpg";
+        img2.onload = function(){
+            ctx2.drawImage(img2,0,0);
+            img2.style.display = 'none';
+            //获取画布内所有位置的像素信息
+            var imageData = ctx2.getImageData(0,0,canvas2.width,canvas2.height);
+            //imageData 中包含 width,height，data 属性  data 中保存整个画布的所有像素信息(rgba格式 4位)
+            var data = imageData.data;
+
+            var invert = function() {
+                for (var i = 0; i < data.length; i += 4) {
+                data[i]     = 225 - data[i];     // red
+                data[i + 1] = 225 - data[i + 1]; // green
+                data[i + 2] = 225 - data[i + 2]; // blue
+                }
+                //将修改后的像素放入画布(任意画布都可以 ctx3)
+                ctx2.putImageData(imageData, 0, 0);
+            };
+
+            var grayscale = function() {
+                for (var i = 0; i < data.length; i += 4) {
+                var avg = (data[i] + data[i +1] + data[i +2]) / 3;
+                data[i]     = avg; // red
+                data[i + 1] = avg; // green
+                data[i + 2] = avg; // blue
+                }
+                ctx2.putImageData(imageData, 0, 0);
+            };
+
+            var invertbtn = document.getElementById('invertbtn');
+            invertbtn.addEventListener('click', invert);
+            var grayscalebtn = document.getElementById('grayscalebtn');
+            grayscalebtn.addEventListener('click', grayscale); 
+
+
+            //canvas图像导出
+            
+             //创建一个PNG图片。
+            var u1 = canvas2.toDataURL('image/png')
+            console.log(u1);
+            //创建一个JPG图片。你可以有选择地提供从0到1的品质量，1表示最好品质，0基本不被辨析但有比较小的文件大小
+            var u2 = canvas2.toDataURL('image/jpeg', 1)
+            console.log(u2);
+
+            var eleA = document.createElement('img');
+            //eleA.appendChild(document.createTextNode('click'));
+            eleA.setAttribute('src',u2);
+            document.getElementsByTagName('body')[0].appendChild(eleA);
+        }
+    </script>
+
+    <script>
+    </script>
+</body>
+</html>

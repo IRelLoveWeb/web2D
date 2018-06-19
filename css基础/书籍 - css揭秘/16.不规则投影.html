@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不规则投影</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+
+        /* 
+            box-shadow
+            filter 
+            都可以有多个重叠
+         */
+        .demo1{
+            border:  1rem dotted yellow;
+            box-shadow: 0 0 5px 2px black,0 0 0 10px red;
+        }
+        
+        /* 
+            不规则图形用滤镜添加阴影 filter:drop-shadow();
+         */
+        .demo2{
+            border:  1rem dotted yellow;
+            filter:drop-shadow(0 0 5px rgba(0,0,0,0.5));
+        }
+
+        .demo3{
+            position: relative;
+            background: yellow;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+        }
+        .demo3::after{
+            content: '';
+            position: absolute;
+            width:10px;
+            height: 10px;
+            display: block;
+            background: inherit;
+            transform: rotate(45deg);
+            right:-5px;
+            top:calc(50% - 5px);
+        }
+
+        /* 
+            文本投影 和 滤镜投影 
+         */
+        .demo4{
+            width:20rem;
+            line-height: 6rem;
+            text-shadow: 3px 3px yellow,-3px -3px green;
+            filter:drop-shadow(3px 3px 5px red);
+        }
+        
+        .demo5{
+            background: linear-gradient(45deg,transparent 5px,yellow 0) left bottom,
+                        linear-gradient(135deg,transparent 5px,yellow 0) left top,
+                        linear-gradient(-45deg,transparent 5px,yellow 0) right bottom,
+                        linear-gradient(-135deg,transparent 5px,yellow 0) top right;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+
+            /* box-shadow: 0 0 5px red; */
+            filter: drop-shadow(0 0 5px red) drop-shadow(0 0 10px green);
+        }
+
+        /* 
+            text-shadow,box-shadow,filter:drop-shadow()
+            值都是空格分隔的
+         */
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">TextAndFilter-Shadow</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

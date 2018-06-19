@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连字</title>
+    <style>
+        body > div{
+            margin: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* text-transform 控制文本的大小写 */
+        .demo2 div:nth-child(1){
+            text-transform:uppercase;
+        }
+        .demo2 div:nth-child(2){
+            text-transform:capitalize;
+        }
+        .demo2 div:nth-child(3){
+            text-transform:lowercase;
+        }
+        .demo2 div:nth-child(4){
+            font-variant: small-caps;
+        }
+
+        /* 
+            font-variant 字体变体
+
+            https://www.w3cplus.com/css3/font-variants.html?utm_source=tuicool&utm_medium=referral
+         */
+    </style>
+</head>
+<body>
+    <div class="demo1">&#xfb01</div>
+    <div class="demo2">
+        <div>abcABC</div>
+        <div>abcABC</div>
+        <div>abcABC</div>
+        <div>abcABC</div>
+    </div>
+    <div class="demo3">fi</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

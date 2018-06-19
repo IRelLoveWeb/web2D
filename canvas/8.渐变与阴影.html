@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2" width="300px" height="300px"></canvas>
+    <canvas id="c3"></canvas>
+    <canvas id="c4"></canvas>
+    <canvas id="c5"></canvas>
+    <script>
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+        //线性渐变
+        var lineargradient = ctx1.createLinearGradient(0,0,150,150);
+        lineargradient.addColorStop(0,'white');
+        lineargradient.addColorStop(1,'black');
+        ctx1.fillStyle = lineargradient;
+        ctx1.fillRect(0,0,150,150);
+
+        //径向渐变 10之内是纯白色 10-75是渐变 75之后是纯黑色
+        var radialgradient = ctx1.createRadialGradient(75,75,10,75,75,75);
+        radialgradient.addColorStop(0,'white');
+        radialgradient.addColorStop(1,'black');
+        ctx1.fillStyle = radialgradient;
+        ctx1.fillRect(0,0,150,150);
+
+        //渐变色,赋值给fillStyle 或 strokeStyle;
+        //渐变色在创建的时候就设置了渐变范围,不管画的路径是否占满,渐变范围始终不会改变的
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+        //在创建的时候由2个坐标 确定了渐变色的方向,初始位置和渐变范围
+        var lineargradient = ctx2.createLinearGradient(0,0,0,150);
+        lineargradient.addColorStop(0,'#fff');
+        lineargradient.addColorStop(.5,'blue');
+        lineargradient.addColorStop(.5,'#fff');
+        lineargradient.addColorStop(1,'red');
+        //canvas未进行变换之前,此处渐变色 x未变,向下;开始渐变的位置在整个坐标戏中y轴为50,渐变的范围是100-50,其余为实色
+        var lineargradient2 = ctx2.createLinearGradient(0,50,0,100);
+        lineargradient2.addColorStop(0,'white');
+        lineargradient2.addColorStop(1,'black');
+
+        ctx2.fillStyle = lineargradient;
+        ctx2.strokeStyle = lineargradient2;
+        ctx2.lineWidth = 6;
+
+        ctx2.fillRect(0,0,150,150);
+        ctx2.strokeRect(50,40,50,70);
+        
+        var lineargradient3 = ctx2.createLinearGradient(50,50,150,150);
+        lineargradient3.addColorStop(0,'white');
+        lineargradient3.addColorStop(1,'black');
+        ctx2.fillStyle = lineargradient3;
+        ctx2.strokeStyle = "red";
+        ctx2.lineWidth = 1;
+        //可以看出在渐变的方向上,只有中间的才渐变,两端的都是实色;
+        ctx2.fillRect(30,30,140,140);
+        //框出了渐变的范围
+        ctx2.strokeRect(50,50,100,100);
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d')
+
+        // 创建渐变
+        var radgrad = ctx3.createRadialGradient(45,45,10,52,50,30);
+        radgrad.addColorStop(0, '#A7D30C');
+        radgrad.addColorStop(0.9, '#019F62');
+        radgrad.addColorStop(1, 'rgba(1,159,98,0)');
+        
+        var radgrad2 = ctx3.createRadialGradient(105,105,20,112,120,50);
+        radgrad2.addColorStop(0, '#FF5F98');
+        radgrad2.addColorStop(0.75, '#FF0188');
+        radgrad2.addColorStop(1, 'rgba(255,1,136,0)');
+
+        var radgrad3 = ctx3.createRadialGradient(95,15,15,102,20,40);
+        radgrad3.addColorStop(0, '#00C9FF');
+        radgrad3.addColorStop(0.8, '#00B5E2');
+        radgrad3.addColorStop(1, 'rgba(0,201,255,0)');
+
+        var radgrad4 = ctx3.createRadialGradient(0,150,50,0,140,90);
+        radgrad4.addColorStop(0, '#F4F201');
+        radgrad4.addColorStop(0.8, '#E4C700');
+        radgrad4.addColorStop(1, 'rgba(228,199,0,0)');
+        
+        // 画图形
+        ctx3.fillStyle = radgrad4;
+        ctx3.fillRect(0,0,150,150);
+        ctx3.fillStyle = radgrad3;
+        ctx3.fillRect(0,0,150,150);
+        ctx3.fillStyle = radgrad2;
+        ctx3.fillRect(0,0,150,150);
+        ctx3.fillStyle = radgrad;
+        ctx3.fillRect(0,0,150,150);
+
+        //渐变指定了色彩, fillRect 指定了图形;多个图形重叠在一起
+    </script>
+
+    <script>
+        //图案样式 Patterns
+        var canvas = document.getElementById('c4');
+        var ctx4 = canvas.getContext('2d')
+
+        var img = new Image();
+        img.src = "../imgs/s1.jpg";
+        img.onload = function(){
+            //repeat，repeat-x，repeat-y 和 no-repeat
+            var ptrn = ctx4.createPattern(img,'repeat');
+            ctx4.fillStyle = ptrn;
+            ctx4.fillRect(0,0,150,150);
+        }
+
+        var img1 = new Image();
+        img1.src = "../imgs/s2.jpg";
+        img1.onload = function(){
+            var ptrn = ctx4.createPattern(img1,'repeat');
+            ctx4.beginPath()
+            ctx4.moveTo(50,50);
+            ctx4.lineTo(100,100);
+            ctx4.strokeStyle = ptrn;
+            ctx4.lineWidth = 20;
+            ctx4.stroke();
+        }
+
+        /*
+        渐变样式也是基于cnavas坐标系的,他设定了方向,在该方向渐变一定范围,范围之外的是实色;
+        路径创建 只有展示的路径范围才显示那部分的渐变色彩
+        */
+    </script>
+
+    <script>
+        //创建阴影
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d');
+        
+        //阴影在 X 的延伸距离
+        ctx3.shadowOffsetX = 2;
+        //阴影在 Y 的延伸距离
+        ctx3.shadowOffsetY = 2;
+        //阴影的模糊距离
+        ctx3.shadowBlur = 2;
+        //阴影的颜色
+        ctx3.shadowColor = "rgba(0, 0, 0, 0.5)";
+
+        /*文本*/
+        //文本字体
+        ctx3.font = "20px Times New Roman";
+        //文本颜色
+        ctx3.fillStyle = "black";
+        //创建文本
+        ctx3.fillText("Sample String", 5, 30);
+
+        /*图形*/
+        ctx3.fillRect(50,50,50,50);
+    </script>
+
+</body>
+</html>

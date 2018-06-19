@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)">
+        <ellipse cx="75" cy="75" rx="40" ry="30" fill="blue"/>
+    </svg> -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height='20%' width='100%'>
+        <script>
+            <![CDATA[
+                function sayHello(){
+                    alert('hello!')
+                }
+            ]]>    
+        </script>
+
+        <ellipse cx="75" cy="75" rx="40" ry="30" fill="blue" onactivate="alert('ellipse')">
+            <animate attributeName='rx' dur='2' values='40;80;40;' begin='click' end='A.begin + 2' onbegin='alert(1)' onend='alert(2)' id='A' repeatCount="indefinite"/>
+        </ellipse>
+
+        <text x='150' y='50' font-size='24'>Click</text>
+        <rect x='150' y='0' width='100' height='100' opacity='.2' onclick='sayHello()'></rect>
+    </svg>
+
+    <!-- 基础功能 -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width='100%' id='svg2'>
+        <script>
+            <![CDATA[
+
+
+                //修改属性----------------------------------------------------------------------------------------------
+                function test(){
+                    //获取元素
+                    var R = document.getElementById('R');
+                    //查找特定属性值
+                    var w = R.getAttributeNS(null,'width');
+                    //设置特定属性值
+                    R.setAttributeNS(null,'width','200');
+                    R.setAttributeNS(null,'fill','red');
+                }
+
+                function changeStopColor(){
+                    Array.from(document.getElementsByTagName('stop')).map(function(ele){
+                        ele.setAttributeNS(null,'stop-color',color());
+                    })
+                }
+
+                function color(){
+                    var color = '#';
+                    for(var i=0;i<3;i++){
+                        color += parseInt(Math.random()*255).toString(16)
+                    } 
+
+                    return color;
+                }
+
+                //image 设置xlink:href属性,必须设置命名空间
+                var xlink = 'http://www.w3.org/1999/xlink';
+                function changeImage(){
+                    var Img = document.getElementById('Image');
+                    //Img.setAttributeNS(xlink,'xlink:href','s2.jpg');
+                    //Img.setAttribute('xlink:href','s2.jpg');
+                    Img.href.baseVal = 's2.jpg';
+                };
+
+                //改变文本
+                function changeText(){
+                    var  T = document.getElementById('text');
+                    T.firstChild.nodeValue = 'Has Changed!';
+                    //T.firstChild.data = 'Has Changed!';
+                };
+
+
+                // 创建元素 -------------------------------------------------------------------------------------------
+                var xmlns = 'http://www.w3.org/2000/svg';
+                var root = document.getElementById('svg2');
+                var baseH = 50;
+
+                //创建图形
+                function createRect(){
+                    var rect = document.createElementNS(xmlns,'rect');
+                    rect.setAttributeNS(null,'x',300);
+                    rect.setAttributeNS(null,'y',baseH);
+                    rect.setAttributeNS(null,'width',100);
+                    rect.setAttributeNS(null,'height',10);
+                    rect.setAttributeNS(null,'fill',color());
+
+                    baseH += 10;
+                    root.appendChild(rect);
+                }
+
+                //创建文本
+                function createText(){
+                    var T = document.createElementNS(xmlns,'text');
+                    var text = document.createTextNode('12345');
+                    T.appendChild(text);
+                    root.appendChild(T);
+                    T.setAttributeNS(null,'x',200);
+                    T.setAttributeNS(null,'y',100);
+                }
+
+                /* 
+                    clone 克隆元素
+                    true:复制自身 和 子元素
+                    flase:只赋值本身
+                    无论true或则false 都会复制属性 和 事件
+
+                    R.replaceChild(E,C); 用C替换E;
+                    R.insertBefore(E,C); 将C插到E之前;
+                    R.appendChild(E); 将E添加到末尾;
+                    E.cloneNode(); 克隆E;
+
+                    R.removeChild(E);删除元素E
+                    E.parentNode.removeChild(E);
+
+
+                    E.nextSibling ;元素E的下一个兄弟元素
+                    E.childNodes;元素E的所有子节点(包括文本节点)
+                */
+                var yl = 50;
+                function clone(){
+                    var baseEle = document.getElementById('clone');
+                    var cloneEle = baseEle.cloneNode(true);
+                    cloneEle.setAttributeNS(null,'transform','translate(0,'+ yl +')');
+                    yl += 20;
+                    root.appendChild(cloneEle);
+                }
+
+                //拖拽(绑定的事件是在绑定元素上起作用)
+                var ele;
+                function startmove(evt){
+                    ele = evt.target;
+                    root.setAttributeNS(null,'onmousemove','move(evt)');
+                    root.setAttributeNS(null,'onmouseup','endmove(evt)');
+                    evt.stopPropagation()
+                }
+
+                function move(evt){
+                    ele.setAttributeNS(null,'cx',evt.clientX);
+                    ele.setAttributeNS(null,'cy',evt.clientY-155)
+                }
+
+                function endmove(){
+                    root.setAttributeNS(null,'onmousemove',null);
+                }
+            ]]>    
+        </script>
+
+        <rect x='0' y='0' width='50' height='50'  onclick='test()' id='R' stroke='black'></rect>
+
+        <linearGradient id='linearG'>
+            <stop id='s0' offset='0' stop-color='red'></stop>
+            <stop id='s1' offset='0.5' stop-color='green'></stop>
+            <stop id='s2' offset='1' stop-color='blue'></stop>
+        </linearGradient>
+        <rect x='80' y='0' width='50' height='50' id='R2' fill='url(#linearG)' onClick="changeStopColor()"></rect>
+        
+        <image xlink:href='s1.jpg' x='0' y='80' width='200' id='Image' onclick="changeImage()"/>
+
+        <rect x='200' y='0' width='100' height='50' opacity='.2' onclick='changeText()'/>
+        <text x='200' y='30' font-size='15'  id='text' >Change Text!</text>
+
+        <g onclick='createRect()'>
+            <rect x='300' y='0' width='100' height='50' opacity='.5' />
+            <text x='300' y='30' font-size='20' fill='none' stroke='red'>createRect</text>
+        </g>
+        
+        <g onclick='createText()'>
+            <rect x='200' y='50' width='100' height='50' opacity='.5' />
+            <text x='200' y='80' font-size='20' fill='none' stroke='red'>createText</text>
+        </g>
+
+        <g id='clone' onclick='clone()'>
+            <rect x='400' y='0' width='100' hieght='50' opacity='.5' fill='red'/>
+            <text x='400' y='30' font-size='20' opacity='.5' >Clone</text>
+        </g>
+
+        <circle cx='500' cy='50' r='25' fill='red' onmousedown='startmove(evt)'/>
+
+    </svg>
+
+    <!-- 特殊功能 -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height='20%' width='100%'>
+        <script>
+            <![CDATA[
+                /* 
+                    1.E.getBBox()  获取元素最小的包围矩形坐标(左上点 和 长宽) 相对于svg左顶点(适用于原始物体,装换后的物体计算可以将获取的rect通过同样变换获取)
+                    2.E.getTotalLength() 获取路径的长度 ;E.getPointAtLength(r) 传入指定长度,获取该处的路径点坐标 (只使用于path中)
+                 */
+                function getRect(){
+                    var box = document.getElementById('textBox');
+                    console.log(box.getBBox());
+                }
+
+                function getPoint(){
+                    var line = document.getElementById('linePoint');
+                    var lineLength = line.getTotalLength();
+                    console.log('lineLength:' + lineLength/2);
+                    console.log(line.getPointAtLength(lineLength/2));
+                }
+
+            ]]>    
+        </script>
+
+        <text x='150' y='50' font-size='24' id='textBox' onclick='getRect()'>Click</text>
+        <path d='M20,20 50,60 100,200' fill='none' stroke='red' stroke-width='5' onclick="getPoint()" id='linePoint'/>
+    </svg>
+
+
+    <!-- 
+        https://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html#SMIL_animations
+
+        getNumberOfChars
+     -->
+</body>
+</html>

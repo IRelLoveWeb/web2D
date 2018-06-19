@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <svg width="300" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <g stroke='black'>
+            <g id='g1'>
+                <path d='M0,50 100,50 M0,100 100,100 M50,0 50,100 M100,0 100,100' id='g' />
+                <use xlink:href='#g' transform='translate(0,100)' />
+                <use xlink:href='#g' transform='translate(0,200)' />
+                <use xlink:href='#g' transform='translate(0,300)' />
+                <use xlink:href='#g' transform='translate(0,400)' />
+                <use xlink:href='#g' transform='translate(0,500)' />
+            </g>
+
+            <use xlink:href='#g1' transform='translate(100,0)' />
+            <use xlink:href='#g1' transform='translate(200,0)' />
+        </g>
+
+        <!-- 
+            动画开始和结束
+         -->
+        <ellipse cx='75' cy='50' rx='25' ry='50' >
+            <animate attributeName='rx' begin='G.click' end='S.click' dur='4s' values='10;75;10' repeatCount='indefinite'/>
+        </ellipse>
+        <g id='G'>
+            <rect x='200' y='0' width='50' height='50' stroke='red' fill='none'/>
+            <text x='200' y='30' font-size='15'>Begin</text>
+        </g>
+        <g id='S'>
+            <rect x='200' y='50' width='50' height='50' stroke='red' fill='none'/>
+            <text x='200' y='80' font-size='15'>Stop</text>
+        </g>
+
+        <!--
+            单个动画属性(单值属性改变) 
+            1.单次动画结束,图形默认回归原处;添加fill="freeze"使得动画停止在最后位置
+            2.设置values值,使物体返回原处
+            3.设置动画循环次数 repeatCount(num,indefinite)
+            4.values每个间隔平分dur,values='20%;40%;90%;40%;20%' 的时间默认就是(0％; 25％; 50％; 75％; 100％),由于values不平均,则速度有快慢
+         -->
+        <rect x="10%" y="100" height="100" width="50" fill="blue">
+            <animate attributeName="x" dur="4" values="10%;90%" fill="freeze"/>
+        </rect>
+
+        <rect x="20%" y="100" height="100" width="50" fill="red">
+            <animate attributeName="x" dur="4" values="20%;90%;20%" fill="freeze"/>
+        </rect>
+        <rect x="20%" y="100" height="100" width="50" fill="green">
+            <animate attributeName="x" dur="4" values="20%;55%;90%;55%;20%" fill="freeze"/>
+        </rect>
+        <rect x="20%" y="100" height="100" width="50" fill="yellow">
+            <animate attributeName="x" dur="4" values="20%;40%;90%;40%;20%" fill="freeze"/>
+        </rect>
+
+
+        <!--  
+            多个动画组合(单值属性动画组合) 
+            1.一个animate控制一个属性进行动画操作
+            2.keyTimes控制values每个间隔的时间长度(默认均等分)[开始和结束为0,1]
+        -->
+        <rect x='0' y='200' width='50' height='50' fill='blue'>
+            <animate attributeName='x' dur='2' values='0;100;0'/>
+            <animate attributeName='y' dur='2' values='200;250;200'/>
+        </rect>
+
+        <circle cx="50%" cy="20" r="5%" fill="blue">
+            <animate attributeName="cx" dur="2.7" values="5%;95%;5%" repeatCount="indefinite" />
+            <animate attributeName="cy" dur="3" values="5%;95%;5%;95%;5%;95%;5%" repeatCount="indefinite" />
+        </circle>
+
+        <circle cx='150' cy='250' r='25'>
+            <animate attributeName='r' dur='5' values='25;50;25'  keyTimes='0;0.2;1'/>
+        </circle>
+
+        <!-- 
+            多值属性动画(一个属性有多个值 例如:path中的d)
+            1.多值属性中值的数量或类型改变,进行的是图形的突变;否则会进行动画效果
+         -->
+         <path d='M0,300 50,350 100,400' fill='none' stroke='red' stroke-width='5'>
+             <animate attributeName='d' dur='2' values='M0,300 50,350 100,400;M0,300 150,350 200,400 300,400;M0,300 Q250,250 200,400;' />
+             <!-- <animate attributeName='d' dur='2' values='M0,300 50,350 100,400;M0,300 150,350 200,400 ;M0,300 Q250,250 200,400;' /> -->
+         </path>
+
+         <!-- 
+             animateMotion :物体沿着指定路径动画
+          -->
+          <path id='curveA' stroke="black" fill="none" stroke-width="3" d='M0,300 C100,250 150,300 100,400 Q200,400 200,300 L300,350 0,300'/>
+          <ellipse cx='7' cy='-5' rx='20' ry='14' fill='#aaa' stroke='#666' stroke-width='2' opacity='.8'>
+            <!-- <animateMotion dur='2' rotate='auto' repeatCount='indefinite' fill='freeze'>
+                <mpath xlink:href='#curveA' ></mpath>
+            </animateMotion> -->
+            <animateMotion dur="2s" keyTimes="0;.6;1" calcMode="spline" keySplines="0 0 1 0;0 0 1 0" rotate="auto" repeatCount="indefinite" >
+                <mpath xlink:href="#curveA"/>
+            </animateMotion>
+          </ellipse>
+
+          <!-- 
+              animateTransform:变换属性动画
+              1.指定变换类型type,用from to表示变换范围
+              2.必须指定additive="sum"才是对物体进行的组合变换动画
+           -->
+           <rect x='50' y='450' width='50' height='30' fill='red' opacity='.8' >
+               <animateTransform attributeName='transform' type='rotate' dur='2'  from='360,75,465' to='0,75,465' repeatCount="indefinite"/>
+               <animateTransform attributeName="transform" type="translate" dur="4s" additive="sum" values="0,0;100,50;0,0" repeatCount="indefinite"/>
+               <animateTransform attributeName="transform" type="scale" dur="4s" additive="sum" values="1;1.5;1" repeatCount="indefinite"/>
+           </rect> 
+
+
+           <!-- 
+               非数值属性动画
+            -->
+            <image xlink:href='s1.jpg' x='100' y='400' width='100' height='100' >
+                <animate attributeName='xlink:href' dur='6' values='s2.jpg;s3.jpg;s4.jpg;' repeatCount="indefinite"/>
+            </image>
+            <rect x='200' y='400' width='100' height='50' fill='red'>
+                <animate attributeName='fill' dur='3' values='yellow;green;blue;' repeatCount="indefinite"/>
+            </rect>
+
+            <!-- 
+                set:该元素没有动画效果,但可以用来设置某状态下某值(只对其父对象操作属性)
+             -->
+             <path d='M0,500 100,500 50,550 100,600' stroke='black' fill='none' stroke-width='3' id='pathMo'/>
+             <ellipse rx='10' ry='6' fill='red' stroke='2' opacity='.8'>
+                <animateMotion dur='2s' repeatCount='indefinite'>
+                    <mpath xlink:href='#pathMo' />
+                </animateMotion>
+             </ellipse>
+             <!--  begin='1' 表示该动画延迟1s再开始,此时ellipse椭圆由于未设置cx,cy,所以位于坐标0,0处(吃屎opacity设置为0)
+                   为了开始动画后物体可见,使用set;设置-->
+             <ellipse rx='10' ry='6' fill='red' stroke='2' opacity='0'>
+                <set attributeName='opacity' to='.8' begin='M.begin' />
+                <animateMotion dur='2s' repeatCount='indefinite' begin='1' id='M' rotate='auto'>
+                    <mpath xlink:href='#pathMo' />
+                </animateMotion>
+             </ellipse>
+
+             <!-- 物体A控制物体B的动画启动(+1 表示A开始动画后延迟一秒B开始动画);begin =>(0)表示页面加载就开始动画 -->
+             <rect x='100' y='500' width='100' height='100' id='B'>
+                <animate attributeName='fill' dur='2' values='blue;green;red;' begin='A.click + 1'/>
+            </rect>
+             <text x='100' y='550' font-size='20' fill='red' id='A'>
+                <animate attributeName='font-size' dur='2' values='20;50;20' begin='0;click'/> 
+                <set attributeName="fill" to="black" begin="mouseover" />
+                <set attributeName="fill" to="grey" begin="mouseout" />    
+            Click</text>
+
+            <path d='M200,500 300,500 250,600' fill='none' stroke='black' id='kkk'/>
+            <circle r='5' fill='red' stroke='black' opacity='0'>
+                <set attributeName='opacity' to='.8' begin='C.begin' />
+                <set attributeName='opacity' to='0' begin='C.end' />
+                <animateMotion dur='2s' repeatCount='indefinite' begin='A.click' end='B.click' id='C'>
+                    <mpath xlink:href='#kkk' />
+                </animateMotion>
+            </circle>
+    </svg>
+
+
+    <!-- 
+        https://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html#SMIL_animations
+     -->
+</body>
+</html>

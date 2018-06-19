@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <script>
+        //图片载入
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+
+        var img = new Image();
+        img.src = "../imgs/s10.jpg"
+        img.onload = function(){
+            //图像在坐标系左上角的位置 img是image元素对象 document.getElementById('source')
+            ctx1.drawImage(img,0,0);
+            ctx1.beginPath();
+            ctx1.moveTo(50,50);
+            ctx1.lineTo(100,100);
+            ctx1.stroke();
+        }
+    </script>
+
+    <script>
+        //图片是否缩放
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+        var img1 = new Image();
+        img1.src="../imgs/s11.jpg";
+        img1.onload = function(){
+            //img x y width height（width 和 height，这两个参数用来控制 当像canvas画入时应该缩放的大小） 
+            ctx2.drawImage(img1,30,30,30,30)
+        }
+    </script>
+
+    <script>
+        //图片剪切换位
+        /*drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+            第一个参数和其它的是相同的，都是一个图像或者另一个 canvas 的引用。
+            前4个是定义图像源的切片位置和大小，后4个则是定义切片的目标显示位置和大小*/
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d');
+
+        var img2 = new Image();
+        img2.src = "../imgs/s10.jpg";
+        img2.onload = function(){
+            ctx3.drawImage(img2,100,50,50,50,80,80,50,50);
+        }
+    </script>
+</body>
+</html>

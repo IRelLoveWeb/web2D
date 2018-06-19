@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本行的斑马条纹</title>
+    <style>
+       div{
+            height:15rem;
+        }
+        /* 
+            在盒模型中(默认)
+                内容是在 content中展示
+                背景图片 在content + padding 中展示
+                背景色 在 content + padding +border 中展示
+            
+            只在content显示条纹,那么就需要修改背景图片的初始位置
+                background-origin:content-box；
+            则图片在content中显示
+         */
+
+        .demo1{
+            padding: .5rem;
+            line-height: 1.5rem;
+            background-image: linear-gradient(to bottom,rgba(0,0,0,.2) 50%,transparent 0);
+            background-size: auto 3rem;
+            background-origin: content-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过阴影来弱化背景</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        /* 
+            阴影方法：
+            将视口分成100份【vh,vw 】
+            1vh就是视口高度的百分之一,1vw就是视口宽度的百分之一；
+            1vmax,1vmin 等
+
+            box-shadow有遮掩层的视觉效果,但不会阻止鼠标交互
+         */
+        .demo2{
+            width:100px;
+            height: 100px;
+            position: absolute;
+            left:calc(50% - 50px);
+            top:calc(50% - 50px);
+            background: rgb(185, 211, 18);
+            box-shadow: 0 0 0 50vmax rgba(200,0,0,0.3);
+
+            display: none;
+        }
+
+        .demo3,.demo5{
+            width:50px;
+            height: 50px;
+            background: pink;
+        }
+        .demo3:hover,.demo5:hover{
+            background: red;
+        }
+
+        /* 
+            伪元素
+                层级控制困难
+            http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/  
+         */
+         .demo4{
+            width:100px;
+            height: 100px;
+            position: absolute;
+            left:calc(50% - 50px);
+            top:calc(50% - 50px);
+            background: yellow;
+
+            display: none;
+         }
+
+         .demo4::before{
+             content: '';
+             position: fixed;
+             top:0;right:0;left: 0;bottom: 0;
+             background:rgba(200,0,0,0.8);
+             z-index: -1;
+         }
+
+         .demo6{
+             position: absolute;
+             top:0;right:0;left: 0;bottom: 0;
+             background:rgba(200,0,0,0.8);
+         }
+    </style>
+</head>
+<body>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">
+        <div class="demo5">5</div>
+    </div>
+    <div class="demo6">6</div>
+</body>
+</html>

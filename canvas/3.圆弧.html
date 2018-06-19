@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="root" height="600px" width="400px"></canvas>
+    
+    <script>
+        var canvas = document.getElementById('root');
+        var ctx = canvas.getContext('2d')
+        //遮挡了arc fill填充的图形
+        /*ctx.fillStyle = "#eee";
+        ctx.fillRect(0,0,400,600);*/
+
+        //x,y,r,startAngle,endAngle,flag(true 逆时针,false 顺时针,默认 顺时针)
+        //此处的角度是弧度 180 = Math.PI弧度
+        ctx.arc(100,100,50,0,Math.PI,true);
+        ctx.strokeStyle = "red";//颜色设置必须在画图方法之前设置
+        ctx.stroke();
+
+        for(var i=0;i<4;i++){
+            for(var j=0;j<3;j++){
+                ctx.beginPath();
+                var x              = 25+j*50;               // x 坐标值
+                var y              = 25+i*50;               // y 坐标值
+                var radius         = 20;                    // 圆弧半径
+                var startAngle     = 0;                     // 开始点
+                var endAngle       = Math.PI+(Math.PI*j)/2; // 结束点
+                var anticlockwise  = i%2==0 ? false : true; // 顺时针或逆时针
+
+                ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+                if (i>1){ 
+                ctx.fill();
+                } else {
+                ctx.stroke();
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>

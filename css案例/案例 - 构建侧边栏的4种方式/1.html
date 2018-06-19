@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定宽度区浮动，自适应区不设宽度而设置 margin</title>
+    <style>
+        div{
+            border:1px solid red;
+        }
+        #wrap {
+            overflow: hidden; *zoom: 1;
+        }
+        #content ,#sidebar {
+            background-color: #eee; 
+        }
+        #sidebar {
+            float: right; width: 300px;
+        }
+        #content {
+            margin-right: 310px;
+        }
+        #footer {background-color: #f00;color:#fff; margin-top: 1em}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!-- html中sidebar必须在content之前 -->
+        <div id="sidebar">sidebar</div>
+        <div id="content">content</div>
+        <div id="footer">footer</div>
+    </div>
+</body>
+</html>

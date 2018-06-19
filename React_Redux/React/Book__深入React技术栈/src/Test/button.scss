@@ -1,0 +1,32 @@
+.base{
+
+}
+
+.normal{
+    font-size: 12px;
+}
+
+.disabled{
+    color: red;
+}
+
+/* 
+    使用composes组合样式,用于开启module模式的css文件中(使用预编译器后不需要这个)
+*/
+
+// .normalC{
+//     composes : base;
+//     color:lightcyan;
+// }
+
+#abc{
+
+}
+
+span{
+
+}
+
+[data-role]{
+
+}

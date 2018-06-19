@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>现实中的文字效果</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+        
+        /* 
+            文本阴影
+            text-shadow :x y blur color; [没有扩张半径]
+         */
+        
+        /* 凸版文字 */
+        .demo1{
+            background: hsl(210, 13%, 60%);
+            color: hsl(210, 13%, 30%);
+            text-shadow: 0 1px 1px hsla(0,0%,100%,.8);
+        }
+        .demo2{
+            background: hsl(210, 13%, 40%);
+            color: hsl(210, 13%, 75%);
+            text-shadow: 0 -1px 1px black;
+        }
+        /* 空心文字 */
+        .demo3{
+            background: deeppink;
+            color: white;
+            text-shadow: 1px 1px black,-1px -1px black,-1px 1px black,1px -1px black;
+        }
+        .demo4{
+            background: deeppink;
+            color: white;
+            text-shadow:0 0 1px black,0 0 1px black,0 0 1px black;
+        }
+        
+        /* 描边变粗 */
+        .demo5{
+            background: deeppink;
+            color: white;
+            text-shadow: 3px 3px black,-3px -3px black,-3px 3px black,3px -3px black;
+        }   
+        
+        .demo6 svg text{
+            fill:white;
+        }
+        .demo6 svg use{
+            stroke: black;
+            stroke-width: 4;
+        }
+
+        /* 文本发光 */
+        .demo7{
+            background: #203;
+            color: white;
+            text-shadow: 0 0 .1em,0 0 .3em;
+        }
+
+        .demo8{
+            background: #203;
+            color: white;
+            transition: .3s;
+        }
+        .demo8:hover{
+            /* color:transparent;
+            text-shadow: 0 0 .1em #ffc,0 0 .3em #ffc; */
+            filter: blur(.1rem);
+        }
+
+        /* 文字凸起效果 */
+        .demo9{
+            background: #58a;
+            color: white;
+            text-shadow: 0 1px hsl(0,0%,85%),0 2px hsl(0,0%,80%),0 3px hsl(0,0%,75%),
+                         0 4px hsl(0,0%,70%),0 5px hsl(0,0%,65%),0 5px 10px black;
+        }
+        /* 复古标志牌 */
+        .demo10{
+            background: hsl(0, 50%, 45%);
+            color: white;
+            text-shadow: 1px 1px black,2px 2px black,3px 3px black,4px 4px black,
+                         5px 5px black,6px 6px black,7px 7px black,8px 8px black; 
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">Css Text</div>
+    <div class="demo2">Css Text</div>
+    <div class="demo3">Css Text</div>
+    <div class="demo4">Css Text</div>
+    <h1 class='demo5'>Css Text</h1>
+    <div class="demo6">
+        <svg viewBox='0 0 100 100'>
+            <use xlink:href='#css'/>
+            <text id='css' x='5' y='40'  font-size='20'>Css Text</text>
+        </svg>
+    </div>
+    <div class="demo7">Css Text</div>
+    <div class="demo8">Css Text</div>
+    <div class="demo9">Css Text</div>
+    <div class="demo10">Css Text</div>
+</body>
+</html>

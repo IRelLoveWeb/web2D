@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="root"></canvas>
+    
+    <script>
+        var canvas = document.getElementById('root');
+        var ctx = canvas.getContext('2d')
+        
+        //填充矩形
+        ctx.fillStyle = "red";
+        ctx.fillRect(0,0,100,100);
+
+        //描边矩形
+        ctx.strokeStyle = "yellow";
+        ctx.strokeRect(10,10,100,100);
+
+        //清楚定义矩形区域
+        ctx.clearRect(20,20,50,50);
+
+        ctx.beginPath()
+        ctx.rect(30,30,10,10);
+        ctx.stroke();
+    </script>
+</body>
+</html>

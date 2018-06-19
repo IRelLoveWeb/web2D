@@ -1,0 +1,6 @@
+<!--pages/map/map.wxml-->
+<view>
+    <map longitude="{{longitude}}" latitude="{{latitude}}" style='width: 100%; height: 300px;'></map>
+    <text>{{info}}</text>
+    <text bindtap='openER'>开启二维码</text>
+</view>

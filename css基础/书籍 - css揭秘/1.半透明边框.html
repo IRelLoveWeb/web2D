@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.半透明边框</title>
+    <style>
+        body{
+            background:url(./imgs/stone-art.jpg)
+        }
+
+        div{
+            width:10rem;
+            height:10rem;
+        }
+        /*
+        1.默认情况下，背景(色和图片)会延伸到边框所在的区域下层。
+        2.background-clip属性限制背景的范围
+        3.box-sizing决定width,height是(border+padding+content)的宽度，还是 content的宽度
+        4.任何颜色的透明度为0,都是全透明的，效果和transparent一致
+        */
+        .b1{
+            border:10px solid hsla(0, 0%, 100%, .5);
+            /*border:10px dashed red;
+            background:yellow;*/
+            background: white;
+            background-clip: padding-box;
+            
+        }
+
+        .i1{
+            border:10px solid hsla(0, 0%, 100%, .5);
+            background-image: url(./imgs/sImg/s1.jpg);
+            background-clip: padding-box;
+            padding:10px;
+            
+            /*box-sizing: border-box;*/
+        }
+
+
+        .b2{
+            width:800px;
+            margin:30px auto;
+            background:url(./imgs/sImg/s1.jpg) repeat;
+            background-size:auto;
+
+            background-clip:text;/*firefox*/
+            -webkit-background-clip:text;/*chrome firefox*/
+
+            color: transparent;
+            animation:cliptext 20s linear infinite;
+            font-size:196px;
+            font-weight:bold;
+            text-transform:uppercase;
+        }
+        @keyframes cliptext{
+            0%{background-position:left top;}
+            50%{background-position:right top;}
+            100%{background-position:left top;}
+        }
+    </style>
+</head>
+<body>
+    <div class="b1"></div>
+    <div class='i1'></div>
+    <div class='b2'>透明色</div>
+</body>
+</html>

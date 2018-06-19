@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义复选框</title>
+    <style>
+       div{
+            margin:1rem auto;
+        }
+        
+
+        /* 
+            使用display:none,会使该元素在tab切换焦点队列消失
+         */
+        input{
+            position: absolute;
+            clip: rect(0,0,0,0);
+            /* display: none; */
+        }
+
+        /* 
+            复选框 
+                :checked选中状态的复选框
+         */
+        .demo1 input + label::before{
+            content: '\a0';
+            display: inline-block;
+            vertical-align: .2em;
+            width:.8em;
+            height: .8em;
+            margin-right: .2em;
+            border-radius: .2em;
+            text-indent: .15em;
+            background: silver;
+            line-height: .65em;
+            transition: all .3s;
+        }
+        .demo1 input:checked + label::before{
+            content: '\2713';
+            background: yellowgreen;
+        }
+        .demo1 input:focus + label::before{
+            box-shadow: 0 0 .1em .1em #58a;
+        }
+        
+
+        /* 
+            开关按钮
+         */
+        .demo2 input + label{
+            display: inline-block;
+            padding: .3em .5em;
+            background: #cccccc;
+            background-image: linear-gradient(#ddd,#bbb);
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: .3em;
+            box-shadow: 0 1px white inset;
+            text-align: center;
+            text-shadow: 0 1px 1px white;
+        }
+
+        .demo2 input:checked + label{
+            box-shadow:  .05em .1em .2em rgba(0,0,0,.6) inset;
+            border-color: rgba(0,0,0,.3);
+            background: #bbb;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        <input type='checkbox' id='awesome' />
+        <label for='awesome'>Awesome!</label>
+    </div>
+    <div class="demo2">
+        <input type='checkbox' id='awesome2' />
+        <label for='awesome2'>Awesome!</label>
+    </div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

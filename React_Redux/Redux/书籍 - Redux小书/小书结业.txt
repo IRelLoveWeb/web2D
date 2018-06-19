@@ -1,0 +1,25 @@
+1.每一次dispatch都会迫使所有注册的事件进行调用
+
+2.react中注册的事件使得
+//形如
+{...mapStateToProps(),...mapDispatchToProps(),...this.props}
+会重新调用 mapStateToProps mapDispatchToProps;
+使得子组件的props改变
+
+3.mapStateToProps 是函数
+
+4.mapDispatchToProps 是函数或对象
+
+4-1. mapDispatchToProps = dispatch =>{
+  handle(){
+    dispatch(action)
+  }
+}
+
+4-2. mapDispatchToProps = {
+  handle:actionCreateFunc
+}
+
+4-2中的handle会封装成1中的形式
+
+5.connect 的子组件props包含 改connect出来的父组件的赋予的props

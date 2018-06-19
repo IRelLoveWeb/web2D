@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <canvas id="c4"></canvas>
+
+    <script>
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d')
+        ctx1.fillStyle = "#eee";
+        ctx1.fillRect(0,0,200,200);
+
+        //开始路径绘画,设置起点
+        ctx1.beginPath();
+        //移动到画图开始位置
+        ctx1.moveTo(75,100);
+        //两点间划线
+        ctx1.lineTo(75,50);
+        ctx1.lineTo(50,75);
+        //填充路径
+        ctx1.fillStyle = 'red';
+        ctx1.fill();
+        
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d')
+        ctx2.fillStyle = "#eee";
+        ctx2.fillRect(0,0,200,200);
+        //使用moveTo()绘制一些不连续的路径
+        ctx2.beginPath();
+        ctx2.arc(75,75,50,0,Math.PI*2,true); // 绘制
+        ctx2.moveTo(110,75);
+        ctx2.arc(75,75,35,0,Math.PI,false);   // 口(顺时针)
+        ctx2.moveTo(65,65);
+        ctx2.arc(60,65,5,0,Math.PI*2,true);  // 左眼
+        ctx2.moveTo(95,65);
+        ctx2.arc(90,65,5,0,Math.PI*2,true);  // 右眼
+        ctx2.stroke();
+
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d')
+        ctx3.fillStyle = "#eee";
+        ctx3.fillRect(0,0,200,200);
+        // 填充三角形
+        ctx3.beginPath();
+        ctx3.moveTo(25,25);
+        ctx3.lineTo(105,25);
+        ctx3.lineTo(25,105);
+        ctx3.fill();
+
+        // 描边三角形
+        ctx3.beginPath();
+        ctx3.moveTo(125,125);
+        ctx3.lineTo(125,45);
+        ctx3.lineTo(45,125);
+        ctx3.closePath();
+        ctx3.stroke();
+
+        //ctx3.beginPath()表示重新开始一次路径绘画
+        //需要重新制定起点 ctx3.moveTo()
+        //但是 fillRect,arc等内置了起点位置，不需要再次显示调用
+
+
+        var canvas = document.getElementById('c4');
+        var ctx4 = canvas.getContext('2d')
+        ctx4.fillStyle = "#eee";
+        ctx4.fillRect(0,0,200,200);
+
+        ctx4.beginPath();
+        ctx4.moveTo(50,50);
+        ctx4.lineTo(50,150);
+        ctx4.strokeStyle = "red";
+        ctx4.stroke();
+
+        ctx4.moveTo(100,150);
+        ctx4.lineTo(50,100);
+        ctx4.stroke();
+
+        ctx4.moveTo(100,50);
+        ctx4.lineTo(50,100);
+        ctx4.stroke();
+
+        ctx4.beginPath();
+        ctx4.moveTo(200,150);
+        ctx4.lineTo(150,100);
+        ctx4.strokeStyle = "yellow";
+        ctx4.stroke();
+
+
+        //path rect arc 都是路径的绘制方法
+        //fill stroke clip 都是路径的实现方法
+        //fileStyle strokeStyle等 都是路径的样式
+    </script>
+</body>
+</html>

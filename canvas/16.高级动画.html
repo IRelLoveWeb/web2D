@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="300" style="border:1px solid black;"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <script>
+        var canvas1 = document.getElementById('c1');
+        var ctx1 = canvas1.getContext('2d');
+        var raf;
+        var running =false;
+
+        var ball = {
+            x:100,
+            y:100,
+            vx:5,
+            vy:2,
+            radius:25,
+            color:'blue',
+            draw:function(){
+                ctx1.beginPath();
+                ctx1.arc(this.x,this.y,this.radius,0,2 * Math.PI,true);
+                ctx1.closePath();
+                ctx1.fillStyle= this.color;
+                ctx1.fill();
+            }
+        }
+
+        function clear(){
+            //ctx1.clearRect(0,0,canvas1.width,canvas1.height);
+            ctx1.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx1.fillRect(0,0,canvas1.width,canvas1.height);
+        }
+
+        function draw(){
+            clear();//清屏 , 添加阴影
+            ball.draw();
+            //加速度
+            ball.vy *= .99;
+            ball.vy += .5;
+            //速度
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            //边界
+            if (ball.y + ball.vy > canvas1.height || ball.y + ball.vy < 0) {
+                ball.vy = -ball.vy;
+            }
+            if (ball.x + ball.vx > canvas1.width || ball.x + ball.vx < 0) {
+                ball.vx = -ball.vx;
+            }
+            raf = requestAnimationFrame(draw);
+        }
+        
+        /*canvas1.addEventListener('mouseover', function(e){
+            raf = requestAnimationFrame(draw);
+        });
+
+        canvas1.addEventListener('mouseout', function(e){
+            cancelAnimationFrame(raf);
+        });*/
+
+       canvas1.addEventListener('mousemove', function(e){
+            if (!running) {
+                clear();
+                ball.x = e.clientX;
+                ball.y = e.clientY;
+                ball.draw();
+            }
+        });
+
+        canvas1.addEventListener('click',function(e){
+            if (!running) {
+                raf = window.requestAnimationFrame(draw);
+                running = true;
+            }
+        });
+
+        canvas1.addEventListener('mouseout', function(e){
+            window.cancelAnimationFrame(raf);
+            running = false;
+        });
+
+        ball.draw();
+
+    </script>
+
+    <script>
+        var canvas2 = document.getElementById('c2');
+        var ctx2 = canvas2.getContext('2d')
+    </script>
+
+    <script>
+        var canvas3 = document.getElementById('c3');
+        var ctx3 = canvas3.getContext('2d');
+    </script>
+</body>
+</html>

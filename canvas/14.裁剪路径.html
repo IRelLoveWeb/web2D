@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <script>
+        var canvas = document.getElementById('c1');
+        var ctx = canvas.getContext('2d');
+        ctx.fillRect(0,0,150,150);
+        ctx.translate(75,75);
+
+        // Create a circular clipping path
+        ctx.beginPath();
+        ctx.arc(0,0,60,0,Math.PI*2,true);
+        ctx.clip(); //路径裁剪
+
+        function starShine(){
+
+            var lingrad = ctx.createLinearGradient(0,-75,0,75);
+            lingrad.addColorStop(0, '#232256');
+            lingrad.addColorStop(1, '#143778');
+            
+            ctx.fillStyle = lingrad;
+            ctx.fillRect(-75,-75,150,150);//覆盖前帖
+
+            for (var j=1;j<10;j++){
+                ctx.save();
+                ctx.fillStyle = 'red';
+                ctx.translate(75-Math.floor(Math.random()*150),
+                            75-Math.floor(Math.random()*150));
+                drawStar(ctx,Math.floor(Math.random()*4)+2);
+                ctx.restore();
+            }
+            
+            function drawStar(ctx,r){
+                ctx.save();
+                ctx.beginPath()
+                ctx.moveTo(r,0);
+                for (var i=0;i<9;i++){
+                    ctx.rotate(Math.PI/5);
+                    if(i%2 == 0) {
+                    ctx.lineTo((r/0.525731)*0.200811,0);
+                    } else {
+                    ctx.lineTo(r,0);
+                    }
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+            requestAnimationFrame(starShine)
+        }
+
+        starShine();
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+        ctx2.strokeStyle = "red";
+        ctx2.translate(75,75);
+        
+        ctx2.strokeStyle="blue";
+        ctx2.beginPath();
+        ctx2.moveTo(-75,0);
+        ctx2.lineTo(75,0);
+        ctx2.moveTo(0,-75);
+        ctx2.lineTo(0,75);
+        ctx2.setLineDash([4,2]);
+        ctx2.stroke();
+
+        //canvas变换不会影响之前path的路径,路径一旦确定不能修改，除非清楚
+        
+      /*ctx2.moveTo(0,25); //中心点坐标的 y轴25
+        ctx2.rotate(Math.PI/5) ;
+        ctx2.lineTo(0,50);//旋转后的坐标系 y轴50
+        ctx2.stroke()*/
+
+        //drawStar(ctx2,50);
+
+        function drawStar(ctx,r){
+            ctx.save();
+            ctx2.strokeStyle="red";
+            ctx2.setLineDash([0,0]);
+            ctx.beginPath();
+
+            ctx.moveTo(0,r/2); //起点在y轴r/2上
+            for(var i=0;i<9;i++){
+                ctx.rotate(Math.PI/5) ;
+                if(i%2 == 0){
+                    ctx.lineTo(0,r);
+                }else{
+                    ctx.lineTo(0,r*2/5)
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d')
+    </script>
+</body>
+</html>

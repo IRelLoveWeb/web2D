@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="200" height="200"></canvas>
+    <canvas id="c2" width="200" height="200"></canvas>
+    <canvas id="c3" width="200" height="200"></canvas>
+    <script>
+    /*translate 位移 移动 canvas 和它的原点到一个不同的位置*/
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+
+        ctx1.save();
+        ctx1.translate(100,100);//位移坐标原点 到100,100
+        //渐变范围为新坐标的-100 到 100 始终相对于当前坐标系
+        var lineargradient = ctx1.createLinearGradient(0,-100,0,100);
+        lineargradient.addColorStop(0,'red');
+        lineargradient.addColorStop(1,'blue');
+        ctx1.fillStyle = lineargradient;
+        ctx1.fillRect(0,-100,100,200);
+
+        ctx1.restore();//恢复之前的坐标系
+        ctx1.fillStyle = "blue";
+        ctx1.fillRect(0,0,100,200);
+
+        for(var i=0;i<54;i++){
+            for(var j=0;j<4;j++){
+                ctx1.save();//每个save 机会对应一个restore;
+                ctx1.translate(50*i,50*j);
+                ctx1.fillStyle = "rgb("+Math.floor(45*i) +","+ Math.floor(45*j) +",0)";
+                ctx1.fillRect(10,10,40,40);
+                ctx1.restore();
+            }
+        }
+    </script>
+
+    <script>
+        //旋转 rotate 以原点为中心旋转 canvas(可以通过translate变换原点) 弧度
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+        ctx2.translate(100,100);//坐标原点移动到中心
+
+        //出来fillRect strokeRect 不需要显示声明beginPath
+        //arc 必须显示声明beginPath,因为从一个圆到另外一个圆的圆心是连线的 ; rect 最好声明beginPath
+       for(var i=0;i<6;i++){
+           var color = "rgb("+Math.floor(45*i) +","+ Math.floor(45*j) +",0)";
+            for(var j=0,len = 6*(i + 1); j<len;j++){
+                ctx2.save();
+                var angel = (Math.PI *2 /len) * j; //旋转的角度
+                ctx2.rotate(angel);
+                ctx2.translate((i+1)*12.5,0);
+                ctx2.beginPath();
+                ctx2.arc(0,0,5,0,2*Math.PI);
+                //ctx2.rect(-5,-5,10,10);
+                ctx2.fillStyle = color;
+                ctx2.fill();
+                ctx2.restore();
+            }
+        }
+    </script>
+
+    <script>
+        //缩放 scale 对形状，位图进行缩小(<1)或者放大(>1) 
+        //接受两个参数。x,y 分别是横轴和纵轴的缩放因子，它们都必须是正值
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d');
+
+        ctx3.fillStyle = "blue";
+        ctx3.font = "24px serif";
+        ctx3.scale(1,1.5);
+        ctx3.fillText("Hello World!",30,30);
+
+        ctx3.save();
+        ctx3.fillStyle = "red";
+        ctx3.font = "34px serif";
+        ctx3.fillText("Hello World!",30,50)
+    </script>
+</body>
+</html>

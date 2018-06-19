@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪随机背景</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+        }
+        
+        /* 
+            hack 实现环形文字
+         */
+        .demo1{
+            position: relative;
+        }
+        .demo1 span{
+            height: 100%;
+            display: inline-block;
+            transform-origin: bottom;
+            position: absolute;
+        }
+        .demo1 span:nth-child(1){
+            transform: rotate(10deg);
+        }
+        .demo1 span:nth-child(2){
+            transform: rotate(20deg);
+        }
+        .demo1 span:nth-child(3){
+            transform: rotate(30deg);
+        }
+        .demo1 span:nth-child(4){
+            transform: rotate(40deg);
+        }
+        .demo1 span:nth-child(5){
+            transform: rotate(50deg);
+        }
+        .demo1 span:nth-child(6){
+            transform: rotate(60deg);
+        }
+        .demo1 span:nth-child(7){
+            transform: rotate(70deg);
+        }
+
+        /* 
+            svg
+            svg自动适应父级div的content长宽,按viewBox值来布局;
+            设置 overflow:visible 溢出部分也可见
+         */
+         .demo2{
+             overflow: hidden;
+             padding: 3rem 0;
+             box-sizing: border-box;
+         }
+         .demo2 svg{
+             overflow: visible;
+         }
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        <span>C</span>
+        <span>S</span>
+        <span>S</span>
+        <span>H</span>
+        <span>T</span>
+        <span>M</span>
+        <span>L</span>
+    </div>
+    <div class="demo2">
+        <svg viewBox='0 0 100 100'>
+            <path d='M0,50 a 50,50 0 1,1 0,1z' id='circle' fill='none'/>
+            <text>
+                <textPath xlink:href='#circle'>circular reasoning works because</textPath>
+            </text>
+        </svg>
+    </div>
+
+    <div>
+        <svg viewBox='0 0 100 100'>
+            <circle cx='50' cy='50' r='35'/>
+        </svg>
+    </div>
+</body>
+</html>
+

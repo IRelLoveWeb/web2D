@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>毛玻璃效果</title>
+    <style>
+       .demo1{
+            width:15rem;
+            height:15rem;
+            margin:1rem auto;
+            text-align: center;
+        }
+        .demo1{
+            background: url(imgs/img0.jpg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            font-size: 30px;
+        }
+        .demo1 > span{
+            display: block;
+            margin: 0 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        body{
+            padding-top: 6rem;
+            background: url(imgs/tiger.jpg) 0 / cover fixed;
+        }
+        
+        .demo{
+            margin: 0 auto;
+            font:150%/1.6 Baskerville, Palatino, serif;
+            max-width: 23em;
+            padding: 1rem;
+            
+            position: relative;
+            background: rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .demo::before{
+            content: '';
+            position: absolute;
+            top:0;bottom: 0;left: 0;right: 0;
+            background: url(imgs/tiger.jpg) 0 / cover fixed;
+            z-index: -1;
+            filter: blur(20px);
+            margin: -30px;
+        }
+
+        /* 
+            1.
+            由于blur(px)会模糊当前元素和后代元素,所以不能直接使用,必须用伪元素before或after
+
+            2.
+            background-attachment: [fixed | scroll | local]
+            fixed : 图片相对于窗口定位 【所以 .demo::before 只显示处图片相对于窗口定位后的部分[伪元素的面积],所以demo所在区域图片和背景图片此部位是重合的】
+            scroll :相对于元素定位 
+            local :相对于内容定位
+
+            3.
+            z-index: -1; 将自身放置在demo元素之下
+            margin: -30px 使伪元素范围扩大,导致模糊范围扩大; 再在元素上使用overflow: hidden 除去渐变范围
+         */
+    </style>
+</head>
+<body>
+    <div class="demo1" style="display: none;"><span>
+        This is a good Means to operating imgs!
+    </span></div>
+    <div class="demo">
+        <blockquote>“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”</em>
+            <footer>— <cite>Oscar Wilde, The Picture of Dorian Gray</cite></footer>
+        </blockquote>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平行四边形</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+        /*适用于其他任何变形样式，当我们想变形一个元素而不想变形它的内容*/
+
+        /*嵌套元素方案*/
+        .demo1{
+            /*其内的内容也发生了扭曲*/
+            transform:skew(-30deg);
+            background: yellow;
+        }
+
+        .demo1 > div{
+            /*内容反扭曲,恢复正常;行内元素必须将display设置为block or inline-block */
+            transform:skew(30deg);
+        }
+
+        /*伪元素方案:真实元素不变,扭曲的是伪元素*/
+        /*利用伪元素以及定位属性产生了一个方块，然后对伪元素设置样式，并将其放置在其宿主元素的下层*/
+        .demo2{
+            /*以便伪元素相对于该元素定位*/
+            position:relative;
+        }
+
+        .demo2::before{
+            content:'';
+            /*设置伪元素的背景色,前提必须设置了长宽*/
+            background: yellow;
+            /*将伪元素设置为绝对定位,此时伪元素浮在该元素之上,必须设置z-index小于改元素*/
+            position: absolute;
+            z-index: -1;
+            /*必须设置长宽;占满整个元素(left,right,top,bottom 0可以替代width,height 100% 占满控件)*/
+            width:100%;
+            height:100%;
+            /*设置left,top将伪元素放置在该元素位置*/
+            left:0;
+            top:0;
+            display: block;
+            transform: skew(-30deg);
+        }
+
+
+        /*
+            //伪元素(可以看做是一个新的元素)
+            1.:before,:after 伪元素; 默认是inline元素
+            2.无论display 是inline,block ,伪元素都是真实元素的子元素(还在文档流中)
+            3.设置position:absolute(脱离文档流,需要显示设置长宽),此时覆盖真实元素
+            4.设置z-index低于真实元素,才能显示真实元素的东西
+            5.left,top 设置相应的值
+            6.一般:before,:after使用一个就可以了(默认前,后)
+        */
+        .demo3{
+            background: yellow;
+            position: relative;
+        }
+
+        .demo3:before,.demo3:after{
+            content:'';
+            background: blue;
+            display: block;
+            height:100%;
+            width:100%;
+            position:absolute;
+            z-index:-1;
+            left:0;
+            top:0;
+        }
+
+        /*
+            //图形扭曲 transform:skew(xdeg,ydeg)
+            1.正值 逆时针;负值 顺时针(图形扭曲方向)
+            2.扭曲分图形 按x轴扭曲,按y轴扭曲(以x,y为中轴)
+        */
+
+        .demo4{
+            transform: skew(30deg);
+            background: yellow;
+        }
+
+        .demo5{
+            transform: skew(-60deg);
+            background: yellow;
+        }
+
+        .demo6{
+            /*transform: skew(0,-60deg);*/
+            background: yellow;
+        }
+
+        /*other*/
+        .demo7{
+            width:6rem;
+            height:6rem;
+            position: relative; 
+        }
+        .demo7:before{
+            content:'';
+            position: absolute;
+            display: block;
+            left:0;right:0;top:0;bottom:0;
+            z-index:-1;
+            background: yellow;
+            transform: rotate(45deg);
+        }
+
+        .demo8{
+            position: relative; 
+            background: blue;
+        }
+
+        .demo8:before{
+            content:attr(class);
+            position: absolute;
+            display: block;
+            left:1rem;right:1rem;top:1rem;bottom:1rem;
+            background: yellow;
+            border-radius: 1rem;
+            line-height: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1"><div>Demo1</div></div>
+    <div class="demo2">Demo2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

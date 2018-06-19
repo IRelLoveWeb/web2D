@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪随机背景</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+
+        /*最小公倍数,重复*/
+        .demo1{
+            background: hsl(20, 40%, 90%);
+            background-image:
+            linear-gradient(90deg, #fb3 10px, transparent 0),
+            linear-gradient(90deg, #ab4 20px, transparent 0),
+            linear-gradient(90deg, #655 20px, transparent 0);
+            background-size: 80px 100%, 60px 100%, 40px 100%;
+        }
+
+        /*通过质数来增加随机真实性的想法*/
+        .demo2{
+            background: hsl(20, 40%, 90%);
+            background-image:
+            linear-gradient(90deg, #fb3 11px, transparent 0),
+            linear-gradient(90deg, #ab4 21px, transparent 0),
+            linear-gradient(90deg, #655 41px, transparent 0);
+            background-size: 41px 100%, 61px 100%, 83px 100%;
+        }
+        
+        @keyframes divRoate{
+            to{transform:rotate(1turn)}
+        }
+
+        @keyframes divRadius{
+            50%{border-radius: 50%}
+        }
+
+        @keyframes divColor{
+            33%{border-color:orange;}
+            66%{border-color: deeppink;}
+        }
+
+        @keyframes divWidth{
+            50%{border-width:2rem}
+        }
+
+        .demo3{
+            animation: divRoate 1s, divRadius .7s, divColor 1.1s, divWidth 2.7s;
+            animation-timing-function: linear;
+	        animation-iteration-count: infinite;
+            border:.7rem solid;
+            box-sizing: border-box;
+        }
+
+        /*每一个时间断都可以改变任意的属性;将多个动画合并在一起,有规律性*/
+        @keyframes demo4T{
+            33%{border-color:orange;}
+            50%{border-radius: 50%;border-width:2rem}
+            66%{border-color: deeppink;}
+            to{transform:rotate(1turn)}
+        }
+
+        .demo4{
+            animation:demo4T 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            border:.7rem solid;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

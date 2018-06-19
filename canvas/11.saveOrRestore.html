@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="200" height="200"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <script>
+    /*Canvas 的状态就是当前画面应用的所有样式和变形的一个快照*/
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+        /*ctx1.fillRect(0,0,150,150);   // 使用默认设置绘制一个矩形
+        ctx1.save();                  // 保存默认状态
+
+        ctx1.fillStyle = '#09F'       // 在原有配置基础上对颜色做改变
+        ctx1.fillRect(15,15,120,120); // 使用新的设置绘制一个矩形
+
+        ctx1.save();                  // 保存当前状态
+        ctx1.fillStyle = '#FFF'       // 再次改变颜色配置
+        ctx1.globalAlpha = 0.5;    
+        ctx1.fillRect(30,30,90,90);   // 使用新的配置绘制一个矩形
+
+        ctx1.restore();               // 重新加载之前的颜色状态
+        ctx1.fillRect(45,45,60,60);   // 使用上一次的配置绘制一个矩形
+
+        ctx1.restore();               // 加载默认颜色配置
+        ctx1.fillRect(60,60,30,30);   // 使用加载的配置绘制一个矩形*/
+
+        ctx1.fillRect(0,0,200,200);
+        ctx1.save();
+
+        ctx1.fillStyle="red";
+        ctx1.fillRect(20,20,160,160);
+        ctx1.save();
+
+        ctx1.fillStyle = "blue";
+        ctx1.fillRect(40,40,120,120);
+
+        ctx1.restore();
+        ctx1.fillRect(60,60,80,80);
+
+        ctx1.restore();
+        ctx1.fillRect(80,80,40,40);
+
+        //save() 保存的是当前的样式,restore()恢复的是上一个的样式；
+        //save() 保存样式后,新的路径需要设置新的样式,没有重新设置的样式延续之前的样式
+
+        //save() 是保存样式,以便restore()重新还原样式;保存后的样式可以修改
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d')
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c3');
+        var ctx3 = canvas.getContext('2d')
+    </script>
+</body>
+</html>

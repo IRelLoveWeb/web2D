@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标准浏览器的方法</title>
+    <style>
+        div{
+            height:200px;
+            border:1px solid red;
+        }
+        #wrapper{
+            display: table;
+            width:100%;
+        }
+        
+        #sidebar,#contentb{
+            display: table-cell;
+        }
+
+        #sidebar{
+            width:200px;
+            transition: all .2s linear;
+        }
+
+    </style>
+
+    <script>
+        function show(){
+            document.getElementById('sidebar')
+            .style.width = 0;
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar">sidebar固定宽度区</div>
+        <div id="contentb">
+            content自适应区，在前面
+        </div>
+    </div>
+
+    <button onclick="show()">click</button>
+    
+    
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折角效果</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+
+        .demo1{
+            background: yellow;
+            position: relative;
+        }
+
+        .demo1::after{
+            content: '';
+            position: absolute;
+            top:0;
+            right: 0;
+            border:0.75rem solid white;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .demo1::before{
+            content: '';
+            position: absolute;
+            top:0;
+            right: 0;
+            border:0.75rem solid #e0ba1b;
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+        
+        /* 
+            正方形 45deg
+            background: position / size;
+
+            background-size : width height;
+            linear-gradient 是斜边距起点的距离
+
+            在正方形中 to left bottom 等于 -135deg;
+            但是在矩形中 他们是不相等的
+         */
+        .demo2{
+            background: linear-gradient(to left bottom,transparent 50%,#e0ba1b 0) top right/2rem 2rem no-repeat,
+                        linear-gradient(-135deg,transparent 1.5rem,yellow 0);
+        }
+
+        .demo3{
+            background: linear-gradient(to left bottom,transparent 50%,#e0ba1b 0) top right/3rem 1.73rem no-repeat,
+                        linear-gradient(-150deg,transparent 1.5rem,yellow 0);
+        }
+        
+        /* 
+            切角为angle
+            demo3. 用伪元素实现;
+            伪元素 长宽调换  逆时针旋转angle【right bottom】,上移动w-h
+            加上圆角和阴影
+         */
+        .demo4{
+            background: linear-gradient(-150deg,transparent 1.5rem,yellow 0);
+            position:relative;
+
+            border-radius: .5rem;
+        }
+        .demo4::before{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            background: linear-gradient(to left bottom,transparent 50%,#e0ba1b 0);
+            height :3rem;
+            width : 1.73rem;
+            transform: translateY(-1.27rem) rotate(-30deg);
+            transform-origin: right bottom;
+
+            border-bottom-left-radius: .5rem;
+            box-shadow: -.2rem .2rem .3rem -.1rem rgba(0,0,0,.15);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

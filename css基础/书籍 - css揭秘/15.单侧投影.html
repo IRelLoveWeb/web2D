@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单侧投影</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+        /* 
+            box-shadow:xoffset,yoffset,blur,R,color;
+            blur:模糊半径【背景色到页面底色的渐变宽度】
+            blur:扩张半径（负值就是缩减）
+        */
+        .demo1{
+            background: yellow;
+            box-shadow: 0 5px 5px -5px black;
+        }
+        
+        /* 
+            2和3都是2边有阴影,
+            但是3的阴影比2的淡，
+            blur越大,模糊半径中的色彩越淡,
+            用模糊半径控制阴影颜色的浓度
+            用扩张半径来控制阴影宽度
+        */
+        .demo2{
+            background: yellow;
+            box-shadow: 3px 3px 3px black;
+        }
+
+        .demo3{
+            background: yellow;
+            box-shadow: 3px 3px 6px -3px black;
+        }
+
+        /* 双侧投影 */
+        .demo4{
+            box-shadow: 5px 0 5px -5px black,
+                        -5px 0 5px -5px black;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

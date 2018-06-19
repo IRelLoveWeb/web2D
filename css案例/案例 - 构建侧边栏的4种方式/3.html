@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>float与margin齐上阵</title>
+    <style>
+        div{
+            border:1px solid red;
+        }
+        #wrap {
+           *zoom: 1; position: relative;
+        }
+        #content ,#sidebar {
+            background-color: #eee; 
+        }
+        #sidebar {
+           width: 300px; float: right;
+        }
+        #content {
+           margin-left: -310px; float: left; width: 100%;
+        }
+        #contentb {
+            margin-left: 310px;
+        }
+        #footer {background-color: #f00;color:#fff; margin-top: 1em}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content" style="height:140px;">
+            <div id="contentb">
+            content自适应区，在前面
+            </div>
+        </div>
+        <div id="sidebar" style="height:240px;">固定宽度区</div>
+        <div id="#footer">footer</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>worker</title>
+
+</head>
+<body>
+    <input type='text' id='input1' />
+    <input type='text' id='input2' />
+
+    <script src='./mian.js'></script>
+    <script src='./mian2.js'></script>
+</body>
+</html>
+
+<!-- 
+main.js
+worker.postMessage() 发送信息到 worker.js
+worker.onmessage事件 接受worker.js返回的信息
+
+worker.js
+onmessage事件 接受main.js发送的信息
+postMessage() 将得到的结果发送给main.js
+
+//main.js
+postMessage发送一个信息,
+//worker.js
+postMessage返回一个信息
+//main.js
+onmessage接受返回的信息
+
+//worker 随本页面关闭
+//ShareWorker 可以多个页面共享
+ -->

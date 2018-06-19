@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        操作时针对一个图形的操作,每个图形的操作相互绝缘
+     -->
+    
+    <svg width="250" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox='0 0 250 200'>
+        <path d='M0,50 250,50 M0,100 250,100 M0,150 250,150 M50,0 50,200 M100,0 100,200 M150,0 150,200 M200,0 200,200' stroke='black' stroke-width='1'/>
+        
+        
+        <path d='M0,10 50,10 M0,20 50,20 M0,30 50,30 M0,40 50,40' stroke='black'/>
+        <path d='M10,0 10,50 M20,0 20,50 M30,0 30,50 M40,0 40,50' stroke='black'/>
+
+        <!-- 
+            1.移动的是左顶点(图形相对左顶点不变,绝对位置改变);
+            2.每个图形的变换独立
+            3.一个图形多次变换(此时左顶点的变换是连续依赖的)-->
+        <!-- 基础图形 -->
+        <rect x='10' y='10' width='10' height='10' fill='red'/>
+        <!--  移动左顶点-->
+        <rect x='10' y='10' width='10' height='10' transform='translate(20,20)' fill='green'/>
+        <!-- 相对于左顶点变换 -->
+        <rect x='10' y='10' width='10' height='10' transform='rotate(45)' fill='blue' opacity='0.5'/>
+        <!-- 移动左顶点,且相对于左顶点变换  -->
+        <rect x='10' y='10' width='10' height='10' transform='translate(20,20) rotate(45)' fill='blue' opacity='0.5'/>
+        <!-- 左顶点位移 左顶点相对于(15,15)旋转,此时物体相对于中心旋转 左顶点x轴位移-->
+        <rect x='10' y='10' width='10' height='10' transform='translate(20,20) rotate(90,15,15) translate(10)' fill='blue'/>
+        <!-- 
+            1.旋转是以左上角为顶点旋转的,但是可以设置旋转中 rotate(deg,centerX,centerY)
+            2.多次旋转旋转中心不共享(没设定旋转中心则以左顶点为原点)
+            3.旋转是顺时针旋转
+         -->
+        <rect x='100' y='100' width='20' height='20' transform='rotate(45,110,110) rotate(-45,110,110)' fill='red'/>
+        <!-- 图形相对于左顶点的相对位置不会改变() -->
+        <rect x='100' y='50' width='50' height='20' fill='red' transform='rotate(90,150,70) rotate(90,150,50)'/>
+    </svg>
+    <br />
+
+    <svg width="250" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <path d='M0,50 250,50 M0,100 250,100 M0,150 250,150 M50,0 50,200 M100,0 100,200 M150,0 150,200 M200,0 200,200' stroke='black' stroke-width='1'/>
+
+        <!-- 
+            1.缩放 scale(sx,sy)
+            2.缩放距左顶点的距离和自身的大小
+         -->
+        <rect x='200' y='50' height='50' width='50' fill='red'/>
+        <rect x='200' y='50' height='50' width='50' fill='blue' transform='scale(1,1.5)'/><!-- width:50 height:50*1.5 x:200 y:50*1.5-->
+
+        <!-- 
+            1.缩放图形之后,与之前中心重合
+            2.将左顶点移动到图形中心,再缩放, 然后反向缩放
+         -->
+        <rect x='50' y='50' height='50' width='50' fill='red' />
+        <rect x='50' y='50' height='50' width='50' fill='blue' transform='translate(75,75)' opacity='0.5'/>
+        <rect x='50' y='50' height='50' width='50' fill='blue' transform='translate(75,75) scale(1,1.5)' opacity='0.8'/>
+
+        <rect x='50' y='50' height='50' width='50' fill='green' transform='translate(75,75) scale(1,1.5) translate(-75,-75)' opacity='0.5'/>
+    </svg>
+    <br />
+
+
+    <!-- 
+        变换前后图形中心重合
+     -->
+    <!-- 
+        1.先translate其中心点位置到元素的中心坐标位置，然后缩放，然后坐标再反方向还原回去
+     -->
+    <svg width="250" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <path d='M0,50 250,50 M0,100 250,100 M0,150 250,150 M50,0 50,200 M100,0 100,200 M150,0 150,200 M200,0 200,200' stroke='black' stroke-width='1'/>
+        <rect x='50' y='50' width='100' height='50' fill='red' opacity='0.5'/>
+        <rect x='50' y='50' width='100' height='50' transform='translate(100,75) rotate(45) translate(-100,-75)'/>
+    </svg>
+    <br />
+
+    <!-- 
+        2.控制viewBox,将图形中心固定到此时的左顶点(此处是svg中心点)
+    -->
+    <svg width="250" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox='-125,-100,250,200'>
+        <path d='M0,-100 0,100 M-125,0 125,0' stroke='black'/>
+        <rect x='-50' y='-25' width='100' height='50' fill='red' opacity='0.5'/>
+        <rect x='-50' y='-25' width='100' height='50' transform='rotate(45)'/>
+    </svg>
+    <br />
+    <!-- 
+        3
+     -->
+    <svg width="250" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <path d='M0,50 250,50 M0,100 250,100 M0,150 250,150 M50,0 50,200 M100,0 100,200 M150,0 150,200 M200,0 200,200' stroke='black' stroke-width='1'/>
+        <!-- 原型 -->
+        <rect x='100' y='50' width='100' height='50' fill='red' opacity='0.5'/>
+        <rect x='100' y='50' width='100' height='50' fill='green' opacity='0.5' transform='translate(0,-15)'/>
+        <!-- 从右往左理解(实际操作时从左往右)  放大1.2倍,中心点改变 (150,75)=>(150 * 1,75 * 1.2) ,将现在的中心点还原到原来(150 - 150 , -0.2 * 75)--> 
+        <rect x='100' y='50' width='100' height='50' fill='blue' opacity='0.8' transform='translate(0,-15) scale(1,1.2)'/>
+    </svg>
+    <br />
+
+    <!-- 
+        分组(g)与使用(use)
+        分组内的物体默认使用分组的颜色
+     -->
+    <svg width="500" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <g fill='red'>
+            <g id='G'>
+                <rect x='50' y='25' width='100' height='50' fill='inherit'/>
+                <ellipse cx='150' cy='100' rx='30' ry='80' fill='#777'/>
+                <rect x='50' y='125' width='100' height='50' />
+            </g>
+
+            <use xlink:href="#G" transform='translate(200,0)' fill='green'>
+        </g>
+
+        <use xlink:href="#G" transform='translate(0,180)' fill='blue'>
+    </svg>
+    <br />
+    <!-- 
+        在实际物体分组上再设置一层样式分组,可以在该分组进行样式的修改(不在改动物体分组)
+     -->
+    <svg width="500" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <g id='g4' stroke='black'>
+            <g id='g3' fill='none' stoke-width='2'>
+                <g id='g2'>
+                    <ellipse id='g1' cx='100' cy='100' rx='75' ry='40'/>
+                    <use xlink:href='#g1' transform='rotate(30,100,100)' />
+                    <use xlink:href='#g1' transform='rotate(60,100,100)' />
+                </g>
+
+                <use xlink:href='#g2' transform='rotate(90,100,100)'/>
+            </g>
+        </g>
+
+        <!-- <use xlink:href='#g4' transform='translate(80,0)' stroke='red'/> -->
+
+        <g stroke='red' transform='translate(80,0)'>
+            <use xlink:href='#g3'/>
+        </g>
+
+        <g stroke='blue' transform='translate(0,80)'>
+            <use xlink:href='#g3'/>
+        </g>
+
+        <g stroke='green' transform='translate(80,80)'>
+            <use xlink:href='#g3'/>
+        </g>
+
+    </svg>
+    <br />
+
+</body>
+</html>

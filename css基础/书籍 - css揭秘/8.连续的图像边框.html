@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连续的图像边框</title>
+    <style>
+       div{
+            width:10rem;
+            margin:1rem auto;
+            text-align: center;
+        }
+
+        .demo1{
+            background: url(./imgs/stone-art.jpg);
+            padding:1rem;
+            background-size: cover;
+        }
+
+        .demo1 span{
+            background: white;
+            display: block;
+            padding:1rem;
+        }
+
+        /*比较origin与clip的区别；详见《基础》中的背景知识*/
+        .demo2{
+            padding:1rem;
+            background-image: linear-gradient(white,white),url(./imgs/stone-art.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-origin: content-box,border-box;
+        }
+
+        .demo3{
+            padding:1rem;
+            background-image: linear-gradient(white,white),url(./imgs/stone-art.jpg);
+            background-clip: content-box,border-box;
+            background-size: cover;
+        }
+
+        .demo4{
+            /*该盒子 有border 1rem + padding 1rem + content 10rem 三个部分*/
+            padding:1rem;
+            border:1rem solid transparent;
+            background-image: linear-gradient(white,white),url(./imgs/stone-art.jpg);
+            background-size: cover;
+            /*设定显示图片的范围*/
+            background-clip: padding-box,border-box;
+            /*图片默认的初始位置是padding-box;border显示的是重复图片*/
+            background-origin: border-box;
+            outline:1px solid red;
+
+            /*
+                解析：background-clip:border-box;background-origin:padding-box;
+                盒子中显示图片的位置有border + padding + content;
+                但是图片初始显示的位置是在padding + content,那么剩余的border就展示的是重复图片;
+                那么为了border也显示但不是重复图片,所以background-origin: border-box;
+            */
+        }
+
+        .demo5{
+            padding:1rem;
+            border:.5rem solid transparent;
+            background-image: linear-gradient(white,white),repeating-linear-gradient(135deg,red 0,red .25rem,transparent 0,transparent .5rem,
+            blue 0,blue 0.75rem,transparent 0,transparent 1rem);
+            background-clip: padding-box,border-box;
+            background-origin: border-box;
+        }
+
+        .demo6{
+            padding:1rem;
+            border:1rem solid transparent;
+            background-image: url(./imgs/stone-art.jpg);
+            width:4rem;
+            height: 4rem;
+            background-origin: content-box;
+            background-size: 3rem 3rem;
+            outline: 1px solid red;
+        }
+
+
+        /* 
+            渐变:
+                1.渐变可以看成是一种图片,当成背景图片时，适用背景的任何属性
+                2.linear-gradient,radial-gradient 默认是平铺整个范围 
+                3.repeating-linear-gradient 必须有开始色 和 截止色 
+                    (40deg,red , yellow 30px) 可以循环渐变
+                    (40deg,red 20px,yellow 0) | (40deg,red 20px,yellow 0,yellow 30px) 不会循环渐变,展示一个实色
+                    (45deg,red 0,red 20px,yellow 0,yellow 30px) 可以循环渐变
+                4.渐变透明色 的使用,底色color,background-size,background-position,background-repeat 可以创造许多图形
+                    (to top,white 1px,transparent 0);  size:1rem 1rem;  color:red  可以画出白边方格块
+                5.多个渐变图片的结合使用【普通渐变 或 循环渐变】 主要使用再多个背景图片的使用上
+                    多个渐变图片 默认是重叠在一起，且前面的覆盖后面的
+                    可以通过设置 background-size,background-position 将多个图片分开
+                    且每个渐变图片的渐变方式可以不一致
+
+         */
+
+        .demo7{
+            background-image:repeating-linear-gradient(45deg,red 0,red 20px,yellow 0,yellow 30px);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        <span>I have a nice stone art border,
+             don't I look pretty?
+        </span>
+    </div>
+
+    <div class="demo2">
+        I have a nice stone art border,
+             don't I look pretty?
+    </div>
+
+    <div class="demo3">
+         I have a nice stone art border,
+             don't I look pretty?    
+    </div>
+    <div class="demo4">
+        I have a nice stone art border,
+             don't I look pretty?  
+    </div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

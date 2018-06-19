@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.多重边框</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        /*
+            margin 从 border处开始算起
+        */
+        div{
+            width:10rem;
+            height:10rem;
+            background: yellowgreen;
+            margin:5em auto;
+        }
+
+        /*box-shahow x偏移,y偏移,模糊半径,扩张半径,色彩,内外显示;
+          只能模拟实线边框*/
+        .d1{
+            /*box-shadow:0 0 0 10px #655 inset,0 0 0 15px deeppink inset;*/
+            box-shadow:0 0 0 10px #655,0 0 0 15px deeppink;
+            
+            padding:15px;
+            box-sizing: content-box;
+            background-clip: content-box; 
+        }
+
+        /* hover改变的是clip后的区域【默认是border-box】*/
+        .d1:hover {
+            background-color: yellow;
+        }
+
+        /*1.em是现对于当前样式的font-size取值,如果本元素没有指定font-size,就继承父元素的font-size
+          2.border会随着圆角改变形状，而outline不会改变*/
+        .d2{
+            /*border: 10px solid #655;
+            outline: 5px solid deeppink;*/
+
+            font-size:12px;
+            border:1px solid red;
+            outline: 1px dashed black;
+            outline-offset: -1em;
+            border-radius: 1em;
+        }
+
+        .d3{
+            position: relative;
+            border-radius: 2rem;
+            text-align: center;
+            line-height: 10rem;
+        }
+
+        .d3:before{
+            content:'';
+            position: absolute;
+            display: block;
+            left:-1rem;right:-1rem;top:-1rem;bottom:-1rem;
+            background: yellow;
+            line-height: 4rem;
+            z-index:-1;
+        }
+
+        /*  background-repeat 
+            background-size 
+            background-position
+            background-origin    只影响image,不影响color
+
+            background-clip 影响color和image
+
+            注意: background-position 是相对于 background-origin设置 的左上角来定位的
+
+            background详解:
+                background-origin 默认值是 padding-box
+                background-repeat 默认值是 repeat
+                background-clip 默认值是 border-box
+
+            假设 边框有厚度且透明,那么边框底下会出现重复的图片【图片默认是padding的左顶点开始平铺padding+content,border处就是重复的图片】;
+            1. 边框显示图片,但不是重复的图片 background-origin:border-box
+            2. 边框下不显示图片 background-clip:padding-box
+
+            对于有多张背景图片，可以为每一张图片设置相互独立的属性【渐变是一种用css绘制的图片】
+         */
+        .d4{
+            border:10px solid rgba(255,0,0,0.5);
+            padding: 10px;
+            background-image: url(imgs/s1.jpg);
+            background-position:10px 10px;
+            background-size : calc(100% - 50px) calc(100% - 50px);
+            background-repeat: no-repeat;
+            background-origin: content-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="d1"></div>
+    <div class="d2"></div>
+    <div class="d3">D3</div>
+    <div class='d4'></div>
+</body>
+</html>

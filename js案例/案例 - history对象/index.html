@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='root'>
+        <button id='add_path'>addPathname</button>
+        <button id='add_hash'>addHash</button>
+        <button id='replace'>replace</button>
+
+        <button id='back'>back</button>
+        <button id='forward'>forward</button>
+        <button id='go'>go</button>
+    </div>
+
+    <script>
+        var nums = '0123456789';
+        var strs = 'abcdefghijklmnopqrstuvwsyz';
+        
+        function getR(num){
+            return Math.round(Math.random()*num);
+        }
+
+        document.getElementById('root').onclick = function(e){
+            var id = e.target.getAttribute('id');
+            
+            // history.pushState(state[object],null,path|hash[str]);
+            // history.replaceState(state[object],null,path|hash[str]);
+
+            // history.go(num);history.back();history.forward();
+
+
+            switch(id){
+                case 'add_path' : {
+                    let path = nums[getR(9)] + strs[getR(25)];
+                    history.pushState({num:nums[getR(9)]},null,path);
+                };break;
+                case 'add_hash' : {
+                    let hash = strs[getR(25)] + '_' + nums[getR(9)];
+                    history.pushState({num:nums[getR(9)]},null,'?'+hash);
+                };break;
+                case 'replace' : {
+                    let path = nums[getR(9)] + strs[getR(25)];
+                    let hash = strs[getR(25)] + '_' + nums[getR(9)];
+                    history.replaceState({num:nums[getR(9)]},null,path+'?'+hash);
+                };break;
+                case 'back' : {
+                    history.back();
+                };break;
+                case 'forward' : {
+                    history.forward();
+                }break;
+                case 'go' : {
+                    let num = Math.round(Math.random()) ? 1 : -1;
+                    history.go(num);
+                }
+            }
+        }
+
+        // popstate事件 只有go,forward,back,手动点击前进后退按钮是才触发;
+        // pushState,replaceState 只是网地址栏添加路径,不触发该事件
+        window.onpopstate = function(e){
+            console.log(e.state);
+        }
+
+    </script>
+</body>
+</html>

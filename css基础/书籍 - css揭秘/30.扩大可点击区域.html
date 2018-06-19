@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩大可点击区域</title>
+    <style>
+       div{
+            margin:1rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 
+           模拟鼠标进入div周边也出发鼠标事件 
+         */
+        .demo1{
+            width:3rem;
+            height: 3rem;
+            border-radius: 2.5rem;
+            background: blue;
+
+            border:1rem solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.5) inset;
+            cursor: pointer;
+        }
+        
+        /* 
+            伪元素响应鼠标交互
+         */
+        .demo2{
+            width:3rem;
+            height: 3rem;
+            border-radius: 2.5rem;
+            background: blue;
+            position: relative;
+            cursor: pointer;
+        }
+        .demo2::after{
+            content: '';
+            position: absolute;
+            top:-10px;right:-10px;
+            left:-10px;bottom: -10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+</body>
+</html>

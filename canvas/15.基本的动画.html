@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width='300' height='300'></canvas>
+    <canvas id="c2" width='300' height='300'></canvas>
+    <canvas id="c3" width="800" height="200"></canvas>
+    <script>
+        /*动画太阳系*/
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+        var sun = new Image();
+        var moon = new Image();
+        var earth = new Image();
+        sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
+        moon.src = 'https://mdn.mozillademos.org/files/1443/Canvas_moon.png';
+        earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
+
+        sun.onload = function(){
+            ctx1.translate(150,150);
+            draw();
+        }
+
+        function draw(){//每一帖都需要清空画布
+            ctx1.save();
+            ctx1.clearRect(-150,-150,300,300);//清空画布
+
+            ctx1.drawImage(sun,-150,-150,300,300);//设置背景
+
+            ctx1.strokeStyle = "blue"; //画出地球环线
+            ctx1.beginPath();
+            ctx1.arc(0,0,105,0,2*Math.PI)
+            ctx1.stroke();
+
+            //地球旋转
+            var time = new Date();
+            ctx1.rotate((Math.PI*2/60)*time.getSeconds() + (Math.PI*2/60000)*time.getMilliseconds());
+            ctx1.translate(105,0);
+            //ctx1.fillRect(0,-12,50,24);
+            ctx1.drawImage(earth,-12,-12);
+
+            //基于地球,月球旋转
+            ctx1.rotate((Math.PI*2/12)*time.getSeconds() + (Math.PI*2/12000)*time.getMilliseconds());
+            ctx1.translate(0,28.5);
+            ctx1.drawImage(moon,-3.5,-3.5);
+
+            ctx1.restore()
+
+            requestAnimationFrame(draw)
+        }
+    </script>
+
+    <script>
+        /*时钟*/
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+
+        ctx2.translate(150,150);
+        ctx2.rotate(-Math.PI/2);
+
+        function drawTime(){
+            ctx2.save();
+            ctx2.clearRect(-150,-150,300,300);//清空画布
+
+            //外圈
+            ctx2.strokeStyle = 'blue';
+            ctx2.lineWidth = 5;
+            ctx2.beginPath();
+            ctx2.arc(0,0,125,0,2*Math.PI)
+            ctx2.stroke();
+
+            //表盘
+            for(var i=0;i<60;i++){
+                ctx2.strokeStyle = "black";
+                ctx2.beginPath();
+                ctx2.moveTo(115,0);
+                if(i%5 == 0){
+                    ctx2.lineWidth = 3;
+                    ctx2.lineTo(105,0);
+
+                    ctx2.save();
+                    ctx2.rotate(- Math.pI*2 * i);
+                    ctx2.font = "20px serif";
+                    ctx2.fillText(i/5 ? i/5 : 12 ,85,8);
+                    ctx2.restore();
+                }else{
+                    ctx2.lineWidth = 1;
+                    ctx2.lineTo(110,0);
+                }
+                ctx2.stroke();
+                ctx2.rotate(Math.PI*2/60);
+            }
+
+            //时分秒
+            var time = new Date();
+            ctx2.save();
+            //秒钟
+            ctx2.rotate((Math.PI*2/60)*time.getSeconds())
+            ctx2.beginPath();
+            ctx2.moveTo(0,0);
+            ctx2.lineTo(110,0);
+            ctx2.stroke();
+            ctx2.restore();
+            
+            //分钟
+            ctx2.save();
+            ctx2.rotate((Math.PI*2/60)*time.getMinutes())
+            ctx2.beginPath();
+            ctx2.moveTo(0,0);
+            ctx2.lineTo(90,0);
+            ctx2.stroke();
+            ctx2.restore();
+
+            //时钟
+            ctx2.save();
+            ctx2.rotate((Math.PI*2/12)*time.getHours())
+            ctx2.beginPath();
+            ctx2.moveTo(0,0);
+            ctx2.lineTo(70,0);
+            ctx2.stroke();
+            ctx2.restore();
+
+            ctx2.restore();
+            requestAnimationFrame(drawTime)
+        }
+
+        drawTime();
+    </script>
+
+    <script>
+        var img3 = new Image();
+
+        // User Variables - customize these to change the image being scrolled, its
+        // direction, and the speed.
+
+        img3.src = 'https://mdn.mozillademos.org/files/4553/Capitan_Meadows,_Yosemite_National_Park.jpg';
+        var CanvasXSize = 800;
+        var CanvasYSize = 200;
+        var speed = 30; //lower is faster
+        var scale = 1.05;
+        var y = -4.5; //vertical offset
+
+        // Main program
+
+        var dx = 0.75;
+        var imgW;
+        var imgH;
+        var x = 0;
+        var clearX;
+        var clearY;
+        var ctx3;
+
+        img3.onload = function() {
+            imgW = img3.width*scale;
+            imgH = img3.height*scale;
+           /* if (imgW > CanvasXSize) { x = CanvasXSize-imgW; } // image larger than canvas
+            if (imgW > CanvasXSize) { clearX = imgW; } // image larger than canvas
+            else { clearX = CanvasXSize; }
+            if (imgH > CanvasYSize) { clearY = imgH; } // image larger than canvas
+            else { clearY = CanvasYSize; }*/
+            //Get Canvas Element
+            ctx3 = document.getElementById('c3').getContext('2d');
+            //Set Refresh Rate
+            return setInterval(draw3, speed);
+        }
+
+        function draw3() {
+            //Clear Canvas
+            ctx3.clearRect(0,0,clearX,clearY);
+            //If image is <= Canvas Size
+            /*if (imgW <= CanvasXSize) {
+                //reset, start from beginning
+                if (x > (CanvasXSize)) { x = 0; }
+                //draw aditional image
+                if (x > (CanvasXSize-imgW)) { ctx3.drawImage(img3,x-CanvasXSize+1,y,imgW,imgH); }
+            }
+            //If image is > Canvas Size
+            else {
+                //reset, start from beginning
+                if (x > (CanvasXSize)) { x = CanvasXSize-imgW; }
+                //draw aditional image
+                if (x > (CanvasXSize-imgW)) { ctx3.drawImage(img3,x-imgW+1,y,imgW,imgH); }
+            }*/
+            //draw image
+            ctx3.drawImage(img3,x,y,imgW,imgH);
+            //amount to move
+            x += dx;
+        }
+    </script>
+</body>
+</html>

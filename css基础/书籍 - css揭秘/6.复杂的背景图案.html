@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复杂的背景图案</title>
+    <style>
+        div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+
+        /*方块图*/
+        .demo1{
+            background: white;
+            /*background-size 限定了一次渐变的范围  每一个渐变可以看成一个图片,其设置了图片的大小*/
+            /*渐变可以生成多个颜色区块*/
+            background-image: linear-gradient(90deg,rgba(200,0,0,.5) 50%,transparent 0),
+                              linear-gradient(rgba(200,0,0,.5) 50%,transparent 0);
+            background-size: 1rem 1rem;
+        }
+        .demo2{
+            background: #58a;
+            background-image:
+                            linear-gradient(white 1px, transparent 0),
+                            linear-gradient(90deg, white 1px, transparent 0); 
+            background-size: 1rem 1rem;
+        } 
+        .demo3{
+            background: #58a;
+            background-image: linear-gradient(white 2px, transparent 0),
+                              linear-gradient(90deg,white 2px,transparent 0),
+                              linear-gradient(hsla(0,0%,100%,.3) 1px,transparent 0),
+                              linear-gradient(90deg, hsla(0,0%,100%,.3) 1px,transparent 0);
+            background-size: 5rem 3rem,5rem 3rem,1rem 1rem,1rem 1rem;
+        } 
+
+        /*斑点图*/
+         .demo4{
+             background: #655;
+             background-image: radial-gradient(tan 30%,transparent 0),radial-gradient(tan 30%,transparent 0);
+             background-size: 1rem 1rem;
+             background-position: 0 0,.5rem .5rem;
+         }
+
+         /*棋盘*/
+         .demo5{
+             /*三角形合并*/
+             background: #eee;
+             background-image: linear-gradient(45deg, #bbb 25%,transparent 0),
+                               linear-gradient(45deg, transparent 75%,#bbb 0),
+                               linear-gradient(45deg, transparent 75%,#bbb 0),
+                               linear-gradient(45deg, #bbb 25%,transparent 0);
+             background-size: 2rem 2rem;
+             background-position: 0 0,-1rem -1rem;
+         }
+
+         .demo6{
+             /*出于可读性的考虑，需要把一句 CSS 代码打断为多行，只需要用反斜杠（\）来转义每行末尾的换行就可以了*/
+            /*svg 相当于图片,但是size限制了图片的大小*/
+            background: #eee url('data:image/svg+xml,\
+                        <svg xmlns="http://www.w3.org/2000/svg" \
+                        width="100" height="100" \
+                        fill-opacity=".25" viewBox="0 0 100 100">\
+                        <rect x="50" width="50" height="50" /> \
+                        <rect y="50" width="50" height="50" /> \
+                        </svg>');
+            background-size: 2rem 2rem;
+         }
+
+         /*
+         每一个渐变申明可以看成一个图片,对于多个背景图片,开始的会覆盖后续的(由于此处都是透明色无法展示);size设置了背景图片的大小;默认背景图片是repeat的。
+         */
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">4</div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

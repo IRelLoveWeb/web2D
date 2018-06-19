@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c"></canvas>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+
+    <script>
+        //Canvas 填充规则 默认值 "nonzero"  ; "evenodd"
+        var canvas = document.getElementById('c');
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath(); 
+        ctx.arc(50, 50, 30, 0, Math.PI*2, true);
+        ctx.arc(50, 50, 15, 0, Math.PI*2, true);
+        ctx.fill("evenodd");
+
+
+        ctx.beginPath();
+        ctx.rect(20,20,100,100);
+        ctx.moveTo(120,120);
+        ctx.lineTo(70,20);
+        ctx.lineTo(20,120);
+        ctx.fill("evenodd");
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c1');
+        var ctx1 = canvas.getContext('2d');
+
+        ctx1.font = "24px serif";
+        //填充文本
+        ctx1.fillText("Hello World!",10,50);
+        //文本边框
+        ctx1.strokeText("Hello World!",10,100);
+
+        //先进的文本测量 measureText
+        //将返回一个 TextMetrics对象的宽度、所在像素，这些体现文本特性的属性
+        //measureText计算的值与font设置的文本大小无关
+        var text = ctx.measureText("Hello World!");
+        ctx1.fillText(text.width,20,150); 
+    </script>
+
+    <script>
+        var canvas = document.getElementById('c2');
+        var ctx2 = canvas.getContext('2d');
+    </script>
+
+</body>
+</html>

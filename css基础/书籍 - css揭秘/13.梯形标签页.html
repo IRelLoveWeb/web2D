@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>梯形标签页</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+
+
+        .demo1{
+            background: red;
+            position: relative;
+        }
+
+        .demo1::after{
+            content: '';
+            position: absolute;
+            right: -20px;
+            border-bottom: 6rem yellow solid;
+            border-right: 20px solid transparent;
+        }
+
+        .demo1::before{
+            content: '';
+            position: absolute;
+            left: -20px;
+            border-bottom: 6rem yellow solid;
+            border-left: 20px solid transparent;
+        }
+
+        /* 
+            元素使用了3D变形之后，其内部的变形效应是“不可逆转”的，这一点跟2D变形不同（在2D变形的体系之下，内部的逆向变形可以抵消外部的变形效应）
+         */
+        .demo2{
+            background: pink;
+            transform-origin: bottom;
+            transform: perspective(.5rem) rotateX(5deg);
+        }
+
+        .demo3{
+            background: deeppink;
+            position: relative;
+        }
+
+        .demo3::before{
+            content: '';
+            position: absolute;
+            display: block;
+            top:0;left: 0;right: 0;bottom: 0;
+            
+            transform-origin: left bottom;/* bottom */
+            transform: scale(2.1) perspective(.5rem) rotateX(5deg);
+            z-index: -1;
+            background: deeppink;
+
+            border-radius: 1rem 1rem 0 0;
+        }
+        
+
+        /* 
+            1.利用单边框可以创建 直角三角【left,right 边长,top,bottom 边高】
+
+            2.absolute 设置top:0;left: 0;right: 0;bottom: 0; 可以设置该元素占满父元素
+
+            3. css 3d变形    变形元素 transform:perspective(num);   变形元素父级 perspective:num;
+
+            4. transform-origina 设置变换中心(默认是center,center)
+         */
+
+        .demo4{
+            perspective: 1rem;
+            /* transform-style: preserve-3d; */
+            border: 1px solid black;
+        }
+
+        .demo4 span{
+            width: 100%;
+            height: 100%;
+            background: red;
+            transform: rotateZ(45deg);
+            transform-origin: left bottom 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">
+        <span style='display:block;'></span>
+    </div>
+    <div class="demo5">5</div>
+    <div class="demo6">6</div>
+    <div class="demo7">7</div>
+    <div class="demo8">8</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切角效果</title>
+    <style>
+       div{
+            width:10rem;
+            height:6rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 6rem;
+            font-size:2rem;
+        }
+        /*渐变*/
+        .demo1{
+            background-image: linear-gradient(-45deg,transparent 15px,#58a 0)
+        }
+
+        .demo2{
+            background: linear-gradient(-45deg,transparent 15px,#58a 0) right,
+                        linear-gradient(45deg,transparent 15px,#655 0) left;
+            background-size: 50% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .demo3{
+            background: linear-gradient(135deg,transparent 15px,#58a 0) top left,
+                        linear-gradient(-135deg,transparent 15px,#58a 0) top right,
+                        linear-gradient(-45deg,transparent 15px,#58a 0) bottom right,
+                        linear-gradient(45deg,transparent 15px,#58a 0) bottom left;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        /* 
+            径向渐变 形状 半径大小(圆只能有一个值) 位置(at) 色值变化(色彩 和 范围);
+         */
+
+        .demo4{
+            background: radial-gradient(circle at top left,transparent 15px,#58a 0) top left,
+                        radial-gradient(circle at top right,transparent 15px,#58a 0) top right,
+                        radial-gradient(circle at bottom right,transparent 15px,#58a 0) bottom right,
+                        radial-gradient(circle at bottom left,transparent 15px,#58a 0) bottom left;
+
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+        }
+        /* 
+            border-image生效则border-style不会生效;
+         */
+        .demo5{
+            border:10px solid #58a ;
+            border-image:1 url('data:image/svg+xml,\
+                    <svg xmlns="http://www.w3.org/2000/svg"\
+                        width="3" height="3" fill="%2358a">\
+                    <polygon points="0,1 1,0 2,0 3,1 3,2 2,3 1,3 0,2"/>\
+                    </svg>'
+                );
+            /* background:#58a; */
+            background: linear-gradient(90deg,rgba(72, 7, 250, 0.911),red);
+            background-clip: padding-box;
+        }
+
+        .demo6{
+            background: #58a;
+            background-image: url(./imgs/s15.jpg);
+            clip-path: polygon(
+                20px 0 ,calc(100% - 20px) 0 , 100% 20px,
+                100% calc( 100% - 20px ), calc( 100% - 20px ) 100%,
+                20px 100% , 0 calc( 100% - 20px ), 0 20px
+            )
+            /* clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%); */
+        }
+
+       /*  .demo7{
+            border-radius : 15px;
+            corner-shape : bevel;
+        } */
+
+        /* 
+            径向渐变默认位置居中
+            circle 只接受一个值的宽度,且不能是百分比;
+            colorStop可以是百分比;
+            多张背景图片默认是叠在一起的,可以设置position分开
+         */
+        .demo7{
+            height: 10rem;
+            background: radial-gradient(circle ,blue 50%,transparent 0) center,
+                        radial-gradient(circle at top left,transparent 5rem,red 0) top left,
+                        radial-gradient(circle at top right,transparent 5rem,red 0) top right,
+                        radial-gradient(circle at bottom left,transparent 5rem,red 0) bottom left,
+                        radial-gradient(circle at bottom right,transparent 5rem,red 0) bottom right;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            /* transform: rotate(45deg); */
+        }
+
+        /* 
+            71
+         */
+    </style>
+</head>
+<body>
+    <div class="demo1">1</div>
+    <div class="demo2">2</div>
+    <div class="demo3">3</div>
+    <div class="demo4">44444444444444</div>
+    <div class="demo5">55555555555555</div>
+    <div class="demo6">66666666666666</div>
+    <div class="demo7"></div>
+    <div class="demo8">8</div>
+</body>
+</html>

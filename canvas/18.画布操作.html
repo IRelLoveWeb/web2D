@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1"></canvas>
+    <canvas id="c2"></canvas>
+    <canvas id="c3"></canvas>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Hit_regions_and_accessibility -->
+    <script>
+        //canvas只是一个位图，它并不提供任何已经绘制在上面的对象的信息
+        var canvas1 = document.getElementById('c1');
+        var ctx1 = canvas1.getContext('2d');
+    </script>
+
+    <script>
+        var canvas2 = document.getElementById('c2');
+        var ctx2 = canvas2.getContext('2d')
+    </script>
+
+    <script>
+        var canvas3 = document.getElementById('c3');
+        var ctx3 = canvas3.getContext('2d')
+    </script>
+</body>
+</html>

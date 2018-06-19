@@ -1,0 +1,115 @@
+//对象属性调用
+//1.自身有的属性
+obj = {a:1}
+console.log('自身有属性a:' + obj.a)
+//2.原型中有的属性，自身没有
+anobj = {a:2}
+obj = Object.create(anobj)
+console.log('原型中有属性a,自身没有:' + obj.a)
+//3.原型和自身都没有
+console.log('原型和自身都没有b:' + obj.b)
+
+//对象属性赋值
+//1.自身和原型都没有有属性a
+anobj = {}
+obj = Object.create(anobj);
+obj.a = 3;
+console.log('自身属性a:'+ obj.a +'---' + '原型属性a:' +anobj.a);
+//2. 自身有属性a 修改属性a的值【不管原型有没有】
+//3. 自身没有a,原型有a
+    //3-1 原型a的writable:true
+    anobj = {a:2}
+    obj = Object.create(anobj);
+    obj.a = 3;
+    console.log('自身新建属性a:' + obj.hasOwnProperty('a') +';值为' + obj.a +'原型值为：' + anobj.a);
+    //3-2 原型a的writable:false
+    anobj = {a:2}
+    Object.defineProperty(anobj,'a',{writable:false})
+    obj = Object.create(anobj);
+    obj.a = 3;
+    console.log('自身新建属性a:' + obj.hasOwnProperty('a') +';自身值为：' + obj.a +'原型值为：' + anobj.a);
+    //3-3 原型中a为 get 和 set
+        anobj = {
+            get a(){ 
+                return this._a
+            } , 
+            set a(v){
+                this._a  = this._a + v;
+            } ,
+            _a:2
+         }
+        obj = Object.create(anobj);
+        obj.a = 2;
+        console.log('自身新建属性a:' + obj.hasOwnProperty('a') +';自身值为：' + obj.a +'原型值为：' + anobj.a);
+        console.log(obj.hasOwnProperty('a')); //true 
+
+    //3-4 用defineproperty设置自身的a
+          anobj = {a:2}
+          Object.defineProperty(anobj,'a',{writable:false})
+          obj = Object.create(anobj);
+          Object.defineProperty(obj,'a',{value:3})       
+          console.log('自身新建属性a:' + obj.hasOwnProperty('a') +';自身值为：' + obj.a +'原型值为：' + anobj.a);
+
+
+
+
+
+
+//对象属性读取，自身有属性a,读取自身;否则原型有a,读原型;都没有返回undefined
+
+//对象属性赋值，自身有的属性就是赋值自身;自身没有且原型没有就是自身新建属性；
+//自身没有但是原型有属性
+    //1.原型属性 writable:true 自身新建属性
+    //2.原型属性 writable:false 自身不会新建属性
+    //3.原型属性 get,set 那么会调用原型的set
+    //4.使用defineproperty给自身设置属性，则必会新建属性
+    
+//对象获取属性实际就是 调用 get ,没有就用默认的
+//对象设置属性就是 调用 set ,没有就用默认的 
+例子1:
+    anobj = {
+        get a(){ 
+            return this._a
+        } , 
+        set a(v){
+            this.dd  = this._a + v;
+        } ,
+        _a:1
+        }
+    obj = Object.create(anobj);
+    obj.a = 2;
+
+    // 1. obj 有属性 a 或则 set,get ,那么对obj.a 的赋值或取值 都是对对象obj属性的操作
+    // 2. 如上 obj没有任何形式的属性a,而原型上有属性a
+        2-1. 原型上 a,则obj.a 会使用默认的set,get特性,那么默认会在obj上创建属性a
+        2-2. 原型上 a的writable= false,那么默认set就会不可用,则obj上不会创建属性a
+        2-3. 原型上 a有get,set属性
+            赋值操作obj.a = 2; 调用原型上的set函数, 实际可以看做 anobj.a.set.call(obj)
+                2-3-1 this._a 执行[[get]],this指向obj,没有_a属性,原型链找到anobj,有属性_a,返回值1
+                2-3-2 this.dd 执行[[set]],在obj和其原型链都没有属性dd,那么会在obj上创建属性dd 
+            查询操作obj.a ; 调用原型上的get函数 anobj.a.get.call(obj)
+                2-3-3 this._a 执行[[get]],this指向obj,没有_a属性,原型链查找到anobj,有属性_a,返回值1
+                2-3-4 设置 obj._a = 3,那么 obj.a 通过执行anobj中的get a,返回obj._a的值，即3
+                2-3-5 anobj 中没有 get a方法,那么返回就是undefined
+
+        
+例子2;
+obj2 = {a:2}
+Object.defineProperty(obj2,'a',{wirtable:false})
+obj1 = Object.create(obj2);
+obj = Object.create(obj1);
+obj.a = 3 
+console.log(obj)  //{a: 3}
+
+
+obj2 = {a:2}
+obj1 = Object.create(obj2);
+Object.defineProperty(obj1,'a',{wirtable:false})
+obj = Object.create(obj1);
+obj.a = 3 
+console.log(obj) //{}
+
+//就近原则
+
+//作用域进行的是左右查询
+//原型链进行的是[[get]][[set]]操作

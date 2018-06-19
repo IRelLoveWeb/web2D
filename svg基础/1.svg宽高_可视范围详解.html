@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        画布200*200  可视范围 100*100
+        rect在可视范围外,所以无法显示 
+    -->
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+        width='200' height='200' viewBox='0 0 100 100'>
+       <rect x='100' y='100' width='50' height='50' />    
+   </svg>
+    <br />
+
+   <!-- 
+        画布200*200  可视范围 100*100
+        rect在可视范围内,可以显示;
+        但是将100*100内的范围填充到200*200,rect放大了4倍 
+    -->
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+         width='200' height='200' viewBox='0 0 100 100'>
+        <rect x='0' y='0' width='50' height='50' fill='red'/>    
+    </svg>
+    <br />
+
+    <!-- 
+        画布200*200  可视范围 200*200
+        rect在可视范围内,且正常显示
+    -->
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+         width='200' height='200' viewBox='0 0 200 200'>
+        <rect x='0' y='0' width='50' height='50' fill='red'/>    
+    </svg>
+    <br />
+
+
+    <!-- 
+        画布200*200  可视范围 200*200
+        rect在可视范围内,但是只有25*25的范围在可以范围内,且在可视范围的右下角,则平铺到200*200视图中,扩大4倍,且位于右下角
+    -->
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" 
+         width='200' height='200' viewBox='0 0 100 100'>
+        <rect x='75' y='75' width='50' height='50' fill='red'/>    
+    </svg>
+</body>
+</html>
+<!-- 
+    PS:svg的width和height是该元素的宽高;
+       viewBox是可视的范围,
+       绘图必须在viewBox范围内,然后在方大或缩小平铺到 svg范围内
+ -->

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单的饼图</title>
+    <style>
+       div,svg{
+            width:10rem;
+            height:10rem;
+            margin:1rem auto;
+            text-align: center;
+            line-height: 10rem;
+            font-size:2rem;
+            display: block;
+        }
+
+        .demo{
+            border-radius: 5rem;
+            background: yellowgreen;
+            background-image: linear-gradient(to right,transparent 50%,#655 0);
+            /* overflow: hidden; */
+        }
+        
+        /* 
+            伪元素 背景为#655 旋转.1turn 是背景yellowgreen 旋转.6turn 正确显示的样式
+         */
+        @keyframes spin{
+            to {transform: rotate(.5turn);}
+        }
+
+        @keyframes bg{
+            50% {background: #655;}
+        }
+
+        .demo::before{
+            content: '';
+            display: block;
+            background: yellowgreen;
+            height: 100%;
+            margin-left: 50%;
+            border-radius: 0 100% 100% 0 / 50%;
+            transform-origin : left;
+            animation: spin 3s linear infinite,
+                        bg 6s step-end infinite;/* spin一次循环结束后,bg走到一半改变背景色; spin再走一次,bg走完一次背景色还原*/
+        }
+
+        /* 
+            animation-timing-function 规定动画的速度曲线【作用于每两个关键帧之间，而不是整个动画】
+                ease linear 会在关键帧间补间,使的动画效果连贯
+                steps,step-end,step-start 在关键帧中跳跃,一帧一帧播放
+
+            steps(num,[end | start]) 
+                两个关键帧中是一个事件间隔,num 就是表示将一个事件间隔平均分成num个时间间隔,即插入num-1帧;
+                例如 num=2,50%-100% => 50% - 75% - 100%;
+
+                end | start 2个参数都会选择性的跳过前后部分，start跳过0%，end跳过100%
+
+            blog:http://blog.csdn.net/christine95/article/details/50471101
+
+         */
+        @keyframes bg2 {
+            /* 0% {background: red;} */
+            50% {background: yellow;}
+            100% {background: blue;}
+        }
+
+        .demo2{
+            background: red;
+            animation: bg2 3s steps(1,end) infinite;
+        }
+        
+
+
+
+        /* 
+            http://dabblet.com/gist/e324a92d31b7f67da5c0
+
+            animation-delay:num;
+            num 正数  延迟几秒执行动画
+            num 负数  在上一次循环中指定|num|秒数开始动画
+
+            子元素继承父元素的属性 inherit
+        */
+        .pie{
+            border-radius: 5rem;
+            background: yellowgreen;
+            background-image: linear-gradient(to right,transparent 50%,#655 0);
+        }
+
+        .pie::before{
+            content: '';
+            display: block;
+            background: yellowgreen;
+            height: 100%;
+            margin-left: 50%;
+            border-radius: 0 100% 100% 0 / 50%;
+            transform-origin : left;
+            animation: spin 50s linear infinite,
+                        bg 100s step-end infinite;
+            animation-delay: inherit;
+            animation-play-state: paused;
+        }
+        
+        .demo3{
+            animation-delay: -20s;
+        }
+        
+        .demo4{
+            animation-delay: -60s;
+        }
+
+
+        /* 
+            使文字居中
+        */
+        
+        .pie2{
+            position: relative;
+            border-radius: 5rem;
+            background: yellowgreen;
+            background-image: linear-gradient(to right,transparent 50%,#655 0);
+            animation-delay:-20s;
+            text-align: center;
+        }
+        
+        .pie2::before{
+            content: '';
+            position: absolute;
+            top:0;left:50%;
+            width:50%;height: 100%;
+            background-color: inherit;
+            animation: spin 50s linear infinite,
+                        bg 100s step-end infinite;
+            border-radius: 0 100% 100% 0 / 50%;
+            transform-origin: left;
+            animation-play-state: paused;
+            animation-delay: inherit;
+        }
+        
+
+        /* 
+            SVG解决方案
+        */
+        #svg1 circle{
+            fill:yellowgreen;
+            stroke: #655;
+            stroke-width: 30;
+            stroke-dasharray: 20 10;
+        }
+        
+        #svg2{
+            transform: rotate(-90deg);
+            background: yellowgreen;
+            border-radius: 50%;
+        }
+
+        #svg2 circle{
+            fill:yellowgreen;
+            stroke: #655;
+            stroke-width: 50;
+            /* 显示 隐藏  循环,将隐藏设置为2*PI*r,那么在可见部位 显示和隐藏只出现一次了
+                将周长设置为100,那么r约等于16 ,方便设置百分比
+                 2*Math.PI * 25 = 158 【r=25】 */
+            stroke-dasharray: 60 158;
+        }
+        
+        /* 
+            svg标签也是html元素，即可以使用css设置样式;
+            而svg中的标签circle不能用css设置样式
+
+            circle的stroke-width 是圆内和圆外平分的,所以r=sw/2,那么整个圆会被stroke覆盖
+         */
+        #svg3{
+            transform: rotate(-90deg);
+            background: yellowgreen;
+            border-radius: 50%;
+        }
+
+        #c1{
+            stroke-width: 32;
+            fill:transparent;
+            stroke: #655;
+            stroke-dasharray: 36 100;
+        }
+
+        #c2{
+            stroke-width: 32;
+            fill:transparent;
+            stroke: red;
+            stroke-dasharray: 20 100;
+            stroke-dashoffset: -36;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo"></div>
+    <div class="demo2">2</div>
+    <div class="demo3 pie"></div>
+    <div class="demo4 pie"></div>
+    <div class="demo5 pie2">5</div>
+    <svg viewBox='0,0,100,100' id='svg1'>
+        <circle cx='50' cy='50' r='30'/>
+    </svg>
+
+    <svg viewBox='0,0,100,100' id='svg2'>
+        <circle cx='50' cy='50' r='25'/>
+    </svg>
+
+    <svg viewBox='0,0,32,32' id='svg3'>
+        <circle cx='16' cy='16' r='16' id='c2'/>
+        <circle cx='16' cy='16' r='16' id='c1'/>
+    </svg>
+</body>
+</html>

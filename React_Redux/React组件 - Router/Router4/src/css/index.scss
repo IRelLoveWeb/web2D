@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,body{
+    height: 100%;
+    font-size: 1rem;
+}
+
+#root{
+    height: 100%;
+
+    &>div{
+        height: 100%;
+    }
+    
+}
+
+.side{
+    width:15%;
+    max-width: 150px;
+    height: 100%;
+    float: left;
+    border-right: 1px solid black;
+
+    .side-split{
+        border-bottom: 1px solid red;
+    }
+
+    & summary{
+        margin-left: .5rem;
+        cursor: pointer;
+    }
+
+    & a{
+        display: block;
+        text-align: center;
+        text-decoration:none;
+    }
+}
+
+/* 占位符 */
+%bg{
+    background: #eee;
+}
+
+.content{
+    float: left;
+    height: 100%;
+    width: calc(85% - 1px);
+    /* 
+        继承占位符%bg的样式;
+        用.content替换所有的%bg标识符
+        如果是id或class,就是将样式拷贝一片,再将id或class替换为.content
+        注意是完全所有的都替换
+    */
+    @extend %bg;
+}

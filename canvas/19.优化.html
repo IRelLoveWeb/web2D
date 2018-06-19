@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #stage {
+            width: 480px;
+            height: 320px;
+            position: relative;
+            border: 2px solid black;
+            background: url(../imgs/s11.jpg) no-repeat;
+        }
+        canvas { position: absolute; }
+        #ui-layer { z-index: 3 }
+        #game-layer { z-index: 2 }
+        #background-layer { z-index: 1 }
+    </style>
+</head>
+<body>
+    <div id="stage">
+    <canvas id="ui-layer" width="480" height="320"></canvas>
+    <canvas id="game-layer" width="480" height="320"></canvas>
+    <canvas id="background-layer" width="480" height="320"></canvas>
+    </div>
+    
+    <script>
+        var canvas = document.getElementById('ui-layer');
+        var ctx1 = canvas.getContext('2d');
+
+    </script>
+
+    <script>
+        var canvas = document.getElementById('game-layer');
+        var ctx2 = canvas.getContext('2d')
+    </script>
+
+    <script>
+        var canvas = document.getElementById('background-layer');
+        var ctx3 = canvas.getContext('2d');
+       /* var img = new Image();
+        img.src = "../imgs/s11.jpg";
+        img.onload = function(){
+            ctx3.drawImage(img,0,0)
+        }*/
+    </script>
+</body>
+</html>

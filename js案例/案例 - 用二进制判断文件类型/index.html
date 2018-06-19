@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type='file' value='选择文件' id='file'/>
+    <button id='loadFile'>加载文件</button>
+    <div id='tips'></div>
+    <script>
+        var tips = document.getElementById('tips');
+
+        //判断文件类型
+        document.getElementById('loadFile').onclick = function(){
+            var file = document.getElementById('file').files[0];
+            if(file){
+                var fileReader = new FileReader();
+
+                fileReader.onload = function(){
+                    //获取文件加载完成的前4个无符号字节(32bite)
+                    var fileType = new DataView(fileReader.result).getUint32(0, false);
+
+                    if(fileType == "0x89504E47"){
+                        console.log('该文件是png');
+                            tips.innerHTML = '该文件是png';
+                    }
+                }
+
+                // var blob = new Blob([file]);
+                // var magicBlob = blob.slice(0,4);
+                fileReader.readAsArrayBuffer(file);
+            }
+        }
+
+        //file对象继承blob对象
+        //文件头 http://blog.csdn.net/cosmoslife/article/details/43114323
+
+
+        var x = 150;
+        x.toString(16);//'96' 将10进制数150转为16进制数96
+        parseInt('96',16);//将16进制数转为10进制数(第二参数默认是10,即将10进制字符串装维数字)
+    </script>
+</body>
+</html>

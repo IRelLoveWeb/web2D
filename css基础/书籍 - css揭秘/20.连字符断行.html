@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>连字符断行</title>
+    <style>
+       div{
+            width:90px;
+            border:1px solid red;
+            margin-top: 3rem;
+        }
+
+        .demo2{
+            word-break: break-all;
+        }
+
+        .demo3{
+            word-wrap: break-word;
+        }
+
+        .demo4{
+            word-wrap: break-word;
+            word-spacing: -5px;
+            letter-spacing: 3px;
+            -webkit-hyphens: auto;
+            hyphens:auto;
+            white-space: pre;
+        }
+
+        /* 
+            浏览器默认方式:
+                一段文本中,某一行最后最后一个单词长度超过区域范围,该单词自动到下一行
+                一个单词的长度超过区域范围,该单词无任何操作
+
+            word-break:bread-all
+                在一段文本中,某一行最后一个单词长度超过区域范围,该单词被分开,超过的部分换到下一行
+                一个单词的长度超过区域范围,该单词被分割换行
+
+            word-wrap:break-word
+                只有一个单词的长度超过区域范围,该单词被分割换行【在长单词或 URL 地址内部进行换行】
+
+            word-spacing/letter-spacing 单词空格/字空格
+
+            hyphens:auto; 连字符 【一般不支持】
+         */
+        
+
+        /* 
+            文本省略号
+                1. text-overflow 生效必须有 width,overflow:hidden,white-space:nowrap
+                2. text-overflow 有【clip,ellipse】
+                3. text-overfow 是设置overflow:hidden,且将超过块容器的内容变为(...);
+                    从5,6可以看出,5未设置white-space:nowrap,所以只有d字符串溢出块,将其变为...
+
+
+            white-space 控制文本空白和换行
+                pre :和<pre>标签一样,保持文本样式,不合并空白符,不安默认方式换行
+                nowrap ： 强制文本不能换行,合并空白行 直到文本结束或遇到<br />
+         */
+         .demo5{
+             overflow: hidden;
+             text-overflow:ellipsis;
+         }
+
+         .demo6{
+             white-space:nowrap; 
+             overflow: hidden;
+             text-overflow: ellipsis;
+         }
+
+         .demo6:hover{
+             overflow: visible;
+             text-overflow:inherit;
+         }
+    </style>
+</head>
+<body>
+    <div class="demo1">
+        1This is issue in css word break which is really puzzling!
+        ddddddddddddddddddddddddddddddddd
+    </div>
+    <div class="demo2">
+        2This is issue in css word break which is really puzzling!
+        ddddddddddddddddddddddddddddddddd
+    </div>
+    <div class="demo3">
+        3This is issue in css word break which is really puzzling!
+        ddddddddddddddddddddddddddddddddd
+    </div>
+    <div class="demo4">
+        4This is issue       in css word break which is really puzzling!
+        ddddddddddddddddddddddddddddddddd
+    </div>
+    <div class="demo5">
+            5This is issue in css word break which is really puzzling!ddddddddddddddddddddddddddddddddd
+    </div>
+
+    <div class="demo6">
+            6This is issue in css word break which is really puzzling! ddddddddddddddddddddddddddddddddd
+    </div>
+
+    <!-- https://blog.brain1981.com/706.html -->
+</body>
+</html>
