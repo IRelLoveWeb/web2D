@@ -1,0 +1,39 @@
+#container{
+    position: relative;
+    height: 260px;
+    width: 100%;
+    top:200px;
+    display: flex;
+}
+
+.bg:nth-child(1){
+    background: url(1.jpg) no-repeat center 0;
+}
+.bg:nth-child(2){
+    background: url(2.jpg) no-repeat center 0;
+}
+.bg:nth-child(3){
+    background: url(3.jpg) no-repeat center 0;
+}
+.bg:nth-child(4){
+    background: url(4.jpg) no-repeat center 0;
+}
+.bg:nth-child(5){
+    background: url(5.jpg) no-repeat center 0;
+}
+.bg:nth-child(6){
+    background: url(6.jpg) no-repeat center 0;
+}
+.bg:nth-child(7){
+    background: url(7.jpg) no-repeat center 0;
+}
+
+.bg{
+    flex: 1;
+    transition: all .5s;
+    display: inline-block;
+}
+
+.bg:hover{
+    flex-basis: 240px;
+}
