@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        section{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <style>
+            .float>img{
+                float: left;
+            }
+            /* 清楚浮动最佳方法 */
+            .clear{ 
+                zoom : 1
+            }
+            .clear::after{
+                display: block;
+                content: '';
+                clear: both;
+                line-height: 0;
+                visibility: hidden;
+            }
+            /* 清楚浮动方法2 */
+            /* 
+                .clear{
+                    zoom:1; 
+                    overflow:hidden;
+                }
+            */
+        </style>
+        <article class='float clear'>
+            qweqweqweqweqweqeqweqdasdada
+            <img src='./1.jpg'/>
+            qweqweqweqweqweqeqweqdasdada
+        </article>
+    </section>
+
+
+    <section>
+        <style>
+            .float2>div{
+                height: 100px;
+            }
+            .float2 .left{
+                width: 300px;
+                float: left;
+                background: red;
+            }
+            .float2 .center{
+                background: green;
+            }
+            .float2 .right{
+                width: 300px;
+                background: yellow;
+            }
+        </style>
+        <article class="float2">
+            <img src="./1.jpg" class="left" />
+            <div class="center">
+                <p>123124214124142</p>
+                <p>123124214124142</p>
+                <p>123124214124142</p>
+                <p>123124214124142</p>
+                <p>123124214124142</p>
+                <p>123124214124142</p>
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+
+
+    <section>
+        <style>
+            .float3 div{
+                min-height: 100px;
+            }
+            .float3 .left{
+                width: 300px;
+                background: red;
+                float: left;
+            }
+            .float3 .center{
+                background: yellow;
+            }
+            .float3 .right{
+                width: 300px;
+                background: green;
+                float: right;
+            }
+        </style>
+        <article class="float3"> 
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                    <p>123124214124142</p>
+                    <p>123124214124142</p>
+                    <p>123124214124142</p>
+                    <p>123124214124142</p>
+                    <p>123124214124142</p>
+                    <p>123124214124142</p>
+            </div>
+        </article>
+    </section>
+
+    <section>
+        <style>
+            .float4 div{
+                height: 100px;
+            }
+            .float4 .left{
+                width: 300px;
+                background: red;
+                float: left;
+            }
+            .float4 .center{
+                background: yellow;
+            }
+        </style>
+        <article class="float4">
+            <div class="left"></div>
+            <div class="center"></div>
+            <label>label</label>
+        </article>
+    </section>
+</body>
+</html>
