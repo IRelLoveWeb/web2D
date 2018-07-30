@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .item1{
+            background: rebeccapurple;
+        }
+        .item2{
+            background: yellow;
+        }
+        .item3{
+            background: yellowgreen;
+        }
+        .item4{
+            background: gray;
+        }
+        .item5{
+            background: gainsboro;
+        }
+        .item6{
+            background: greenyellow;
+        }
+        .item7{
+            background: rgb(225, 147, 147);
+        }
+        .item8{
+            background: black;
+        }
+        .item9{
+            background: pink;
+        }
+
+        section{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <style>
+            .grid-1{
+                display: grid;
+                grid-template-columns: 150px 20px 150px 20px 150px;
+                grid-template-rows: auto 20px auto 20px auto;
+            }
+        </style>
+        <article class="grid-1">
+            <div class="item1">1</div>
+            <div class="item2">2</div>
+            <div class="item3">3</div>
+            <div class="item4">4</div>
+            <div class="item5">5</div>
+            <div class="item6">6</div>
+            <div class="item7">7</div>
+            <div class="item8">8</div>
+            <div class="item9">9</div>
+        </article>
+    </section>
+
+    <!-- 自己控制间隔 -->
+    <section>
+            <style>
+                .grid-2{
+                    display: grid;
+                    grid-template-columns: 150px 20px 150px 20px 150px;
+                    grid-template-rows: auto 20px auto 20px auto;
+                }
+
+                .grid-2 .item1{
+                    grid-column: 5;
+                    grid-row: 3;
+                }
+                .grid-2 .item2{
+                    grid-column: 3;
+                    grid-row: 1;
+                }
+                .grid-2 .item3{
+                    grid-column: 5;
+                    grid-row: 1;
+                }
+                .grid-2 .item4{
+                    grid-column: 1;
+                    grid-row: 3;
+                }
+                .grid-2 .item5{
+                    grid-column: 3;
+                    grid-row: 3;
+                }
+                .grid-2 .item6{
+                    grid-column: 1;
+                    grid-row: 1;
+                }
+                .grid-2 .item7{
+                    grid-column: 1;
+                    grid-row: 5;
+                }
+                .grid-2 .item8{
+                    grid-column: 3;
+                    grid-row: 5;
+                }
+                .grid-2 .item9{
+                    grid-column: 5;
+                    grid-row: 5;
+                }
+            </style>
+            <article class="grid-2">
+                <div class="item1">1</div>
+                <div class="item2">2</div>
+                <div class="item3">3</div>
+                <div class="item4">4</div>
+                <div class="item5">5</div>
+                <div class="item6">6hhh</div>
+                <div class="item7">7</div>
+                <div class="item8">8</div>
+                <div class="item9">9</div>
+            </article>
+        </section>
+
+        <!-- 属性控制间隔 -->
+        <section>
+            <style>
+                .grid-3{
+                    display: grid;
+                    grid-template-columns: 33.33% 33.33% 33.33%;
+                    grid-template-rows: auto auto auto;
+                    grid-column-gap: 10px;
+                    grid-row-gap: 10px;
+                }
+            </style>
+            <article class="grid-3">
+                <div class="item1">1</div>
+                <div class="item2">2</div>
+                <div class="item3">3</div>
+                <div class="item4">4</div>
+                <div class="item5">5</div>
+                <div class="item6">6</div>
+                <div class="item7">7</div>
+                <div class="item8">8</div>
+                <div class="item9">9</div>
+            </article>
+        </section>
+
+        <section>
+            <style>
+                .grid-4{
+                    display: grid;
+                    grid-template-columns: repeat(3,33.33%);
+                    grid-gap: 10px;
+                }
+            </style>
+            <article class="grid-4">
+                <div class="item1">1</div>
+                <div class="item2">2</div>
+                <div class="item3">3</div>
+                <div class="item4">4</div>
+                <div class="item5">5</div>
+                <div class="item6">6</div>
+                <div class="item7">7</div>
+                <div class="item8">8</div>
+                <div class="item9">9</div>
+            </article>
+        </section>
+
+        <section>
+            <style>
+                .grid-5 .header{
+                    grid-area: header;
+                }
+                .grid-5 .main{
+                    grid-area: main;
+                }
+                .grid-5 .left{
+                    grid-area: left;
+                }
+                .grid-5 .right{
+                    grid-area: right;
+                }
+                .grid-5 .footer{
+                    grid-area: footer;
+                }
+                .grid-5{
+                    display: grid;
+                    grid-template-columns: 150px 1fr 150px;
+                    grid-template-rows: 50px 1fr 30px;
+                    grid-template-areas: "header header header" "left main right" "footer footer footer";
+                    /* min-height: 100vh; */
+                    grid
+                }
+            </style>
+            <article class="grid-5">
+                <header class="header">Tile</header>
+                <main class="main">main</main>
+                <aside class="left">left</aside>
+                <aside class="right">right</aside>
+                <footer class="footer">footer</footer>
+            </article>
+        </section>
+
+
+
+        <!-- 
+            父元素中使用的属性 都是带template的
+            子元素中使用的属性 不带template
+         -->
+</body>
+</html>

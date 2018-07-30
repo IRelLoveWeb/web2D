@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两栏布局</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            min-height: 100px;
+        }
+
+        section{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- float 布局 -->
+    <section>
+        <style>
+            .two1{
+                overflow: hidden;
+                zoom: 1;
+            }
+            .two1 .left{
+                float: left;
+                width: 200px;
+                background: red;
+            }
+            .two1 .right{
+                background: yellow;
+            }
+        </style>
+        <article class="two1">
+            <div class='left'></div>
+            <div class='right'></div>
+        </article>
+    </section>
+
+    <!-- position 布局 -->
+    <section>
+        <style>
+            .two2 .left{
+                position: absolute;
+                width: 200px;
+                background: red;
+            }
+            .two2 .right{
+                background: yellow;
+                margin-left: 200px;
+            }
+        </style>
+        <article class="two2">
+            <div class='left'></div>
+            <div class='right'></div>
+        </article>
+    </section>
+
+    <!-- flex 布局 -->
+    <section>
+        <style>
+            .two3{
+                display: flex;
+            }
+            .two3 .left{
+                flex-basis: 200px;
+                background: rebeccapurple;
+            }
+            .two3 .right{
+                background: yellow;
+                flex: 1;
+            }
+        </style>
+        <article class="two3">
+            <div class='left'></div>
+            <div class='right'></div>
+        </article>
+    </section>
+
+    <!-- display:table -->
+    <section>
+        <style>
+            .two4{
+                display: table;
+            }
+            .two4 .left{
+                background: rebeccapurple;
+                width: 200px;
+            }
+            .two4 .right{
+                background: yellow;
+                display: table-cell;
+                width: 100%;
+            }
+        </style>
+        <article class="two4">
+            <div class='left'></div>
+            <div class='right'></div>
+        </article>
+    </section>
+
+    <section>
+        <style>
+            .two5{
+                display: grid;
+                /* grid-template-columns:200px 1fr; */
+                grid-template-columns: 200px auto;
+            }
+            .two5 .left{
+                background: rebeccapurple;
+            }
+            .two5 .right{
+                background: yellow;
+            }
+        </style>
+        <article class="two5">
+            <div class='left'></div>
+            <div class='right'></div>
+        </article>
+    </section>
+</body>
+</html>
