@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='btn'>hehe</div>
+    <div id='btn2'>hehe2</div>
+    <script>
+        /* Event创建事件 */
+        var myEvent = new Event('react')
+        var btn = document.getElementById('btn');
+        btn.addEventListener('react',(e)=>{
+            console.log('own event react!')
+        },false)
+        btn.dispatchEvent(myEvent)
+
+        /* CustomEvent ,添加额外参数必须是detail*/
+        var customEvent = new CustomEvent('creact',{detail:{x:1}})
+        var btn2 = document.getElementById('btn2')
+        btn2.addEventListener('creact',(e)=>{
+            console.log('own event creact!')
+            console.log(e.detail.x)
+        },false)
+        btn2.dispatchEvent(customEvent)
+        
+
+        /* 不推荐的用法 */
+        var evt = document.createEvent('Event');
+        evt.initEvent('dreact',true,false);
+        document.addEventListener('dreact',()=>{
+            console.log('own event dreact!')
+        },false)
+        document.dispatchEvent(evt)
+    </script>
+</body>
+</html>
