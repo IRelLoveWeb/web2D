@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        section{
+            margin-top: 10px;
+        }
+        div:first-child{
+            background: rebeccapurple;
+        }
+        div:last-child{
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <style>
+            .float1{
+                background: rgba(255, 100, 34, 0.1);
+                /* 形成bfc,清除浮动 */
+                overflow: hidden; 
+                /* overflow: auto; */
+                /* overflow: scroll; */
+                /* 
+                    display: table-cell;
+                    width: 9999px;
+                */
+                /* float: left; 虽然清除了浮动,但是破坏了盒模型 */
+                /* 。。。 */
+            }
+            .float1 .left{
+                float: left;
+                width: 100px;
+                height: 100px;
+            }
+
+        </style>
+        <article class="float1">
+            <div class="left"></div>
+            <div class="right">
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+            </div>
+        </article>
+    </section>
+
+
+    <section>
+        <!-- right内容过多,形成文字环绕,要实现元素隔离 -->
+        <style>
+            .float2{
+                overflow: hidden; /* bfc,清楚浮动 */
+                background: rgba(255, 100, 34, 0.1);
+            }
+
+            .float2 .left{
+                float: left;
+                width: 100px;
+                height: 100px;
+            }
+            .float2 .right{
+                overflow: hidden; /* bfc ,bfc元素不和float元素重叠*/
+            }
+        </style>
+        <article class="float2">
+            <div class="left"></div>
+            <div class="right">
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+                小猫,小狗,小鸡,小鸭,
+            </div>
+        </article>
+    </section>
+</body>
+</html>

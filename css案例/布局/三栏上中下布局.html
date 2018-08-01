@@ -36,8 +36,11 @@
     <!-- 自然布局 -->
     <section>
         <style>
+            .three1{
+                height: 100%;
+            }
             .three1 main{
-                height: calc(50vh - 100px);
+                height: calc(100% - 100px);
             }
         </style>
         <article class="three1">
@@ -79,6 +82,7 @@
         </article>
     </section>
 
+    <!-- flex -->
     <section>
         <style>
             .three3{
@@ -91,6 +95,22 @@
             }
         </style>
         <article class="three3">
+            <header>header</header>
+            <main>main</main>
+            <footer>footer</footer>
+        </article>
+    </section>
+
+    <!-- grid -->
+    <section>
+        <style>
+            .three4{
+                display: grid;
+                grid-template-rows: 50px auto 50px;
+                height: 100%;
+            }
+        </style>
+        <article class="three4">
             <header>header</header>
             <main>main</main>
             <footer>footer</footer>

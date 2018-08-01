@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        section{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <style>
+            .mar1{
+                background: yellow;
+                overflow: hidden;/* BFC */
+            }
+            .mar1 .inner{
+                height: 100px;
+                margin-top: 10px;
+                background: rebeccapurple;
+            }
+        </style>
+        <article class="mar1">
+            <div class="inner"></div>
+        </article>
+    </section>
+
+    <section>
+        <!-- 上下元素margin重叠取最大值 -->
+        <style>
+            .mar2 p{
+                height: 30px;
+                margin: 5px 0 25px; 
+            }
+            p:first-child{
+                background: yellow
+            }
+            p:last-child{
+                background: palegreen;
+            }
+            .in-bfc{
+                overflow: hidden;
+            }
+        </style>
+        <article class="mar2">
+            <p>1</p>
+            <div class="in-bfc">
+                <p>2</p>
+            </div>
+            <p>3</p>
+        </article>
+    </section>
+
+    <section>
+        <!-- 空元素取margin值大的 -->
+        <style>
+            .mar3{
+                background: yellow;
+            }
+            .mar3 div:first-child{
+                background: red;
+                margin: 10px 0 20px;
+            }
+        </style>
+        <article class="mar3">
+            <div></div>
+        </article>
+    </section>
+
+    <section>
+        <!-- top 父子margin合并, 空元素margin合并 ,相邻元素margin合并-->
+        <style>
+            .mar4{
+                background: rgb(60, 60, 45);
+                overflow: hidden; /* bfc */
+            }
+            .mar4 p {
+                margin: 5px 0 ;
+            }
+        </style>
+        <article class="mar4">
+            <p style="margin-top: 40px">13</p>
+            <p></p>
+            <p></p>
+            <p>23</p>
+        </article>
+    </section>
+</body>
+</html>
