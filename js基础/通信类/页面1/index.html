@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通信类测试页面跨域页面一</title>
+    <script>
+        
+        window.onload = function(){
+            /* Hash页面跨域 */
+            var btn = document.getElementById('changehash')
+            var iframe = document.getElementById('iframe')
+            btn.onclick = function(){
+                var hash = Math.ceil(Math.random()*20) + '-hash'
+                var src = iframe.src
+                iframe.src = src.indexOf('#') > -1 ? src.replace(/(.+#)(.+)/,'$1'+hash) : src + '#' + hash
+            }
+
+            //postMessage页面跨域
+                //iframe
+                var btn2 = document.getElementById('postInfo')
+                btn2.onclick = function(){
+                    var msg = Math.ceil(Math.random()*20) + '-postmessage';
+                    iframe.contentWindow.postMessage(msg,'http://localhost:5679/index.html')
+                } 
+                //window.open
+                var btn3 = document.getElementById('open')
+                var win = window.open('http://localhost:5679/index.html')
+                btn3.onclick = function(){
+                var msg = Math.ceil(Math.random()*20) + '-postmessage';
+                win.postMessage(msg,'http://localhost:5679/index.html')
+                }
+        }
+    </script>
+</head>
+<body>
+    <h2>测试页面一</h2>
+
+    <hr>
+    <h3>postMessage页面跨域</h3>
+    <button id='postInfo'>改变传入postmessage中的值</button>
+    <button id='open'>打开窗口,用postmessage传值</button>
+
+    <hr>
+    <h3>Hash页面跨域</h3>
+    <button id='changehash'>改变hash</button>
+
+    <iframe src='http://localhost:5679/index.html' id='iframe' style='width:500px;height: 400px;'/>
+</body>
+</html>

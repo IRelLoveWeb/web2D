@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通信类测试页面跨域页面二</title>
+</head>
+<body>
+    <h2>测试页面二</h2>
+
+    <hr>
+    <h3>Hash改变</h3>
+    <div id='showTip'></div>
+    <script>
+        /* Hash页面跨域 */
+        window.onhashchange = function(){
+            document.getElementById('showTip').innerHTML = window.location.hash
+        }
+        
+        /* postMessage页面跨域 */
+        window.onmessage = function(e){
+            console.log(event.origin);
+            console.log(event.source);
+            console.log(event.data);
+            document.getElementById('postInfo').innerHTML = event.data
+        }
+
+    </script>
+
+    <hr>
+    <h3>postMessage改变</h3>
+    <div id='postInfo'></div>
+    <script>
+        /*  postMessage页面跨域 */
+    </script>
+</body>
+</html>
