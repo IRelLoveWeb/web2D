@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <style>
+            .pos1 span{
+                width: 200px;
+                background: red;
+            }
+            
+            .pos1 .s1{
+                display: inline-block;
+                background: green;
+            }
+            .pos1 .s2{
+                float: left;
+                background: blue;
+            }
+            .pos1 .s3{
+                position: absolute;
+                background: yellow;
+            }
+        </style>
+        <article class="pos1">
+            <span>Pos</span>
+            <span class="s1">Pos inline-block</span>
+            <span class="s2">Pos float</span>
+            <span class="s3">Pos absolute</span>
+        </article>
+    </section>
+
+    <section>
+        <article>
+            <div>
+                <img src='./2.jpg' style="position: absolute;"/>
+                <p>123123131</p>
+            </div>
+        </article>
+    </section>
+</body>
+</html>
