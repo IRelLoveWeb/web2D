@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 测试异步任务进入任务队列时间和异步任务执行时间 */
+        for(var i=0;i<4;i++){
+            setTimeout(function(){
+                console.log(i)
+            },i*1000)
+        }
+        console.log('for end.....')
+
+
+        p = new Promise(function(resolve,reject){
+            console.log('....inner promise....')
+            
+            resolve()
+        })
+
+        p.then(v=>{
+            console.log('....promise after resolve....')
+        })
+
+        console.log('....outer promise....')
+    </script>
+</body>
+</html>
