@@ -4,50 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>定位</title>
     <style>
         *{
-            padding: 0;
             margin: 0;
+            padding: 0;
+        }
+        .relative{
+            width:200px;
+            height: 200px;
+            position: relative;
+            left: 10px;
+            top:10px;
+            background: yellow;
+        }
+
+        .fixed{
+            width: 200px;
+            height: 200px;
+            background: rebeccapurple;
+            position: fixed;
+            top:0;
+            left: 50%;
+        }
+        
+        .abs{
+            width: 200px;
+            height: 200px;
+            background: rebeccapurple;
+            position: fixed;
+            top:50%;
+            left: 50%;
+        }
+
+        [class^='absolute']{
+            width: 150px;
+            height: 50px;
+            top:20px;
+            left: 20px;
+            background: pink;
+            position: absolute;
         }
     </style>
 </head>
 <body>
-    <section>
-        <style>
-            .pos1 span{
-                width: 200px;
-                background: red;
-            }
-            
-            .pos1 .s1{
-                display: inline-block;
-                background: green;
-            }
-            .pos1 .s2{
-                float: left;
-                background: blue;
-            }
-            .pos1 .s3{
-                position: absolute;
-                background: yellow;
-            }
-        </style>
-        <article class="pos1">
-            <span>Pos</span>
-            <span class="s1">Pos inline-block</span>
-            <span class="s2">Pos float</span>
-            <span class="s3">Pos absolute</span>
-        </article>
-    </section>
+    <div style="background: red;height: 200px;width: 200px;">
+        before relative
+    </div>
+    <div class='relative'>
+            relative
+        <div class="absolute1">absolute1-relative</div>
+    </div>
+    <div style="background: green;height: 200px;width: 200px;">
+        after relative
+    </div>
 
-    <section>
-        <article>
-            <div>
-                <img src='./2.jpg' style="position: absolute;"/>
-                <p>123123131</p>
-            </div>
-        </article>
-    </section>
-</body>
+    <div class="absolute2">absolute1-body</div>
+
+    <div class="fixed">
+        fixed
+        <div class="absolute3">absolute3-fixed</div>
+    </div>
+
+    <div class="abs">
+        absolute
+        <div class="absolute4">absolute-absolute</div>
+    </div>
 </html>
