@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #root{
+            width:200px;
+            height: 200px;
+            background-color: red;
+            transition: width 3s linear;
+        }
+        
+        #root:hover{
+            width: 300px;
+        }
+
+        @keyframes test{
+            0%{
+                background-color: red;
+            }
+            100%{
+                background-color: yellow;
+            }
+        }
+        .animation{
+            animation: test 0.3s linear infinite;
+        }
+        
+
+        @keyframes test2{
+            0%{
+                transform: scale(0.1)
+            }
+            100%{
+                transform: scale(0.8)
+            }
+        }
+        .animation2{
+            animation: test2 0.3s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <div id='root'></div>
+    <button id='btn2'>隐藏</button>
+    <button id='btn1'>添加动画1</button>
+    <button id='btn3'>添加动画2</button>
+    <script>
+        var root = document.getElementById('root')
+        document.getElementById('btn1').onclick = function(){
+            root.classList.add('animation')
+        }
+        document.getElementById('btn2').onclick = function(){
+            root.style.display = 'none'
+        }
+        document.getElementById('btn3').onclick = function(){
+            root.classList.add('animation2')
+        }
+    </script>
+</body>
+</html>
