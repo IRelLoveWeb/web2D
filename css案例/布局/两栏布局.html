@@ -10,128 +10,127 @@
             margin: 0;
             padding: 0;
         }
-
-        div{
+        section{
+            margin-top: 20px;
+        }
+        section>div{
             min-height: 100px;
         }
 
-        section{
-            margin-top: 20px;
+        section>div:first-of-type{
+            background: red;
+        }
+        section>div:last-child{
+            background: yellow;
         }
     </style>
 </head>
 <body>
-    <!-- float 布局 -->
-    <section>
+    <!-- 
+        @float 布局 脱离文档流
+        @ 父元素形成BFC,解决浮动造成的高度塌陷问题
+     -->
+    <section class="demo1">
         <style>
-            .two1{
+            .demo1{
                 overflow: hidden;
-                zoom: 1;
             }
-            .two1 .left{
-                float: left;
-                width: 200px;
-                background: red;
+            .demo1 .left{
+                width:150px;
+                float:left;
             }
-            .two1 .right{
-                background: yellow;
-                overflow: auto; /* right形成BFC */
+
+            .demo1 .center{
+                margin-left: 150px;
             }
         </style>
-        <article class="two1">
-            <div class='left'></div>
-            <div class='right'>
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1,
-                小猫1,小猫1,小猫1
-            </div>
-        </article>
+        <div class="left"></div>
+        <div class="center"></div>
     </section>
 
-    <!-- position 布局 -->
-    <section>
+    <!-- 
+        @定位布局
+        @绝对定位 元素脱离文档流
+        @包裹元素 未设置高度时,其高度值为0;因为子元素都脱离文档流
+     -->
+    <section class="demo2">
         <style>
-            .two2 .left{
+            .demo2 {
+                position: relative;
+                height: 100px;
+            }
+            .demo2 .left{
                 position: absolute;
-                width: 200px;
-                background: red;
+                width:150px;
+                left:0;
+                top:0;
             }
-            .two2 .right{
-                background: yellow;
-                margin-left: 200px;
-            }
-        </style>
-        <article class="two2">
-            <div class='left'></div>
-            <div class='right'></div>
-        </article>
-    </section>
-
-    <!-- flex 布局 -->
-    <section>
-        <style>
-            .two3{
-                display: flex;
-            }
-            .two3 .left{
-                flex-basis: 200px;
-                background: rebeccapurple;
-            }
-            .two3 .right{
-                background: yellow;
-                flex: 1;
+            .demo2 .center{
+                position: absolute;
+                left:150px;
+                right: 0;
+                top:0;
             }
         </style>
-        <article class="two3">
-            <div class='left'></div>
-            <div class='right'></div>
-        </article>
+        <div class="left"></div>
+        <div class="center"></div>
     </section>
 
-    <!-- display:table -->
-    <section>
+    <!-- 
+        @flex 布局
+     -->
+   <section class="demo3">
+       <style>
+           .demo3{
+               display: flex;
+           }
+           .demo3 .left{
+               flex-basis: 150px;
+           }
+           .demo3 .center{
+               flex: 1;
+           }
+       </style>
+        <div class="left"></div>
+        <div class="center"></div>
+    </section>
+
+    <!-- 
+        @table 布局
+        @表格的宽高未设置值时，都是由内容撑开的;一般需要设置默认值
+        @单元格默认自动填充
+     -->
+    <section class="demo4">
         <style>
-            .two4{
+            .demo4{
                 display: table;
-            }
-            .two4 .left{
-                background: rebeccapurple;
-                width: 200px;
-            }
-            .two4 .right{
-                background: yellow;
-                display: table-cell;
                 width: 100%;
             }
+            .demo4 .left{
+                display: table-cell;
+                width:150px;
+            }
+            .demo4 .right{
+                display: table-cell;
+            }
         </style>
-        <article class="two4">
-            <div class='left'></div>
-            <div class='right'></div>
-        </article>
+        <div class="left"></div>
+        <div class="center"></div>
     </section>
 
-    <section>
+    <!-- 
+        @grid 布局
+     -->
+    <section class="demo5">
         <style>
-            .two5{
+            .demo5{
                 display: grid;
-                /* grid-template-columns:200px 1fr; */
-                grid-template-columns: 200px auto;
+                grid-template-columns: 150px auto;
             }
-            .two5 .left{
-                background: rebeccapurple;
-            }
-            .two5 .right{
-                background: yellow;
-            }
+            
         </style>
-        <article class="two5">
-            <div class='left'></div>
-            <div class='right'></div>
-        </article>
+        <div class="left"></div>
+        <div class="center"></div>
     </section>
 </body>
 </html>

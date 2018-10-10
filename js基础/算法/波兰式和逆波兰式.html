@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        2 + 3 * (5 - 1)
+        
+        /*
+            @波兰式 前缀表达式
+            @转化结果 + 2 * 3 - 5 1 
+            @计算方式 从左往右遍历,遇到连续2个数字,开始计算
+        */
+        
+        /*
+            @逆波兰式 后缀表达式
+            @转化结果 2 3 5 1 - * +
+            @计算方式 从左往右遍历,利用栈,数字进栈,遇到字符,进行计算,将计算结果进栈,循环到结束
+        */
+
+        /*
+            @ 参考文献 http://www.cnblogs.com/chenying99/p/3675876.html
+            @ 按照文献规则进行实践
+        */
+        const ReversePolish = {
+            priority:{
+                '+':0,
+                '-':0,
+                '*':1,
+                '/':1
+            },
+            isNum(char){
+                return /[0-9]/.test(char)
+            },
+            isOpt(char){
+                return '+-*/'.indexOf(char) > -1
+            },
+            /*
+            @ 规则
+            @ 从左往右遍历中缀表达式中的每个数字和符号，是数字就输出，成为逆波兰式的一部分 
+              如果是右括号，或者是其他符号并且比当前栈顶符号的优先级低，则栈顶元素依次出栈并输出,然后将当前符号进栈，重复以上操作直到结束
+            @ 括号不写入后缀表达式
+            */
+            mid2end(str){
+                let stack = []
+                let end = ''
+                for(let i=0;i<str.length;i++){
+                    let char = str[i]
+                    if(this.isNum(char)){
+                        end += char
+                    }else if(!stack.length || char === '('){ //栈为空或是左括号,直接写入栈中
+                        stack.push(char)
+                    }else if(char === ')' || this.priority[char] < this.priority[stack[stack.length-1]]){
+                        let opt = stack.pop()
+                        while(opt && opt!== '('){
+                            end += opt
+                            opt = stack.pop()
+                        }
+                        if(char !== ')'){
+                            stack.push(char)
+                        }
+                    }else if(this.isOpt(char)){
+                        stack.push(char)
+                    }
+                }
+
+                if(stack.length){
+                    let opt = stack.pop()
+                    while(opt){
+                        end += opt
+                        opt = stack.pop()
+                    }
+                }
+
+                return end
+            },
+            /*
+            @规则 从左往右依次读取表达式，如果是数字则将该数字压栈，如果是符号，则将之前的两个数字出栈，做计算后，将计算结果压栈，直到表达式读取结束。栈中剩下的一个数就是计算结果。
+            */
+            calculate(str){
+                str = this.mid2end(str)
+                let stack = []
+                for(let i=0;i<str.length;i++){
+                    let char = str[i]
+                    if(this.isNum(char)){
+                        stack.push(char)
+                    }else if(this.isOpt(char)){
+                        let f = stack.pop()
+                        let s = stack.pop()
+                        let t = eval(s + char + f) //计算除和减是有顺序的,s和f位置不能变
+                        stack.push(t)
+                    }
+                }
+
+                return stack[0]
+            }
+        }
+    </script>
+</body>
+</html>

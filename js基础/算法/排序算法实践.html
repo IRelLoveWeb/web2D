@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Sorts = {
+            /*
+            @快速排序
+            */
+            quickSort(arr){
+                if(arr.length<=1) return arr;
+                const mid = Math.floor(arr.length/2)
+                const piovt = arr.splice(mid,1)[0]
+                let left=[],right=[];
+                for(let i=0;i<arr.length;i++){
+                    let num = arr[i]
+                    if(num <= piovt){
+                        left.push(num)
+                    }else{
+                        right.push(num)
+                    }
+                }
+
+                return this.quickSort(left).concat(piovt,this.quickSort(right))
+            },
+            /*
+            @ 查找最小值
+            */
+           selectMinNum(arr){
+               let minIndex = 0;
+               for(let i=1; i<arr.length; i++){
+                   if(arr[i]<arr[minIndex]){ //将小数值的索引赋值给minIndex
+                       minIndex = i
+                   }
+               }
+               return arr[minIndex]
+           },
+           /*
+           @ 选择排序
+           @ 遍历一次数组,每次都求最小值放在数组左侧(每次求最小值都要循环一次)
+           @ i处的值 和 此时右侧最小值得 进行交换 
+           */
+            selectSort(arr){
+                let minIndex,temp,len = arr.length;
+                for(let i=0;i<len;i++){
+                    minIndex = i
+                    for(let j=i+1;j<len;j++){ 
+                        if(arr[j]<arr[minIndex]){
+                            minIndex = j
+                        }
+                    }
+                    // 将当前循环的最小数放在i处,而原本i处的值交换到右侧未排序的数中
+                    // 再进入洗一次循环
+                    temp = arr[i]
+                    arr[i] = arr[minIndex]
+                    arr[minIndex] = temp
+                }
+                return arr;
+            }
+        }
+    </script>
+</body>
+</html>

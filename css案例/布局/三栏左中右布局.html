@@ -5,8 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 容器 */
+        section {
+            margin-top: 20px;
+        }
+        section div{
+            min-height:150px;
+        }
+        
+        /* 浮动布局
+        @ 注意: 1. center块要在最后
+         */
+        .demo1 .left{
+            float: left;
+            width: 300px;
+            background: yellow;
+        }
+        .demo1 .right{
+            float: right;
+            width: 300px;
+            background:  red;
+        }
+        .demo1 .center{
+            background: green;
+            margin: 0 300px;
+        }
+        
+        
+        /* 定位布局
+        @ 注意: 1. 包容块需要设置宽度100%; 2.所有子块都要设置绝对定位 
+        @ 问题: 1. right中设置margin,会导致其下坠
+         */
+        .demo2{
+            position: absolute;
+            width: 100%;
+        }
+        .demo2 .left{
+            position: absolute;
+            width:300px;
+            left:0;
+            background: yellow;
+        }
+        .demo2 .right{
+            position: absolute;
+            width: 300px;
+            right: 0;
+            background: red;
+        }
+        .demo2 .center{
+            /* margin: 0 300px; */  
+            position: absolute;
+            left: 300px;
+            right: 300px;
+            background: green;
+        }
+
+        /* flex 布局
+        @ 注意: 1. ie8不支持
+         */
+        .demo3{
+            display: flex;
+            margin-top: 190px;
+        }
+        .demo3 .right{
+            width: 300px;
+            background: red;
+        }
+        .demo3 .left{
+            width: 300px;
+            background: yellow;
+        }
+        .demo3 .center{
+            flex: 1;
+            background: green;
+        }
+
+        /* table 布局
+        @ 注意: 1.表格布局需要设置包容块的宽高 2.未设置宽度的单元格会自动伸缩
+        */
+        .demo4{
+            display: table;
+            height: 150px;
+            width: 100%;
+        }
+        .demo4 .left{
+            width:300px;
+            display: table-cell;
+            background: yellow;
+        }
+        .demo4 .right{
+            width:300px;
+            display: table-cell;
+            background: red;
+        }
+        .demo4 .center{
+            display: table-cell;
+            background: green;
+        }
+
+        /* grid 布局 */
+        .demo5{
+            display: grid;
+            width: 100%;
+            grid-template-columns: 300px auto 300px;
+        }
+        .demo5 .left{
+            background: yellow;
+        }
+        .demo5 .right{
+            background: red;
+        }
+        .demo5 .center{
+            background: green;
+        }
+    </style>
 </head>
 <body>
+    <section class="demo1">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="center"></div>
+    </section>
+
+    <section class="demo2">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </section>
+
+    <section class="demo3">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </section>
     
+    <section class="demo4">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </section>
+
+    <section class="demo5">
+            <div class="left"></div>
+            <div class="center"></div>
+            <div class="right"></div>
+        </section>
 </body>
 </html>
