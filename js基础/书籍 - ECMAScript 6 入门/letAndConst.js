@@ -47,6 +47,8 @@ let a = 1;
 console.log(a);
 console.log(window.a);
 
-
+parseInt('100', 2) // 以二进制解析'10' , 值4
+const a = 4
+a.toString(2) // 将值4解析为二进制
 
 
