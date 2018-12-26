@@ -39,3 +39,8 @@
 
 8. 回滚到某个版本
     git reset --hard xxxxxx
+
+9. 查看远程信息
+    git remote [-v]
+
+10. 
