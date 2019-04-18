@@ -1,0 +1,76 @@
+# 定义变量
+variables:
+  BRANCH_JOB: ${CI_COMMIT_REF_NAME}/${CI_JOB_STAGE}/${CI_JOB_NAME}
+
+# 定义锚； 可复用代码
+.access_branch_template: &access_branch
+  before_script:
+    - echo $BRANCH_JOB script begin
+  after_script:
+    - echo 
+  only:
+    - dev
+    - master
+
+
+# 全局cache; key定义缓存的名字; paths是缓存的目录
+# 在执行job时都会更新和拉取缓存
+cache:
+  key: ${CI_COMMIT_REF_NAME}
+  paths:
+    - node_modules
+
+# 定义gitlab ci中的执行阶段; 安定义的顺序执行
+stages:
+  - install
+  - test
+  - build
+  - deploy
+
+# 定义每个阶段执行的任务
+install_dependencies:
+  <<: *access_branch # 使用锚中定义的公共代码
+  stage: install # 定义该任务属于那个阶段
+  script: # 定义该任务需要执行的代码
+    - echo 'install dependencies / maybe use shell file'
+
+# 一个阶段可以同时执行多个任务
+eslint:
+  <<: *access_branch
+  stage: test
+  script:
+    - echo 'eslint code / maybe use shell file'
+
+unit:
+  <<: *access_branch
+  stage: test
+  script:
+    -echo 'unit test / maybe use shell file'
+
+build:
+  <<: *access_branch
+  stage: build
+  script:
+    - echo 'do build / maybe use shell file'
+  cache: # 定义阶段缓存; 可以定义多个缓存
+    key: build
+    paths:
+      - public/
+
+deploy_development:
+  stage: deploy
+  when: on_success # 上一阶段执行成功后, 才会执行该阶段
+  script:
+    - echo 'deploy development / maybe use shell file'
+  cache: # 只拉取名字为build的缓存, 且不更新build缓存
+    key: build
+    paths:
+      - public/
+    policy: pull
+  only: # 定义只有dev分支的提交才会执行该阶段任务
+    - dev
+
+
+
+
+
