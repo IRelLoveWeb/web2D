@@ -62,6 +62,8 @@ deploy_development:
   when: on_success # 上一阶段执行成功后, 才会执行该阶段
   script:
     - echo 'deploy development / maybe use shell file'
+  environment: # 指定运行环境, 便于回退; 位置处于=> 运维 => 环境
+    name: production 
   cache: # 只拉取名字为build的缓存, 且不更新build缓存
     key: build
     paths:
