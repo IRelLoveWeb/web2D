@@ -33,3 +33,6 @@
 
 ## 删除所有存储进度
   * `git stash clear`
+
+## 修改项目指向的远程url
+  * git remote set-url origin reomateUrl
