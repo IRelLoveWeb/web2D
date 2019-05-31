@@ -1,3 +1,6 @@
 */node_modules
 */日志
 .DS_Store
+
+learn_c_plus/io.dSYM
+learn_c_plus/.vscode/ipch
