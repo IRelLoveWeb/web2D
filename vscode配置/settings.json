@@ -1,0 +1,46 @@
+{
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "editor.minimap.enabled": false,
+
+    "python.venvPath": "~/.virtualenvs",
+    "python.venvFolders": [
+        "py",
+        "py3",
+        "spider"
+    ],
+    "editor.detectIndentation": false,
+    "explorer.confirmDelete": false,
+    "fileheader.LastModifiedBy": "lyf",
+    "fileheader.Author": "liuyingfeng",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "window.zoomLevel": 0,
+    "breadcrumbs.enabled": true,
+    "editor.tabSize": 2,
+    "debug.allowBreakpointsEverywhere": true,
+    "mssql.logDebugInfo": true,
+    "terminal.integrated.rendererType": "dom",
+    "semistandard.nodePath": "",
+    "leetcode.endpoint": "leetcode-cn",
+    "leetcode.defaultLanguage": "javascript",
+    "view-in-browser.customBrowser": "chrome",
+
+    "eslint.validate": [
+      // "javascript",
+      // "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.ignoreSelection": true,
+    "code-runner.preserveFocus": false,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "workbench.iconTheme": "vscode-icons",
+
+    "code-runner.executorMap" : { "cpp" : "cd $dir && g++ -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt" }
+}
