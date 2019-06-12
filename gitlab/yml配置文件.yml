@@ -14,7 +14,7 @@ variables:
 
 
 # 全局cache; key定义缓存的名字; paths是缓存的目录
-# 在执行job时都会更新和拉取缓存
+# 在执行job前会拉取缓存, 在执行job后都会更新该缓存
 cache:
   key: ${CI_COMMIT_REF_NAME}
   paths:
@@ -52,10 +52,11 @@ build:
   stage: build
   script:
     - echo 'do build / maybe use shell file'
-  cache: # 定义阶段缓存; 可以定义多个缓存
+  cache: # 定义阶段缓存; job内部定义的缓存 覆盖 全局定义的缓存; 此处 不会拉取${CI_COMMIT_REF_NAME}缓存, 在job完成会生成build缓存
     key: build
-    paths:
+    paths: # 缓存数据是 public 和 package.json
       - public/
+      - package.json
 
 deploy_development:
   stage: deploy
@@ -64,15 +65,13 @@ deploy_development:
     - echo 'deploy development / maybe use shell file'
   environment: # 指定运行环境, 便于回退; 位置处于=> 运维 => 环境
     name: production 
-  cache: # 只拉取名字为build的缓存, 且不更新build缓存
+  cache: # 拉取名字为build的缓存, 且不更新build缓存
     key: build
-    paths:
+    paths: # 对于名字是build的缓存, 只使用public内容, 不会使用缓存中其他的内容
       - public/
     policy: pull
   only: # 定义只有dev分支的提交才会执行该阶段任务
     - dev
 
 
-
-
-
+# 每一个job开始时, 均会将非 git中拉取部分的 内容删除

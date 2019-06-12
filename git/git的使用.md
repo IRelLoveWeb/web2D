@@ -45,3 +45,8 @@
   * 删除本地标签 `git tag -d [tagname]`
   * 删除远程标签 `git push origin :refs/tags/[tagname]`
   * 获取远程指定标签 `git fetch origin tag [tagname]`
+
+## 清除Untracked文件(未被add的文件)
+  * 预览要删除的文件 `git clean -n`
+  * 删除文件 `git clean -f` (忽略.gitignore文件中指定的)
+  * 删除文件 `git clean -df` 

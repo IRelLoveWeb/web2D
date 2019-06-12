@@ -1,7 +1,7 @@
 # AWK 指令 
 * `awk [options] 'pattern{action}' file`
 * 根据pattern获取符合条件的行, 对行进行options处理, 然后对行进行action处理
-  * 默认根据条件分割, 在获取符合条件的行, 执行action操作
+  * 默认根据条件分割, 在获取符合条件的行, 执行action操作[awk总基本操作是行]
   * pattern和{action} 必须被单引号包裹, 防止shell解析
   * 没有pattern, 则对文件中每一行进行action处理
   * 没有action, 输出文件中的每一行
