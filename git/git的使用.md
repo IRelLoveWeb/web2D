@@ -36,3 +36,12 @@
 
 ## 修改项目指向的远程url
   * git remote set-url origin reomateUrl
+
+## 打标签
+  * 查看所有标签 `git tag`
+  * 查看标签 `git show [tagname]`
+  * 新增本地标签 `git tag -a [tagname] -m 'xxx'`
+  * 将指定标签上传远程 `git push origin [tagname]` 或 上传所有本地标签 `git push origin --tags`
+  * 删除本地标签 `git tag -d [tagname]`
+  * 删除远程标签 `git push origin :refs/tags/[tagname]`
+  * 获取远程指定标签 `git fetch origin tag [tagname]`
