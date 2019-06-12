@@ -9,3 +9,7 @@
 * `react-devtools`
 * 多刷新虚拟机
 <!-- * `adb reverse tcp:8097 tcp:8097` -->
+
+# 工具
+* 调试工具 `react-native-debugger`
+* 安装项目模块 `npm install -g yarn react-native-cli` && 新建项目`react-native init AwesomeProject`
