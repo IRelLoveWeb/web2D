@@ -50,3 +50,7 @@
   * 预览要删除的文件 `git clean -n`
   * 删除文件 `git clean -f` (忽略.gitignore文件中指定的)
   * 删除文件 `git clean -df` 
+
+## 修改commit的注释
+  * `git commit --amend` 然后使用vim的方式修改注释
+  * url地址: https://www.jianshu.com/p/098d85a58bf1
