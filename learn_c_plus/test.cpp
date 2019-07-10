@@ -50,5 +50,14 @@ int main() {
   cout << i << j << endl;
 
   const int ci = 3;
+
+  string str2{'a', 'b'};
+
+  string::iterator iter = str2.begin();
+  while(iter != str2.end()) {
+    iter++;
+  }
+  cout << str2 << endl;
+  
   return 0;
 }
