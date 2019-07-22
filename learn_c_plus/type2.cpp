@@ -16,6 +16,7 @@ int main() {
   string str = "hello"; // 拷贝初始化
   string str1("hello world"); // 直接初始化
   string str2(10, 'c'); // 直接初始化
+  string str3{'1', '2', 'c'};
 
   // auto sn = str2.size();
   // cout << (str1>str) << endl;
@@ -97,3 +98,15 @@ int main() {
 
   return 0;
 }
+
+// 数组
+int p[] = {1, 2};
+int pp[3][5] = {{1}, {2}, {3}};
+
+// 指针数组 
+int a = 1, b = 2;
+int *a2[] = {&a, &b};
+// 数组指针: 指向数组的指针
+int (*a3)[2] = &p;
+
+int (*p2)[5] = pp;
