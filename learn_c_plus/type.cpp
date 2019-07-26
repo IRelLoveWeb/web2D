@@ -156,3 +156,18 @@ int main() {
 
 // 指向常量的常量指针: const int *const p3 = &j; p3是一个常量指针, 且该指针指向一个常量. 即该指针的值 和 指针指向对象的值都不能改变
 // p3是一个const型指针,且为int型指针, 指向对象为常量。
+
+int di = 1;
+const int cdi = 2;
+const int &dr = di;
+const int *dp = &di;
+
+// 底层符合const类型 赋值给 非const的符合类型 报错
+const int &dr2 = dr;
+const int *dp2 = dp;
+// int *dp3 = dp; 
+// int &dr3 = dr;
+
+// 顶层const 赋给 符合类型(符合类型必须 是const类型)
+// int *dp4 = &cdi;
+// int &dr4 = cdi;

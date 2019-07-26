@@ -74,14 +74,18 @@ int main() {
   // 类型强制转换
   cout << static_cast<double>(i); // 将int型强制转换成double型
   cout << static_cast<int*>(pi); // 将void*强制转换成int*型
-  // 去除底层const性质, 但无法转换类型
+  // 去除或添加const性质, 但无法转换类型
   char c = 'c';
   char &cp = c;
   const char *pchar = &c;
-  char *pc2 = const_cast<char*>(pchar);
+  char *pc2 = const_cast<char*>(pchar); // 剔除底层const
   *pc2 = 'b'; // 指针pc2 和 pchar 指向同一个地址, 但是可以通过指针pc2修改地址中的值
   cout << "*pchar:" << *pchar << "---" << "&cp:" << cp; 
   // 任何类型 可以转换成 空类型; 空类型 不可以转换成非空类型
+
+  int *const pch = &i;
+  int *pci = const_cast<int*>(pch); // 剔除顶层const
+  int *const pch2 = const_cast<int *const>(pci); // 添加顶层const 
 
   cout <<endl;
   return 0;

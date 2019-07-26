@@ -5,6 +5,10 @@
 * 再定义runner时一般使用shell executor
 
 # 删除 specific Runner
-* 使用 gitlab-ci-multi-runner stop 暂停所有运行的runner
-* 使用 gitlab-ci-multi-runner list 查找所有运行的runner
-* 使用 gitlab-ci-multi-runner unregister --url xx --token xx 来删除runner
+* 使用 `gitlab-ci-multi-runner stop` 暂停所有运行的runner
+* 使用 `gitlab-ci-multi-runner list` 查找所有运行的runner
+* 使用 `gitlab-ci-multi-runner unregister --url xx --token xx` 来删除runner
+
+# 修改配置文件 
+* `/etc/gitlab-runner/config.toml` 文件
+* 参考文档 https://docs.gitlab.com/runner/configuration/advanced-configuration.html
