@@ -2,8 +2,12 @@
 
 # 变量赋值,使用变量用 $变量名
 # 变量和=之间 不能有空格
-varyone=123
+varyone=12345654321
 echo $varyone
+echo ${varyone#"123"} 若变量varyone内容从头符合"123", 则变量删除"123"
+echo ${varyone%"123"} 若变量varyone内容从尾符合"123", 则变量删除"123"
+echo ${varyone/"123"/"abc"} 若变量varyone内容第一个符合"123"的替换成"abc"
+echo ${varyone/"123"/"abc"} 若变量varyone内容所有符合"123"的替换成"abc"
 
 # 只读变量
 v2=1

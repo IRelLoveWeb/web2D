@@ -20,6 +20,11 @@ using arrS = string[10];
 arrS *funcs();
 auto funcs() -> string(*)[10];
 
+// 返回函数指针
+bool (*pf)(const string &, const string &); // pf 指向函数指针
+bool *pf2(const string &, const string &); // pf函数的返回值 类型为 bool*
+  // 将函数当作值使用, 取得是函数地址
+  // 给函数指针赋值, 赋值函数的类型和形参必须一致
 
 // 默认实参数, b赋默认实参后, 后续所有参数必须默认实参
 int func(int a, double b = 3.14, char c = 'c');
