@@ -111,7 +111,7 @@ li>a:hover::after{
     height: 100%;
     min-height: 100%;
     min-width: 1024px;
-    height: auto !important;
+    /* height: auto !important; */
     top:0;
     left: 0;
     z-index: 1;
