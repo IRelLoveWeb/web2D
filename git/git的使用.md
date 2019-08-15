@@ -34,8 +34,11 @@
 ## 删除所有存储进度
   * `git stash clear`
 
-## 修改项目指向的远程url
-  * git remote set-url origin reomateUrl
+## 添加项目的远程origin
+  * git remote add origin remoteUrl
+
+## 修改项目指向的远程url(项目必须先又一个远程的origin)
+  * git remote set-url origin remoteUrl
 
 ## 打标签
   * 查看所有标签 `git tag`
@@ -54,3 +57,12 @@
 ## 修改commit的注释
   * `git commit --amend` 然后使用vim的方式修改注释
   * url地址: https://www.jianshu.com/p/098d85a58bf1
+
+## 查看远程分支
+  * `git branch -a`
+
+## 将远程分支拉取到本地, 并创建新分支
+  * `git checkout -b 本地分支名 origin/远程分支名`
+  * 如果上一步失败, 则执行
+    * `git fetch` (master分支) 
+    * `git checkout 远程分支名` 或 `git checkout -b 本地分支名 origin/远程分支名`

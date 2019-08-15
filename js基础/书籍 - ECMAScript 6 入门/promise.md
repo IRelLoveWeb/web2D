@@ -1,26 +1,28 @@
-/*
-1.Promise对象是一个构造函数，用来生成Promise实例
+## Promise是一种异步处理方案
+* Promise接受一个拥有两个参数的函数(resolve和reject, 由JavaScript引擎提供，不用自己部署)
+  * resolve函数,将Promise对象的状态从“未完成”变为“成功”(即从Pending变为Resolved)
+  * reject函数，将Promise对象的状态从“未完成”变为“失败”(即从Pending变为Rejected)
+  * 一般在异步任务执行后, 才执行 resolve函数或reject函数 改变状态
+  * 状态确定后, Resolved立即执行then函数, Rejected立即执行catch函数
 
-2.Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。它们是两个函数，由JavaScript引擎提供，不用自己部署。
-  resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从Pending变为Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从Pending变为Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去
+* 解析执行顺序
+  ```
+    let p1 = new Promise((resolve,reject) =>{
+      console.log(1)
+      resolve(3)
+    })
+    p1.then(res=>console.log(res))
 
-3.Promise实例生成以后，可以用then方法分别指定Resolved状态和Reject状态的回调函数
-  then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为Resolved时调用，第二个回调函数是Promise对象的状态变为Reject时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数
+    console.log(2)
 
-4.Promise 的状态一旦改变，就永久保持该状态，不会再变了;只有状态确定后,才会调用then或catch方法
+    setTimeout(()=>console.log(4),2000)
+    // 1 2 3 4
+  ```
+  * new Promise 生成promise对象, 立即执行传入函数, 输出 1
+  * 执行console, 输出 2, 且 主线程执行完毕
+  * 执行promise.then, 输出 3
+  * 执行settimeout的回调函数, 输出 4
 
-5. let p1 = new Promise((resolve,reject) =>{
-    console.log(1)
-    resolve(12)
-  })
-  p1.then(res=>console.log(res))
-
-  console.log(2)
-
-  setTimeout(()=>console.log(3),2000)
-  // 1 2  12 3
-  PS: new Promise(fn) 立即执行fn函数,所以输出了1,且改变了p1的状态;但是会继续执行后续的同步代码
-      即输出了2;同步代码结束,才会执行then函数中的代码;最后才会执行洗衣歌异步的代码输出3
 
 6.同步代码同步输出,异步代码异步输出
   //const f = () => console.log('now');
@@ -127,4 +129,3 @@ p2 resolve(p1)  p1决定p2的状态
       //one two three
       注释：立即resolve的Promise对象，是在本轮“事件循环”（event loop）的结束时，而不是在下一轮“事件循环”的开始时
             setTimeout(fn, 0)在下一轮“事件循环”开始时执行，Promise.resolve()在本轮“事件循环”结束时执行，console.log('one')则是立即执行，因此最先输出
-*/
