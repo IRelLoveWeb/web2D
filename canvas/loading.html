@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+      width, height 是canvas 工作区域像素;
+      style 设置 在页面中展示的 像素;
+      如下配置: 80x80的图 在屏幕中 40x40的区域展示
+    -->
+    <canvas
+      id="c1"
+      width="80px"
+      height="80px"
+      style="width: 40px; height: 40px;"
+    ></canvas>
+    <script>
+        const canvas = document.getElementById('c1');
+        const ctx = canvas.getContext('2d')
+        let num = 0;
+        let timer;
+
+
+
+
+        function loading() {
+          ctx.clearRect(0, 0, 80, 80);
+
+          // ctx.save()
+          num++
+
+          if (num > 100) clearInterval(timer)
+
+          // ctx.translate(40,40);
+          ctx.beginPath()
+          ctx.arc(0, 0, 30, 0, Math.PI * 2);
+          ctx.lineWidth = 10;
+          ctx.strokeStyle = '#EDEDF3';
+          ctx.stroke();
+          ctx.closePath()
+
+          ctx.beginPath()
+
+          ctx.arc(0,0,30,-Math.PI/2,(Math.PI/50 * num)-Math.PI/2);
+
+          ctx.lineWidth = 10;
+          // 描边的颜色
+          ctx.strokeStyle = '#25B09C';
+          ctx.lineCap="round";
+          // 描边
+          ctx.stroke();
+          // 结束绘画
+          ctx.closePath();
+          // 恢复状态
+          // ctx.restore();
+        }
+
+        loading();
+
+        timer = setInterval(function () {
+            loading();
+        },30)
+    </script>
+</body>
+</html>

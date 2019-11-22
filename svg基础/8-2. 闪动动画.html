@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #mask3 ellipse{
+      animation: move 1.3s linear 5;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(-50px);
+      }
+
+      100% {
+        transform: translate(100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg width="375" height="42">
+    <rect x='0' y='0' width='375' height='42' fill='#1E1E36'/>
+    <g mask='url(#mask3)'>
+      <g id="six-line">
+          <g id="one-line">
+              <g id="four">
+                  <path d='M 0,0 3,0 3,3 0,3 L 0,5 3,5 3,8 0,8' fill='#26F2F3' id="two" />
+                  <use xlink:href="#two" transform='translate(5, 0)' />
+                </g>
+                <use xlink:href='#four' transform='translate(0,10)' />
+                <use xlink:href='#four' transform='translate(0,20)' />
+                <use xlink:href='#four' transform='translate(0,30)' />
+                <use xlink:href='#four' transform='translate(0,40)' />
+            </g>
+            <use xlink:href='#one-line' transform='translate(10,0)' />
+            <use xlink:href='#one-line' transform='translate(20,0)' />
+            <use xlink:href='#one-line' transform='translate(30,0)' />
+            <use xlink:href='#one-line' transform='translate(40,0)' />
+            <use xlink:href='#one-line' transform='translate(50,0)' />
+        </g>
+        <use xlink:href='#six-line' transform='translate(60,0)' />
+        <use xlink:href='#six-line' transform='translate(120,0)' />
+        <use xlink:href='#six-line' transform='translate(180,0)' />
+        <use xlink:href='#six-line' transform='translate(240,0)' />
+        <use xlink:href='#six-line' transform='translate(300,0)' />
+        <use xlink:href='#six-line' transform='translate(360,0)' />
+    </g>
+    <mask id='mask3'>
+        <ellipse cx='-60' cy='21' rx='60' ry='50' fill='url(#radial)' />
+    </mask>
+    <radialGradient id='radial'>
+        <stop offset='0' stop-color='#26F2F3'/>
+        <stop offset='0.8' stop-color='#1E1E36'/>
+        <stop offset='1' stop-color='transparent'/>
+    </radialGradient>
+  </svg>
+</body>
+</html>

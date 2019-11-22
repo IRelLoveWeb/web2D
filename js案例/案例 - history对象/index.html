@@ -20,14 +20,14 @@
     <script>
         var nums = '0123456789';
         var strs = 'abcdefghijklmnopqrstuvwsyz';
-        
+
         function getR(num){
             return Math.round(Math.random()*num);
         }
 
         document.getElementById('root').onclick = function(e){
             var id = e.target.getAttribute('id');
-            
+
             // history.pushState(state[object],null,path|hash[str]);
             // history.replaceState(state[object],null,path|hash[str]);
 
@@ -41,7 +41,7 @@
                 };break;
                 case 'add_hash' : {
                     let hash = strs[getR(25)] + '_' + nums[getR(9)];
-                    history.pushState({num:nums[getR(9)]},null,'?'+hash);
+                    history.pushState({num:nums[getR(9)]},null,'#'+hash);
                 };break;
                 case 'replace' : {
                     let path = nums[getR(9)] + strs[getR(25)];
