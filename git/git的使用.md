@@ -6,7 +6,24 @@
   * 提交代码 `git push origin branch_name`  
      
 ## 合并分支
-  * `git merge branch`
+  * merge 方式
+  ```
+    git checkout master
+    git merge feat_branch
+  ```
+
+  * rebase 方式
+  ```
+    git checkout feat_branch
+    # feat_feature分支的所有提交先缓存, 且顶到(origin)最新提交, 在最新提交的基础上合并feat_feature分支之前的提交记录
+    git rebase origin
+
+    # 合并有冲突时, 添加修改后文件, 再次合并
+    git add .
+    git rebase --continue
+  ```
+
+  * 在master分支上的提交记录上有区别, merge有分支记录, rebase在最新提交的基础上合并提交
 
 ## 新建分支(并且切换到分支)
   * `git checkout -b branch_name`

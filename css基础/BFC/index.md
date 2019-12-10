@@ -6,7 +6,7 @@ BFC: 内联格式化上下
     float 不为none
     overflow 为 auto,scroll,hidden
     display 为 table-cell,table-caption,inline-block
-    position 不为 relative,static
+    position 为 absoulte, fixed
 
 应用
     margin重叠 : 两个相邻元素(可能是兄弟关系也可能是祖先关系)要处于同一个BFC中,可能造成外边距折叠
