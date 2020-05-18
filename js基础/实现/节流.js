@@ -19,7 +19,7 @@ function throttle(func, wait, options) {
             }
             func.apply(this,params)
         } else if (!timer){
-            setTimeout(() => {
+            timer = setTimeout(() => {
                 timer = null
                 previous = Date.now()
                 func.apply(this,params)

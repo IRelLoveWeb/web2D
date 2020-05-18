@@ -34,6 +34,7 @@
 ## 删除分支
   * 删除本地分支 `git branch -d branch_name`
   * 删除远程分支 `git push --delete origin branch_name`
+  * 批量删除分支  `git branch |grep 'xx' |xargs git branch -D`
 
 ## 回滚到某个版本
   * `git reset --hard branch_id`
