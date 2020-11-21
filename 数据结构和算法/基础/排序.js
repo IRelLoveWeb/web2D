@@ -2,9 +2,9 @@
  * @Author: lyf
  * @Date: 2020-05-06 08:51:09
  * @LastEditors: lyf
- * @LastEditTime: 2020-05-18 07:39:42
+ * @LastEditTime: 2020-05-26 08:04:06
  * @Description: In User Settings Edit
- * @FilePath: /workspace/Users/a58/iworkspace/MoreCollections/数据结构和算法/基础/排序.js
+ * @FilePath: /iread/Users/a58/iworkspace/MoreCollections/数据结构和算法/基础/排序.js
  * 
  * // 参考 https://github.com/damonare/Sorts
  */
@@ -24,6 +24,7 @@ function bubbleSort (arr) {
   for (let i = 0; i < len; i++) {
     // 相邻两数比较, 大的放后边
     // 只有左边数比右变数大, 才发生交换
+    // 为什么减去i, 每次遍历都确定了一个最大值, 所以比较时需要减去已确定位置的数值
     for (let j = 0; j < len - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
@@ -95,6 +96,7 @@ function insertionSort(arr) {
     // }
 
     // key小于列表值 值往后移位, 在 key 大于 列表值 位置, 插入key值。
+    // 是用key值和有序数组做对比
     while (key < arr[j] && j >= 0) {
       arr[j + 1] = arr[j]
       j--

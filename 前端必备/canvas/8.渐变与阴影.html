@@ -5,7 +5,9 @@
     <title>Document</title>
 </head>
 <body>
+    <div>canvas1: </div>
     <canvas id="c1"></canvas>
+    <div>canvas2: </div>
     <canvas id="c2" width="300px" height="300px"></canvas>
     <canvas id="c3"></canvas>
     <canvas id="c4"></canvas>
@@ -14,18 +16,18 @@
         var canvas = document.getElementById('c1');
         var ctx1 = canvas.getContext('2d');
         //线性渐变
-        var lineargradient = ctx1.createLinearGradient(0,0,150,150);
+        var lineargradient = ctx1.createLinearGradient(0,0,150,0);
         lineargradient.addColorStop(0,'white');
         lineargradient.addColorStop(1,'black');
         ctx1.fillStyle = lineargradient;
         ctx1.fillRect(0,0,150,150);
 
         //径向渐变 10之内是纯白色 10-75是渐变 75之后是纯黑色
-        var radialgradient = ctx1.createRadialGradient(75,75,10,75,75,75);
-        radialgradient.addColorStop(0,'white');
-        radialgradient.addColorStop(1,'black');
-        ctx1.fillStyle = radialgradient;
-        ctx1.fillRect(0,0,150,150);
+        // var radialgradient = ctx1.createRadialGradient(75,75,10,75,75,75);
+        // radialgradient.addColorStop(0,'white');
+        // radialgradient.addColorStop(1,'black');
+        // ctx1.fillStyle = radialgradient;
+        // ctx1.fillRect(0,0,150,150);
 
         //渐变色,赋值给fillStyle 或 strokeStyle;
         //渐变色在创建的时候就设置了渐变范围,不管画的路径是否占满,渐变范围始终不会改变的

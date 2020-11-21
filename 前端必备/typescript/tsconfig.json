@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ESNext",
+        "sourceMap": true,
+        // "noLib": true, 默认的lib.d.ts 文件, ts安装中自带的声明文件
+        "noImplicitThis": true,
+        // 无法推断一个变量时发出一个错误（或者只能推断为一个隐式的 any 类型）
+        "noImplicitAny": true,
+        // 严格检查null、undefined类型
+        "strictNullChecks": true,
+        // 启用修饰器
+        "experimentalDecorators": true
+    },
+    "include": [
+        "./app",
+    ]
+}

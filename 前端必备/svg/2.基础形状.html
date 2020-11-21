@@ -103,19 +103,19 @@
     </svg>
     <br />
 
-    <!-- 贝尔曲线 -->
+    <div>贝尔曲线:</div>
     <svg width="400" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <!-- M是开始点 M和Q1,Q1和Q2的直线是贝尔曲线的切线,生成贝尔曲线 -->
         <path d='M50,50 L100,100 150,50' stroke='red' fill='none'/>
         <path d='M50,50 Q100,100 150,50' fill='none' stroke='green'/>
-        <path d='M150,150 Q200,200 250,150' fill='none' stroke='green'/>
+        <!-- <path d='M150,150 Q200,200 250,150' fill='none' stroke='green'/> -->
 
         <!--  三个点 M一个Q两个生成一个曲线,将Q2当做下一个的起点;默认填充的是路径的闭合部分,此处设置evenodd,将重叠部分置空-->
-        <path fill="red" fill-rule="evenodd"
-            d="M 70 140 Q 150,0 200,100 Q 40,100 100,0 Q 170,140 70 140"/>
+        <!-- <path fill="red" fill-rule="evenodd"
+            d="M 70 140 Q 150,0 200,100 Q 40,100 100,0 Q 170,140 70 140"/> -->
         
-        <path fill="none" stroke='green'
-        d="M 70 140 L150,0 200,100 40,100 100,0 170,140 70 140"/>
+        <!-- <path fill="none" stroke='green'
+        d="M 70 140 L150,0 200,100 40,100 100,0 170,140 70 140"/> -->
     </svg>
     <br />
 
@@ -132,7 +132,7 @@
     </svg>
     <br />
 
-    <!-- 路径圆弧 -->
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths">路径圆弧</a>
     <svg width="200" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <!-- M起点 A1:Rx,A2:Ry  A3,4,5  A6,A7表示终点-->
         <path d='M50,50 A30,50 0,0,0 150,100z' />

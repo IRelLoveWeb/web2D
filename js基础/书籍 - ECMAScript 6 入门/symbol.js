@@ -8,3 +8,19 @@
 4. Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名
    Reflect.ownKeys(obj)
 */
+
+Promise.all([
+  new Promise((resolve, reject) => {
+    setTimeout(() => resolve(1), 500)
+  }),
+  new Promise((resolve, reject) => {
+    setTimeout(() => resolve(2), 1000)
+  }),
+  new Promise((resolve, reject) => {
+    setTimeout(() => reject(3), 2000)
+  })
+]).then(([a, b, c]) => {
+  console.log(a, b, c)
+}).catch(err => {
+  console.log(err)
+})
