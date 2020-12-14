@@ -8,6 +8,8 @@ class Animal2{
     // private name: string
     protected name: string
 
+    age: number
+
     // private constructor(name: string) {this.name = name}
     constructor(thename: string) {this.name = thename}
 }
@@ -61,3 +63,5 @@ w = {name: '345'}
 // 抽象类 包含抽象方法的类就是抽象类, 抽象方法必须在子类中实现 abstract
 
 // 类定义会创建两个东西：类的实例类型和一个构造函数。 因为类可以创建出类型，所以你能够在允许使用接口的地方使用类
+
+export = Animal2
