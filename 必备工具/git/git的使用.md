@@ -71,3 +71,10 @@
   * 如果上一步失败, 则执行
     * `git fetch` (master分支) 
     * `git checkout 远程分支名` 或 `git checkout -b 本地分支名 origin/远程分支名`
+
+## 合并本地分支中的多个commit
+  * `git rebase -i commitId` commitId之后的提交才会参与合并
+  * 将需要合并的commit, 首位`pick`改成`s`; 然后wq退出vim编辑模式
+  * 设置合并的commit信息, 然后wq退出
+
+  * 如果需要修改远程提交信息, 且该分支是担任分支, 直接强制提交(`git push -f`)
